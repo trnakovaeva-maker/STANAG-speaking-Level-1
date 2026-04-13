@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speaking Practice · STANAG Level 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & TOKENS ─────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:    #0b1f3a;
+  --navy2:   #162d52;
+  --navy3:   #1e3d6e;
+  --sky:     #2878d6;
+  --sky2:    #4fa3f0;
+  --sky3:    #d0e8ff;
+  --gold:    #e09a12;
+  --gold2:   #f5c040;
+  --gold3:   #fff3d0;
+  --sage:    #237a50;
+  --sage2:   #d0f0e0;
+  --white:   #ffffff;
+  --off:     #f2f5fa;
+  --off2:    #e8edf6;
+  --muted:   #7a8fa8;
+  --text:    #18293f;
+  --card:    #ffffff;
+  --border:  #d8e4f0;
+
+  --tag-wife:    #2878d6;
+  --tag-son:     #237a50;
+  --tag-friend:  #b04010;
+  --tag-col:     #6b35a0;
+  --tag-cmd:     #b02828;
+  --tag-sib:     #1a7a6e;
+
+  --r-sm: 8px; --r-md: 14px; --r-lg: 20px; --r-xl: 28px;
+  --shadow:    0 2px 20px rgba(11,31,58,.09);
+  --shadow-lg: 0 8px 44px rgba(11,31,58,.16);
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--off);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ── VIEWS ──────────────────────────────────────────── */
+.view { display: none; animation: fadeUp .35s ease both; }
+.view.active { display: block; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+/* ═══════════════════════════════════════════════════
+   HOME PAGE
+═══════════════════════════════════════════════════ */
+.home-page { min-height: 100vh; display: flex; flex-direction: column; }
+
+/* ── Top banner strip ── */
+.home-topbar {
+  background: var(--navy);
+  padding: 12px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.topbar-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Syne', sans-serif; font-size: .85rem; font-weight: 700;
+  color: rgba(255,255,255,.55); letter-spacing: .06em; text-transform: uppercase;
+}
+.topbar-logo span { color: var(--sky2); }
+.topbar-tag {
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+  color: rgba(255,255,255,.5); font-size: .72rem; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 99px;
+}
+
+/* ── Hero split ── */
+.home-hero {
+  background: linear-gradient(160deg, var(--navy) 0%, var(--navy2) 50%, var(--navy3) 100%);
+  padding: 70px 32px 80px;
+  position: relative; overflow: hidden;
+  flex: 1;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* decorative circles */
+.home-hero::before {
+  content: '';
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(40,120,214,.18) 0%, transparent 70%);
+  top: -200px; right: -150px;
+  pointer-events: none;
+}
+.home-hero::after {
+  content: '';
+  position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(224,154,18,.10) 0%, transparent 70%);
+  bottom: -100px; left: -80px;
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 780px; width: 100%;
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: center; gap: 48px;
+  position: relative; z-index: 1;
+}
+@media (max-width: 600px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-crest { display: none; }
+}
+
+.hero-text {}
+.hero-kicker {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+  color: var(--sky2); font-size: .78rem; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  padding: 6px 16px; border-radius: 99px; margin-bottom: 22px;
+}
+.hero-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.1rem, 5.5vw, 3.4rem);
+  font-weight: 800; color: var(--white); line-height: 1.08;
+  margin-bottom: 8px;
+}
+.hero-title .line2 {
+  color: var(--gold2);
+  display: block;
+}
+.hero-sub {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: rgba(255,255,255,.55);
+  font-weight: 400; line-height: 1.5;
+  margin-bottom: 36px; max-width: 420px;
+}
+.hero-sub strong { color: rgba(255,255,255,.85); font-weight: 600; }
+
+/* info pills row */
+.hero-pills {
+  display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px;
+}
+.hero-pill {
+  display: flex; align-items: center; gap: 7px;
+  background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.13);
+  color: rgba(255,255,255,.7); font-size: .82rem; font-weight: 500;
+  padding: 7px 14px; border-radius: 99px;
+}
+.hero-pill .pill-icon { font-size: 1rem; }
+
+/* decorative crest */
+.hero-crest {
+  width: 140px; height: 140px; flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,.05);
+  border: 2px solid rgba(255,255,255,.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 4rem;
+  box-shadow: 0 0 60px rgba(40,120,214,.25);
+}
+
+/* ── Section cards ── */
+.home-cards-wrap {
+  background: var(--off);
+  padding: 0 32px 60px;
+  margin-top: -1px;
+}
+.home-cards-label {
+  text-align: center;
+  padding: 40px 0 24px;
+  font-size: .78rem; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--muted);
+}
+.home-cards {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 20px; max-width: 700px; margin: 0 auto;
+}
+@media (max-width: 500px) { .home-cards { grid-template-columns: 1fr; } }
+
+.home-card {
+  background: var(--card);
+  border-radius: 24px;
+  border: 1.5px solid var(--border);
+  padding: 32px 28px;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+  position: relative; overflow: hidden;
+}
+.home-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 4px;
+  border-radius: 24px 24px 0 0;
+}
+.home-card.blue::before  { background: linear-gradient(90deg, var(--sky), var(--sky2)); }
+.home-card.amber::before { background: linear-gradient(90deg, var(--gold), var(--gold2)); }
+.home-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--sky); }
+.home-card.disabled { opacity: .55; cursor: not-allowed; }
+.home-card.disabled:hover { transform: none; box-shadow: none; border-color: var(--border); }
+
+.home-card-icon {
+  width: 56px; height: 56px; border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.7rem; margin-bottom: 18px;
+}
+.home-card.blue  .home-card-icon { background: #deeeff; }
+.home-card.amber .home-card-icon { background: #fff0cc; }
+
+.home-card h2 {
+  font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700;
+  margin-bottom: 8px; color: var(--text);
+}
+.home-card p { font-size: .9rem; color: var(--muted); line-height: 1.55; }
+
+.home-card-meta {
+  margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border);
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.meta-chip {
+  background: var(--off); border: 1px solid var(--border);
+  font-size: .75rem; font-weight: 600; color: var(--muted);
+  padding: 3px 10px; border-radius: 99px;
+}
+.home-card.blue .meta-chip { background: #eef6ff; border-color: #c0dcf8; color: var(--sky); }
+
+.soon-badge {
+  position: absolute; top: 16px; right: 16px;
+  background: var(--off2); border: 1px solid var(--border);
+  font-size: .68rem; font-weight: 700; color: var(--muted);
+  padding: 4px 10px; border-radius: 99px;
+  letter-spacing: .08em; text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════════════
+   SHARED: PAGE HEADER
+═══════════════════════════════════════════════════ */
+.page-header {
+  background: var(--navy);
+  padding: 24px 24px 22px;
+  display: flex; align-items: center; gap: 16px;
+}
+.back-btn {
+  background: rgba(255,255,255,.10); border: none; color: var(--white);
+  width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+  font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: background .2s;
+}
+.back-btn:hover { background: rgba(255,255,255,.22); }
+.page-header-text h2 {
+  font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--white);
+}
+.page-header-text p { font-size: .83rem; color: rgba(255,255,255,.5); margin-top: 2px; }
+
+/* ═══════════════════════════════════════════════════
+   INTERVIEW HUB
+═══════════════════════════════════════════════════ */
+.hub-intro {
+  max-width: 880px; margin: 0 auto; padding: 24px 24px 10px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+}
+.hub-intro p { color: var(--muted); font-size: .88rem; }
+.progress-summary {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--card); border: 1.5px solid var(--border);
+  border-radius: var(--r-md); padding: 9px 16px;
+  font-size: .84rem; color: var(--muted);
+}
+.progress-summary strong { color: var(--sky); font-size: 1.05rem; font-weight: 700; }
+
+.sets-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(138px, 1fr));
+  gap: 12px; max-width: 880px; margin: 0 auto; padding: 14px 24px 60px;
+}
+.set-tile {
+  background: var(--card); border-radius: 18px;
+  border: 1.5px solid var(--border);
+  padding: 18px 12px 14px; cursor: pointer; text-align: center;
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+.set-tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: var(--sky); }
+.set-tile.done    { border-color: #a8dfc0; background: #f0faf5; }
+.set-tile.partial { border-color: #f0d070; background: #fdfbe8; }
+.set-num {
+  font-family: 'Syne', sans-serif; font-size: 1.7rem; font-weight: 800; color: var(--navy); line-height: 1;
+}
+.set-tile.done    .set-num { color: var(--sage); }
+.set-tile.partial .set-num { color: #9a6800; }
+.set-status { font-size: .7rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; margin-top: 5px; color: var(--muted); }
+.set-tile.done    .set-status { color: var(--sage); }
+.set-tile.partial .set-status { color: #9a6800; }
+.set-dots { display: flex; justify-content: center; gap: 3px; margin-top: 9px; flex-wrap: wrap; }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border); }
+.dot.mastered { background: var(--sage); }
+.dot.revision { background: var(--gold); }
+
+/* ═══════════════════════════════════════════════════
+   SET PRACTICE PAGE
+═══════════════════════════════════════════════════ */
+.practice-wrap {
+  max-width: 700px; margin: 0 auto; padding: 24px 16px 80px;
+}
+.set-progress-bar {
+  background: var(--border); border-radius: 99px; height: 5px; margin-bottom: 24px; overflow: hidden;
+}
+.set-progress-fill {
+  height: 100%; background: linear-gradient(90deg, var(--sky), var(--sky2));
+  border-radius: 99px; transition: width .4s ease;
+}
+
+/* Q number pills */
+.q-nav { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 20px; }
+.q-pill {
+  width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--border);
+  background: var(--card); cursor: pointer;
+  font-size: .82rem; font-weight: 600; color: var(--muted);
+  display: flex; align-items: center; justify-content: center; transition: all .15s;
+}
+.q-pill.active   { border-color: var(--sky); color: var(--sky); background: #deeeff; }
+.q-pill.mastered { border-color: var(--sage); background: var(--sage); color: var(--white); }
+.q-pill.revision { border-color: var(--gold); background: var(--gold); color: var(--white); }
+
+/* ── Main card ── */
+.q-card {
+  background: var(--card); border-radius: var(--r-xl);
+  border: 1.5px solid var(--border); box-shadow: var(--shadow);
+  overflow: hidden; margin-bottom: 16px;
+}
+
+/* dark top section */
+.q-card-top {
+  background: linear-gradient(140deg, #0b1f3a 0%, #162d52 60%, #1e3d6e 100%);
+  padding: 26px 28px 24px;
+}
+.q-counter {
+  font-size: .75rem; font-weight: 600; letter-spacing: .12em;
+  text-transform: uppercase; color: rgba(255,255,255,.38); margin-bottom: 10px;
+}
+.q-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em;
+  padding: 4px 12px; border-radius: 99px; margin-bottom: 16px; color: var(--white);
+}
+.q-tag.wife   { background: var(--tag-wife); }
+.q-tag.son    { background: var(--tag-son); }
+.q-tag.friend { background: var(--tag-friend); }
+.q-tag.col    { background: var(--tag-col); }
+.q-tag.cmd    { background: var(--tag-cmd); }
+.q-tag.sib    { background: var(--tag-sib); }
+
+/* audio button */
+.audio-btn {
+  display: flex; align-items: center; gap: 12px;
+  background: rgba(255,255,255,.10); border: 1.5px solid rgba(255,255,255,.18);
+  color: var(--white); border-radius: var(--r-md);
+  padding: 14px 20px; cursor: pointer; width: 100%;
+  font-family: 'Outfit', sans-serif; font-size: 1rem;
+  transition: background .2s;
+}
+.audio-btn:hover { background: rgba(255,255,255,.18); }
+.audio-icon { font-size: 1.4rem; flex-shrink: 0; }
+.audio-label { text-align: left; font-weight: 600; }
+.audio-label small { display: block; font-size: .76rem; color: rgba(255,255,255,.42); font-weight: 400; margin-top: 1px; }
+
+/* ── reveal body ── */
+.q-card-body { padding: 22px 28px 8px; }
+
+/* Question reveal */
+.reveal-section { margin-bottom: 12px; }
+.reveal-btn {
+  display: flex; align-items: center; gap: 9px; width: 100%;
+  border-radius: var(--r-md); padding: 12px 18px;
+  cursor: pointer; font-family: 'Outfit', sans-serif;
+  font-size: .92rem; font-weight: 600;
+  transition: all .2s;
+  border: none;
+}
+.reveal-btn.q-reveal-btn {
+  background: #deeeff; color: var(--sky);
+}
+.reveal-btn.q-reveal-btn:hover { background: #c8e2ff; }
+.reveal-btn.a-reveal-btn {
+  background: var(--sage2); color: var(--sage);
+}
+.reveal-btn.a-reveal-btn:hover { background: #b8e8d0; }
+.reveal-btn .chevron { margin-left: auto; transition: transform .25s; font-size: .85rem; opacity: .6; }
+.reveal-btn.open .chevron { transform: rotate(180deg); }
+
+.reveal-content { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+.reveal-content.open { max-height: 500px; }
+
+/* ── The big reveal text ── */
+.reveal-inner {
+  margin-top: 10px; padding: 18px 20px;
+  border-radius: var(--r-md);
+  font-size: 1.2rem;
+  line-height: 1.65;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--off);
+  border-left: 4px solid var(--sky);
+}
+.reveal-inner.answer {
+  background: #f0faf5;
+  border-left-color: var(--sage);
+  color: #0f3022;
+  font-size: 1.15rem;
+  font-style: italic;
+}
+
+/* ── Self-assessment ── */
+.assess-section {
+  padding: 4px 28px 24px;
+}
+.assess-label {
+  font-size: .78rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 10px;
+}
+.assess-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+.assess-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 8px; border-radius: var(--r-md);
+  border: 2px solid transparent; cursor: pointer;
+  font-family: 'Outfit', sans-serif; font-size: .95rem; font-weight: 700;
+  transition: all .18s;
+}
+.assess-btn.mastered-btn { background: #edfaf3; border-color: #a8dfc0; color: var(--sage); }
+.assess-btn.mastered-btn:hover,
+.assess-btn.mastered-btn.active { background: var(--sage); color: var(--white); border-color: var(--sage); }
+.assess-btn.revision-btn { background: #fef8e6; border-color: #f0d070; color: #8a5e00; }
+.assess-btn.revision-btn:hover,
+.assess-btn.revision-btn.active { background: var(--gold); color: var(--white); border-color: var(--gold); }
+
+/* ── Prev/Next ── */
+.q-nav-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 8px;
+}
+.nav-arrow {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--card); border: 1.5px solid var(--border);
+  border-radius: var(--r-md); padding: 11px 20px;
+  cursor: pointer; font-family: 'Outfit', sans-serif;
+  font-size: .9rem; font-weight: 600; color: var(--muted);
+  transition: border-color .2s, color .2s;
+}
+.nav-arrow:hover { border-color: var(--sky); color: var(--sky); }
+.nav-arrow:disabled { opacity: .3; cursor: not-allowed; }
+.nav-arrow.next-btn {
+  background: var(--sky); border-color: var(--sky); color: var(--white);
+}
+.nav-arrow.next-btn:hover { background: #1f66c0; border-color: #1f66c0; }
+
+/* Completion banner */
+.complete-banner {
+  background: linear-gradient(135deg, #165c35, #22915a);
+  border-radius: var(--r-xl); padding: 32px 28px; text-align: center; color: var(--white);
+  display: none; margin-bottom: 20px;
+}
+.complete-banner.show { display: block; animation: fadeUp .4s ease; }
+.complete-banner h3 { font-family: 'Syne', sans-serif; font-size: 1.45rem; font-weight: 700; margin-bottom: 8px; }
+.complete-banner p { color: rgba(255,255,255,.72); font-size: .9rem; }
+
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════
+     VIEW 1 · HOME
+════════════════════════════════════════════════════ -->
+<div id="view-home" class="view active">
+<div class="home-page">
+
+  <div class="home-topbar">
+    <div class="topbar-logo">🎖️ &nbsp;<span>University of Defence</span>&nbsp;· Language Centre</div>
+    <div class="topbar-tag">Brno · Czech Republic</div>
+  </div>
+
+  <div class="home-hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-kicker">🎤 STANAG Level 1 · A2</div>
+        <h1 class="hero-title">
+          Speaking Practice
+          <span class="line2">STANAG Level 1</span>
+        </h1>
+        <p class="hero-sub">
+          Prepare for your <strong>speaking examination</strong> with interactive question sets, audio playback and self-assessment tools.
+        </p>
+        <div class="hero-pills">
+          <div class="hero-pill"><span class="pill-icon">📋</span> 25 question sets</div>
+          <div class="hero-pill"><span class="pill-icon">🔊</span> Audio playback</div>
+          <div class="hero-pill"><span class="pill-icon">✅</span> Self-assessment</div>
+          <div class="hero-pill"><span class="pill-icon">🌍</span> Everyday topics</div>
+        </div>
+      </div>
+      <div class="hero-crest">🪖</div>
+    </div>
+  </div>
+
+  <div class="home-cards-wrap">
+    <div class="home-cards-label">Choose a section to practise</div>
+    <div class="home-cards">
+
+      <div class="home-card blue" onclick="showView('view-interview')">
+        <div class="home-card-icon">🎤</div>
+        <h2>Interview Practice</h2>
+        <p>Answer questions about yourself and people in your life. Listen to each question, reveal the text, and check an example answer.</p>
+        <div class="home-card-meta">
+          <span class="meta-chip">25 sets</span>
+          <span class="meta-chip">10 questions each</span>
+          <span class="meta-chip">A2 level</span>
+        </div>
+      </div>
+
+      <div class="home-card amber disabled">
+        <div class="home-card-icon">🎭</div>
+        <h2>Role Plays</h2>
+        <p>Practise practical dialogues and scenarios from the STANAG 1 speaking examination.</p>
+        <div class="home-card-meta">
+          <span class="meta-chip">Coming soon</span>
+        </div>
+        <span class="soon-badge">Soon</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     VIEW 2 · INTERVIEW HUB
+════════════════════════════════════════════════════ -->
+<div id="view-interview" class="view">
+  <div class="page-header">
+    <button class="back-btn" onclick="showView('view-home')">←</button>
+    <div class="page-header-text">
+      <h2>🎤 Interview Practice</h2>
+      <p>Choose a set to practise</p>
+    </div>
+  </div>
+
+  <div class="hub-intro">
+    <p>Each set has <strong>10 questions</strong>. Some questions ask about people in your life.</p>
+    <div class="progress-summary">
+      ✅ <strong id="hub-mastered-count">0</strong>&nbsp;mastered &nbsp;·&nbsp;
+      📝 <strong id="hub-revision-count">0</strong>&nbsp;need revision
+    </div>
+  </div>
+
+  <div class="sets-grid" id="sets-grid"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     VIEW 3 · SET PRACTICE
+════════════════════════════════════════════════════ -->
+<div id="view-practice" class="view">
+  <div class="page-header" id="practice-header">
+    <button class="back-btn" onclick="showView('view-interview')">←</button>
+    <div class="page-header-text">
+      <h2 id="practice-title">Set 1</h2>
+      <p id="practice-subtitle">Question 1 of 10</p>
+    </div>
+  </div>
+
+  <div class="practice-wrap">
+    <div class="set-progress-bar"><div class="set-progress-fill" id="practice-progress-fill"></div></div>
+    <div class="q-nav" id="q-nav"></div>
+
+    <!-- Completion banner -->
+    <div class="complete-banner" id="complete-banner">
+      <div style="font-size:2.6rem;margin-bottom:10px">🎉</div>
+      <h3>Set complete!</h3>
+      <p id="complete-msg">You reviewed all 10 questions.</p>
+    </div>
+
+    <!-- Question card -->
+    <div class="q-card" id="q-card">
+      <div class="q-card-top">
+        <div class="q-counter" id="q-counter">Question 1 / 10</div>
+        <div id="q-tag-wrap"></div>
+        <button class="audio-btn" id="audio-btn" onclick="speakQuestion()">
+          <span class="audio-icon">🔊</span>
+          <span class="audio-label">
+            Listen to the question
+            <small>Click to hear the question read aloud</small>
+          </span>
+        </button>
+      </div>
+
+      <div class="q-card-body">
+        <!-- Question text reveal -->
+        <div class="reveal-section">
+          <button class="reveal-btn q-reveal-btn" id="reveal-q-btn" onclick="toggleReveal('q')">
+            <span>👁️ Show question</span>
+            <span class="chevron">▾</span>
+          </button>
+          <div class="reveal-content" id="reveal-q-content">
+            <div class="reveal-inner" id="q-text"></div>
+          </div>
+        </div>
+
+        <!-- Answer reveal -->
+        <div class="reveal-section">
+          <button class="reveal-btn a-reveal-btn" id="reveal-a-btn" onclick="toggleReveal('a')">
+            <span>💬 Show example answer</span>
+            <span class="chevron">▾</span>
+          </button>
+          <div class="reveal-content" id="reveal-a-content">
+            <div class="reveal-inner answer" id="a-text"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Self-assessment -->
+      <div class="assess-section">
+        <div class="assess-label">How did you do?</div>
+        <div class="assess-row">
+          <button class="assess-btn mastered-btn" id="btn-mastered" onclick="assess('mastered')">
+            ✅ Got it!
+          </button>
+          <button class="assess-btn revision-btn" id="btn-revision" onclick="assess('revision')">
+            📝 Need practice
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prev / Next -->
+    <div class="q-nav-row">
+      <button class="nav-arrow" id="btn-prev" onclick="navigate(-1)">← Previous</button>
+      <button class="nav-arrow next-btn" id="btn-next" onclick="navigate(1)">Next →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SETS = [{"id": 1, "questions": [{"q": "What is your full name? How do you spell your surname?", "a": "My name is Jan Novák. That's N-O-V-Á-K."}, {"q": "Where are you from?", "a": "I am from the Czech Republic. I come from Brno."}, {"q": "What is your military rank?", "a": "My rank is Sergeant."}, {"q": "Are you married or single?", "a": "I am married."}, {"q": "What is your wife's / husband's name? How old is she / he?", "a": "My wife's name is Petra. She is thirty-two years old.", "tag": "wife/husband"}, {"q": "What does your wife / husband do? Where does she / he work?", "a": "She is a teacher. She works at a primary school in Brno.", "tag": "wife/husband"}, {"q": "Do you live in a house or a flat?", "a": "I live in a small flat in the city centre."}, {"q": "What time do you start and finish work?", "a": "I start at seven and finish at half past three."}, {"q": "What do you do in your free time?", "a": "I like cycling and reading books."}, {"q": "What sports do you like?", "a": "I like football and swimming."}]}, {"id": 2, "questions": [{"q": "How old are you?", "a": "I am thirty-two years old."}, {"q": "What is your job in the army?", "a": "I am a technician. I repair military vehicles."}, {"q": "Do you have any children?", "a": "Yes, I have one son and one daughter."}, {"q": "How old is your son / daughter? What does he / she do?", "a": "My son is ten. He goes to primary school.", "tag": "son/daughter"}, {"q": "What does your son / daughter like to do after school?", "a": "He loves playing football and video games.", "tag": "son/daughter"}, {"q": "How do you travel to work?", "a": "I travel by car because it is fast."}, {"q": "Why do you need English for your job?", "a": "I need it for international missions and exercises."}, {"q": "What is the weather like today?", "a": "It is sunny but a bit cold today."}, {"q": "What languages do you speak?", "a": "I speak Czech and a little German."}, {"q": "Is there a shop near your home?", "a": "Yes, there is a supermarket five minutes away."}]}, {"id": 3, "questions": [{"q": "How many rooms are there in your home?", "a": "There are three rooms and a kitchen in my flat."}, {"q": "What do your parents do? Are they retired?", "a": "My father is retired and my mother works as a nurse."}, {"q": "What is your military specialisation?", "a": "My specialisation is logistics."}, {"q": "Do you have a best friend? What is his / her name?", "a": "Yes, my best friend's name is Marek.", "tag": "best friend"}, {"q": "What does your best friend do? Where does he / she work?", "a": "He is an engineer. He works for a construction company.", "tag": "best friend"}, {"q": "What do you and your best friend usually do together?", "a": "We go hiking and sometimes watch football.", "tag": "best friend"}, {"q": "What do you have for breakfast?", "a": "I usually have bread with ham and a cup of tea."}, {"q": "How far is your home from the base?", "a": "It is about forty kilometres from the base."}, {"q": "What time do you go to bed on weekdays?", "a": "I usually go to bed at ten o'clock."}, {"q": "What is a typical lunch for you?", "a": "I usually have soup and a main course in the military canteen."}]}, {"id": 4, "questions": [{"q": "What is your favourite season? Why?", "a": "I like summer because I love swimming in the sea."}, {"q": "Do you use a computer at work?", "a": "Yes, I use a computer every day for emails and reports."}, {"q": "What is your commander's name and rank?", "a": "My commander is Major Svoboda.", "tag": "commander"}, {"q": "What is your commander like? Is he / she strict?", "a": "He is strict but fair. He is a very professional soldier.", "tag": "commander"}, {"q": "Does your commander speak English?", "a": "Yes, he speaks good English. He works a lot with NATO.", "tag": "commander"}, {"q": "Do you play any sports?", "a": "I play football with my friends every Friday."}, {"q": "Where do you usually go on holiday?", "a": "I usually go to Croatia with my family."}, {"q": "What do you usually drink with your meals?", "a": "I usually drink water or tea."}, {"q": "Do you have any hobbies?", "a": "Yes, I like photography and hiking."}, {"q": "Do you have a garden or a balcony?", "a": "I don't have a garden, but I have a big balcony with flowers."}]}, {"id": 5, "questions": [{"q": "Do you have any pets?", "a": "Yes, I have a cat. Her name is Mici."}, {"q": "Describe your typical morning routine.", "a": "I wake up at six, have a shower, get dressed and go to work."}, {"q": "Do you have any brothers or sisters?", "a": "Yes, I have one younger brother."}, {"q": "What is your brother's / sister's name? How old is he / she?", "a": "His name is Ondřej. He is twenty-six years old.", "tag": "brother/sister"}, {"q": "What does your brother / sister do? Where does he / she live?", "a": "He is a programmer. He lives in Prague with his girlfriend.", "tag": "brother/sister"}, {"q": "How often do you see your brother / sister?", "a": "We see each other about once a month.", "tag": "brother/sister"}, {"q": "Do you have a car? What kind?", "a": "Yes, I have a Škoda Octavia. It is very reliable."}, {"q": "What time do you finish work?", "a": "I usually finish work at half past three."}, {"q": "What is your favourite type of film?", "a": "I like action films and documentaries."}, {"q": "Can you cook? What can you cook?", "a": "Yes, I can cook simple things like pasta or soup."}]}, {"id": 6, "questions": [{"q": "Where is your military base located?", "a": "My base is located in Chrudim, in east Bohemia."}, {"q": "Is your office big or small?", "a": "My office is quite small. I share it with one colleague."}, {"q": "What is your colleague's name? What is his / her rank?", "a": "My colleague's name is Pavel. He is a Corporal.", "tag": "colleague"}, {"q": "What is your colleague like as a person?", "a": "He is very reliable and calm. He is also helpful.", "tag": "colleague"}, {"q": "What does your colleague do after work?", "a": "He likes fishing and watching ice hockey.", "tag": "colleague"}, {"q": "Can you swim well?", "a": "Yes, I am a good swimmer. I go to the pool every week."}, {"q": "What do you usually do on Sunday?", "a": "I usually spend Sunday at home with my family."}, {"q": "What is your favourite sport to watch?", "a": "I like watching ice hockey. It is very popular in our country."}, {"q": "Do you prefer coffee or tea?", "a": "I prefer coffee, especially in the morning."}, {"q": "How do you usually pay – by card or cash?", "a": "I usually pay by card. It is more convenient."}]}, {"id": 7, "questions": [{"q": "How do you spell your first name?", "a": "It is J-A-R-O-S-L-A-V."}, {"q": "Do you live in a big city or a small town?", "a": "I live in a small town near Pardubice."}, {"q": "What is your favourite animal? Why?", "a": "I like dogs because they are very loyal and friendly."}, {"q": "How long is your journey to work?", "a": "It takes about twenty minutes by car."}, {"q": "Is your wife / husband / partner good at cooking?", "a": "Yes, my wife is an excellent cook. She makes delicious cakes.", "tag": "wife/husband"}, {"q": "What does your wife / husband / partner do in the evenings?", "a": "She usually reads a book or watches a series on TV.", "tag": "wife/husband"}, {"q": "What do you usually do in the afternoon after work?", "a": "I usually help my children with their homework."}, {"q": "Do you like watching documentaries?", "a": "Yes, I especially like documentaries about history and nature."}, {"q": "Do you like winter sports?", "a": "Yes, I go skiing every year in the mountains."}, {"q": "What do you eat for lunch at the base?", "a": "I usually have soup and meat with rice or potatoes."}]}, {"id": 8, "questions": [{"q": "What do you do every morning at work?", "a": "I check my emails and prepare the plan for the day."}, {"q": "Do you speak any foreign languages?", "a": "I speak English and a little bit of Russian."}, {"q": "Is there a gym or sports facility at your base?", "a": "Yes, there is a gym and a football pitch at our base."}, {"q": "Do you have a son or daughter? How old is he / she?", "a": "Yes, I have a daughter. She is eight years old."}, {"q": "What does your daughter / son like to do at the weekend?", "a": "She loves going to the park and drawing pictures.", "tag": "son/daughter"}, {"q": "What school does your son / daughter go to?", "a": "She goes to primary school in our neighbourhood.", "tag": "son/daughter"}, {"q": "What kind of music do you listen to?", "a": "I listen to rock and pop music."}, {"q": "What do you need English for at work?", "a": "I need English for technical manuals and for NATO exercises."}, {"q": "What do you usually do in the evening?", "a": "I usually cook dinner, watch TV and relax."}, {"q": "What is your favourite colour?", "a": "My favourite colour is dark blue."}]}, {"id": 9, "questions": [{"q": "What is your address?", "a": "I live at 15 Main Street in Vyškov."}, {"q": "Do you live near your parents?", "a": "No, my parents live about two hundred kilometres away."}, {"q": "What is your best friend's name?", "a": "My best friend's name is Lukáš.", "tag": "best friend"}, {"q": "What does your best friend look like?", "a": "He is tall with short dark hair. He is quite athletic.", "tag": "best friend"}, {"q": "How often do you meet your best friend? What do you do together?", "a": "We meet about twice a month. We go for a beer or watch sport.", "tag": "best friend"}, {"q": "Is English difficult for you?", "a": "Yes, it is sometimes difficult, but I practise every day."}, {"q": "What is there to do in your town or city?", "a": "There is a cinema, a sports centre and some nice restaurants."}, {"q": "What time do you usually have dinner?", "a": "I usually have dinner at about six o'clock."}, {"q": "What is there in your living room?", "a": "There is a sofa, a TV, a coffee table and some bookshelves."}, {"q": "Do you use social media?", "a": "Yes, I use it sometimes to stay in touch with friends and family."}]}, {"id": 10, "questions": [{"q": "Do you have any children? How old are they?", "a": "Yes, my son is ten and my daughter is seven."}, {"q": "How do you travel to work?", "a": "I travel by car, but sometimes I take the bus."}, {"q": "What is the typical weather in your region?", "a": "In summer it is hot, and in winter it is cold and sometimes snowy."}, {"q": "Do you have a colleague you work with closely? What is he / she like?", "a": "Yes, my colleague Kamila is very organised and professional.", "tag": "colleague"}, {"q": "Does your colleague speak English?", "a": "Yes, she speaks very good English. She studies it in her free time.", "tag": "colleague"}, {"q": "How often do you visit your parents?", "a": "I visit them about once a month, usually at the weekend."}, {"q": "Do you prefer to read a book or watch TV?", "a": "I prefer to watch TV after work. I am usually tired."}, {"q": "What is your least favourite household chore?", "a": "I don't like doing the dishes. It is very boring."}, {"q": "What is there near your home?", "a": "There is a park, a shop and a bus stop near my home."}, {"q": "Do you like your job? Why?", "a": "Yes, I like it because it is never boring and I work with good people."}]}, {"id": 11, "questions": [{"q": "How many floors does your building have? Which floor do you live on?", "a": "My building has five floors. I live on the second floor."}, {"q": "What time do you wake up on weekdays?", "a": "I wake up at five o'clock every morning."}, {"q": "What is your favourite Czech dish?", "a": "I like svíčková with dumplings. It is a traditional Czech meal."}, {"q": "Do you have a brother or a sister? Tell me about him / her.", "a": "I have one sister. Her name is Jana. She is a doctor.", "tag": "brother/sister"}, {"q": "What is your sister / brother like as a person?", "a": "She is very intelligent and kind. She is also a bit quiet.", "tag": "brother/sister"}, {"q": "How often do you see your brother / sister?", "a": "We see each other about once a month at our parents' house.", "tag": "brother/sister"}, {"q": "Why do you want to learn English?", "a": "Because I want to work at a NATO headquarters one day."}, {"q": "Is there a lift in your building?", "a": "No, there is no lift. I walk up the stairs every day."}, {"q": "How often do you go to the cinema?", "a": "I go about once a month with my wife."}, {"q": "What do you do when you have a cold?", "a": "I stay at home, drink a lot of tea and rest."}]}, {"id": 12, "questions": [{"q": "Is your home far from the base?", "a": "Yes, it is about sixty kilometres from the base."}, {"q": "Do you like reading? What kind of books?", "a": "Yes, I like detective stories and history books."}, {"q": "What is your commander's best quality?", "a": "I think his best quality is that he is calm in difficult situations.", "tag": "commander"}, {"q": "How does your commander communicate with the unit?", "a": "He has a briefing every morning at seven thirty.", "tag": "commander"}, {"q": "Does your commander work long hours?", "a": "Yes, he often stays at the base until six or seven in the evening.", "tag": "commander"}, {"q": "Do you have a balcony? What do you use it for?", "a": "Yes, I have a small balcony. I drink my morning coffee there."}, {"q": "How often do you use the internet?", "a": "I use it every day for news and to stay in touch with people."}, {"q": "What do you usually do on Saturday evenings?", "a": "I usually go to a restaurant or watch a film at home."}, {"q": "Is the area around your home safe?", "a": "Yes, it is a very quiet and safe neighbourhood."}, {"q": "What do you wear at the base?", "a": "I wear my camouflage uniform and black boots."}]}, {"id": 13, "questions": [{"q": "What is your job in the army?", "a": "I am a medic. I help sick or injured soldiers."}, {"q": "How do you go to work every day?", "a": "I usually go by train. It takes about forty minutes."}, {"q": "What is your wife's / husband's daily routine like?", "a": "She wakes up early, prepares breakfast for the children and goes to work.", "tag": "wife/husband"}, {"q": "Does your wife / husband do any sport?", "a": "Yes, she goes to yoga twice a week.", "tag": "wife/husband"}, {"q": "What does your wife / husband like to eat?", "a": "She loves Italian food, especially pasta and risotto.", "tag": "wife/husband"}, {"q": "How often do you meet your friends?", "a": "I meet my friends about twice a week in the evenings."}, {"q": "What do you do on your days off?", "a": "I like going for long walks in the forest with my family."}, {"q": "What is the weather like today?", "a": "It is very cloudy and windy today."}, {"q": "Is there a sports centre near your home?", "a": "Yes, there is a fitness centre about ten minutes away."}, {"q": "What things do you need to bring to work every day?", "a": "I need my ID, my keys, my phone and my water bottle."}]}, {"id": 14, "questions": [{"q": "What is your hometown?", "a": "My hometown is Liberec. It is near the Jizera mountains."}, {"q": "What is your rank?", "a": "I am a Private First Class."}, {"q": "Do you have a son or daughter? What is he / she like?", "a": "Yes, I have a daughter. She is cheerful, creative and a bit stubborn.", "tag": "son/daughter"}, {"q": "What is your son's / daughter's favourite food?", "a": "She loves pasta and pizza. She doesn't like vegetables much.", "tag": "son/daughter"}, {"q": "Does your son / daughter have any hobbies or do any sport?", "a": "Yes, she goes to a dance class every Tuesday and Thursday.", "tag": "son/daughter"}, {"q": "Do you like cooking? What do you cook?", "a": "Yes, I like cooking for my partner at the weekend. I make pasta and soups."}, {"q": "Why is English important for you?", "a": "Because many military manuals are in English and I need it for NATO missions."}, {"q": "What do you usually do on Saturday morning?", "a": "I go shopping and then I clean my flat."}, {"q": "How much free time do you have after work?", "a": "I usually have about three hours of free time in the evening."}, {"q": "What equipment do you use at work?", "a": "I use a radio, a computer and various military equipment."}]}, {"id": 15, "questions": [{"q": "What is your military specialisation?", "a": "I am an IT specialist. I work with computers and networks."}, {"q": "What is the best thing about your job?", "a": "The best thing is that I travel to different places and meet new people."}, {"q": "What is your best friend like as a person?", "a": "He is very funny and loyal. He always tells me the truth.", "tag": "best friend"}, {"q": "Does your best friend have a family?", "a": "Yes, he is married and has one small daughter.", "tag": "best friend"}, {"q": "What are your best friend's hobbies?", "a": "He loves cycling and reading science fiction books.", "tag": "best friend"}, {"q": "Do you like watching movies? What kind?", "a": "Yes, I like action movies and comedies."}, {"q": "How do you stay healthy?", "a": "I exercise regularly, eat healthy food and sleep enough."}, {"q": "What do you eat for breakfast?", "a": "I have some bread with cheese and a glass of juice."}, {"q": "What is a typical Saturday for you?", "a": "I go to the market in the morning, then visit my parents in the afternoon."}, {"q": "What do you do when the weather is bad?", "a": "I stay at home, cook something and watch films."}]}, {"id": 16, "questions": [{"q": "What is your phone number?", "a": "My number is six-zero-three, four-five-six, seven-eight-nine."}, {"q": "How many rooms are there in your home? Which is your favourite?", "a": "There are four rooms. My favourite is the living room."}, {"q": "What do your parents do?", "a": "My father is a driver and my mother is a cook."}, {"q": "Do you have a brother or a sister? What does he / she do?", "a": "I have one brother. He is a mechanic.", "tag": "brother/sister"}, {"q": "What is your brother / sister good at?", "a": "He is very good with his hands. He can repair almost anything.", "tag": "brother/sister"}, {"q": "How often do you talk to your brother / sister?", "a": "We call each other about twice a week.", "tag": "brother/sister"}, {"q": "What time do you usually go to bed?", "a": "I go to bed at eleven o'clock. Sometimes later at the weekend."}, {"q": "How do you usually get to the city centre from your home?", "a": "I usually take the tram. It is fast and cheap."}, {"q": "Do you prefer to eat at home or in a restaurant?", "a": "I prefer to eat at home because it is cheaper and healthier."}, {"q": "What sports facilities are near your home?", "a": "There is a swimming pool and a football pitch near my home."}]}, {"id": 17, "questions": [{"q": "What is your name? How do you spell your surname?", "a": "My name is Tomáš Černý. That's C-E-R-N-Y."}, {"q": "Who do you live with?", "a": "I live with my wife and our daughter."}, {"q": "What is your colleague's name? How long does he / she work at the base?", "a": "My colleague's name is Radek. He works here for five years.", "tag": "colleague"}, {"q": "What are your colleague's duties at the base?", "a": "He is responsible for vehicle maintenance. He repairs trucks.", "tag": "colleague"}, {"q": "Do you and your colleague get along well?", "a": "Yes, we work very well together. We help each other a lot.", "tag": "colleague"}, {"q": "How often do you travel for work?", "a": "I travel for military exercises about three times a year."}, {"q": "Do you know your neighbours? Are they friendly?", "a": "Yes, I know my neighbours. They are very nice people."}, {"q": "What do you do to relax after a long day?", "a": "I like reading or listening to music. Sometimes I go for a short walk."}, {"q": "Is the canteen at your base good?", "a": "Yes, the food is quite good. I have lunch there every day."}, {"q": "What is your favourite film or book?", "a": "My favourite film is Saving Private Ryan. It is a war film."}]}, {"id": 18, "questions": [{"q": "How old are you?", "a": "I am forty years old."}, {"q": "What is your job in the army?", "a": "I am a radio operator. I handle communications at the base."}, {"q": "What is your favourite season?", "a": "I like autumn because of the colours and the cool weather."}, {"q": "What does your wife / husband look like?", "a": "She is of medium height with long dark hair and brown eyes.", "tag": "wife/husband"}, {"q": "What is your wife / husband like as a person?", "a": "She is very kind, patient and a bit funny. I love her sense of humour.", "tag": "wife/husband"}, {"q": "How does your wife / husband relax after work?", "a": "She reads a book or takes a long bath.", "tag": "wife/husband"}, {"q": "What public transport is there in your town or city?", "a": "There are buses and trams in my city. I use the tram every day."}, {"q": "Do you like your neighbourhood?", "a": "Yes, it is quiet and green. There is a big park nearby."}, {"q": "How often do you contact your family when you are away?", "a": "I call my wife every evening and we video call at the weekend."}, {"q": "What is there to see near your base?", "a": "There are some forests and a small lake near the base."}]}, {"id": 19, "questions": [{"q": "What is your hometown? What is it like?", "a": "My hometown is Pardubice. It is a medium-sized city with a famous racecourse."}, {"q": "What is your rank?", "a": "I am a First Sergeant."}, {"q": "Do you have any children?", "a": "Yes, I have two sons."}, {"q": "How old are your sons / daughters? What do they do?", "a": "My sons are eight and eleven. They both go to primary school.", "tag": "son/daughter"}, {"q": "What sport does your son / daughter do?", "a": "My older son plays football in a local club every Saturday.", "tag": "son/daughter"}, {"q": "What do you have for breakfast?", "a": "I have eggs and toast. Sometimes I have yoghurt and fruit."}, {"q": "Do you like watching sport on TV?", "a": "Yes, I like watching football and ice hockey."}, {"q": "What is the name of your favourite restaurant?", "a": "My favourite restaurant is called U Koníčka. It serves Czech food."}, {"q": "What is on your bedside table?", "a": "There is a lamp, my phone and a glass of water."}, {"q": "What are your plans for this weekend?", "a": "I plan to go for a hike with my sons and cook a barbecue."}]}, {"id": 20, "questions": [{"q": "What is your military specialisation?", "a": "I am a supply officer. I manage equipment and materials."}, {"q": "What time do you finish work?", "a": "I finish at four o'clock in the afternoon."}, {"q": "Do you like your job? What is the hardest part?", "a": "Yes, I like it. The hardest part is the paperwork."}, {"q": "What is your best friend's name? Where does he / she live?", "a": "My best friend's name is Petr. He lives in Ostrava.", "tag": "best friend"}, {"q": "How does your best friend usually spend his / her weekends?", "a": "He usually goes cycling or visits his parents at the weekend.", "tag": "best friend"}, {"q": "Does your best friend have a car? What kind?", "a": "Yes, he has a new Hyundai. He is very proud of it.", "tag": "best friend"}, {"q": "What kind of books or magazines do you read?", "a": "I read military magazines and sometimes history books."}, {"q": "What is your favourite room in the house? Why?", "a": "My favourite room is the kitchen because I love cooking."}, {"q": "Do you prefer coffee or tea? How many cups a day?", "a": "I prefer tea. I drink about three cups a day."}, {"q": "Where is a good place to go on holiday in the Czech Republic?", "a": "I think Šumava is very beautiful. The forests and lakes are amazing."}]}, {"id": 21, "questions": [{"q": "How do you spell your surname?", "a": "It's H-O-R-Á-K."}, {"q": "What is your home city or town famous for?", "a": "My city, Plzeň, is famous for its beer and its beautiful cathedral."}, {"q": "How often do you do sport?", "a": "I go running every morning. I also play tennis on Saturdays."}, {"q": "What is your commander's rank?", "a": "My commander is a Lieutenant Colonel.", "tag": "commander"}, {"q": "How often does your commander organise exercises?", "a": "He organises a big exercise about twice a year.", "tag": "commander"}, {"q": "What do your colleagues think about your commander?", "a": "They respect him. He is experienced and always supports his soldiers.", "tag": "commander"}, {"q": "Is there a lot of traffic near your base?", "a": "Not really. The base is on the outskirts of the city."}, {"q": "What is special about Christmas in your family?", "a": "We always have fish and potato salad. We open presents on the 24th."}, {"q": "Do you like going to restaurants? What kind?", "a": "Yes, I like Czech restaurants and sometimes Italian food."}, {"q": "What do you take with you on a military exercise?", "a": "I take my uniform, sleeping bag, first aid kit and all my equipment."}]}, {"id": 22, "questions": [{"q": "What is the name of the base where you work?", "a": "I work at the Dědice base near Vyškov."}, {"q": "How many bedrooms does your home have?", "a": "My home has two bedrooms."}, {"q": "What do you usually do on a rainy day?", "a": "I stay at home, watch TV or read a book."}, {"q": "Do you have a brother or sister? What does he / she do in his / her free time?", "a": "Yes, my brother loves cooking and cycling.", "tag": "brother/sister"}, {"q": "Is your brother / sister married? Does he / she have children?", "a": "No, he is not married yet, but he has a girlfriend.", "tag": "brother/sister"}, {"q": "How many hours a week do you work?", "a": "I work about forty hours a week, sometimes more during exercises."}, {"q": "Do you like summer or winter more? Why?", "a": "I like summer more because I can swim and go outside with my family."}, {"q": "How do you get to the nearest big city from where you live?", "a": "I take the train. It takes about thirty minutes."}, {"q": "What is a good present for a soldier?", "a": "A good present is a good book, a nice watch or some sport equipment."}, {"q": "Do you have a washing machine at home?", "a": "Yes, I have a washing machine in the bathroom."}]}, {"id": 23, "questions": [{"q": "What is your date of birth?", "a": "I was born on the tenth of May, nineteen eighty-eight."}, {"q": "How many people do you have in your immediate family?", "a": "There are four of us: my wife, my son, my daughter and me."}, {"q": "What is your son's / daughter's favourite subject at school?", "a": "My son loves PE and history. He is not very good at maths.", "tag": "son/daughter"}, {"q": "What does your son / daughter want to do in the future?", "a": "He wants to study computer science at university.", "tag": "son/daughter"}, {"q": "Do you have a mobile phone? What do you use it for?", "a": "Yes, I use it for calls, messages, navigation and the internet."}, {"q": "Is English useful in everyday life in the Czech Republic?", "a": "Yes, it is useful for travel, shopping and watching films and series."}, {"q": "How often does your family eat together?", "a": "We usually eat dinner together every day. It is important to us."}, {"q": "What sport is the most popular in the Czech Republic?", "a": "Ice hockey and football are the most popular sports here."}, {"q": "What do you usually have for dinner?", "a": "I usually have soup and a warm meal that my wife cooks."}, {"q": "What is the address of your military base?", "a": "Our base is on Hradní Street in Brno."}]}, {"id": 24, "questions": [{"q": "How do you usually spend your evenings after work?", "a": "I usually cook, play with my children and watch the news."}, {"q": "What is your base like? Describe it.", "a": "Our base is medium-sized. There is a parade ground, a gym, a canteen and office buildings."}, {"q": "What is your best friend's job? Does he / she like it?", "a": "My best friend is an engineer. He really loves his job.", "tag": "best friend"}, {"q": "What does your best friend think about your life in the army?", "a": "He thinks it is interesting, but he says it is too strict for him.", "tag": "best friend"}, {"q": "What do you and your best friend talk about?", "a": "We talk about sport, our families and sometimes about work.", "tag": "best friend"}, {"q": "Is there a market in your town? Do you shop there?", "a": "Yes, there is a market on Saturdays. I sometimes buy fruit and vegetables there."}, {"q": "What season is it now? What is the weather like?", "a": "It is autumn now. It is cool and sometimes rainy."}, {"q": "What is your morning routine before you go to work?", "a": "I wake up, have a shower, eat breakfast and drive to the base."}, {"q": "What kind of clothes do you wear at the weekend?", "a": "I wear jeans and a comfortable T-shirt or a sweatshirt."}, {"q": "Do you have central heating at home?", "a": "Yes, I have central heating. It is warm and comfortable in winter."}]}, {"id": 25, "questions": [{"q": "What is your full name and rank?", "a": "My name is Ondřej Krejčí. My rank is Warrant Officer."}, {"q": "What does your partner do? Where does he / she work?", "a": "My wife is a pharmacist. She works in a pharmacy in the city centre."}, {"q": "Does your wife / husband like his / her job? Why?", "a": "Yes, she likes it because she helps people every day.", "tag": "wife/husband"}, {"q": "Does your wife / husband speak any foreign languages?", "a": "Yes, she speaks English and a little French.", "tag": "wife/husband"}, {"q": "What do you do to improve your English?", "a": "I watch English films and series and I practise with my colleagues."}, {"q": "Describe the street where you live.", "a": "It is a quiet street with trees and some small houses. There is not much traffic."}, {"q": "What is the most important meal of the day for you?", "a": "Breakfast is the most important for me. I never skip it."}, {"q": "Do you have a first aid kit at home?", "a": "Yes, I have one in the bathroom. I also have one in my car."}, {"q": "What are your children interested in? What are their hobbies?", "a": "My son loves football and my daughter likes drawing and dancing."}, {"q": "What would be your perfect day off?", "a": "My perfect day is a hike in the morning, lunch in a nice restaurant and a film in the evening."}]}];
+
+const scores = SETS.map(s => Array(s.questions.length).fill(null));
+let currentSet = 0, currentQ = 0;
+
+const TAG_CFG = {
+  "wife/husband":  { cls:"wife",   icon:"💑", label:"wife / husband"   },
+  "son/daughter":  { cls:"son",    icon:"👶", label:"son / daughter"    },
+  "best friend":   { cls:"friend", icon:"🤝", label:"best friend"       },
+  "colleague":     { cls:"col",    icon:"🪖", label:"colleague"          },
+  "commander":     { cls:"cmd",    icon:"⭐", label:"commander"          },
+  "brother/sister":{ cls:"sib",    icon:"👫", label:"brother / sister"  },
+};
+
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+  if (id === 'view-interview') renderHub();
+}
+
+function renderHub() {
+  let totalM = 0, totalR = 0;
+  scores.forEach(s => s.forEach(v => { if(v==='mastered') totalM++; if(v==='revision') totalR++; }));
+  document.getElementById('hub-mastered-count').textContent = totalM;
+  document.getElementById('hub-revision-count').textContent = totalR;
+
+  const grid = document.getElementById('sets-grid');
+  grid.innerHTML = '';
+  SETS.forEach((set, si) => {
+    const qs = scores[si];
+    const mastered = qs.filter(v=>v==='mastered').length;
+    const revision = qs.filter(v=>v==='revision').length;
+    const total    = qs.length;
+    const allDone  = mastered === total;
+    const anyDone  = mastered + revision > 0;
+
+    const tile = document.createElement('div');
+    tile.className = 'set-tile' + (allDone?' done':anyDone?' partial':'');
+    tile.onclick = () => openSet(si);
+
+    const statusLabel = allDone ? '✓ Complete' : anyDone ? `${mastered+revision}/${total} done` : 'Not started';
+    const dots = qs.map(v =>
+      `<span class="dot ${v==='mastered'?'mastered':v==='revision'?'revision':''}"></span>`
+    ).join('');
+
+    tile.innerHTML = `<div class="set-num">${set.id}</div><div class="set-status">${statusLabel}</div><div class="set-dots">${dots}</div>`;
+    grid.appendChild(tile);
+  });
+}
+
+function openSet(si) {
+  currentSet = si; currentQ = 0;
+  showView('view-practice');
+  renderPractice();
+}
+
+function renderPractice() {
+  const set = SETS[currentSet];
+  const qi  = currentQ;
+  const q   = set.questions[qi];
+
+  document.getElementById('practice-title').textContent = `Set ${set.id}`;
+  document.getElementById('practice-subtitle').textContent = `Question ${qi+1} of ${set.questions.length}`;
+
+  const done = scores[currentSet].filter(Boolean).length;
+  document.getElementById('practice-progress-fill').style.width =
+    Math.round((done / set.questions.length) * 100) + '%';
+
+  const nav = document.getElementById('q-nav');
+  nav.innerHTML = '';
+  set.questions.forEach((_, i) => {
+    const p = document.createElement('button');
+    const st = scores[currentSet][i];
+    p.className = 'q-pill' + (i===qi?' active':'') + (st?' '+st:'');
+    p.textContent = i + 1;
+    p.onclick = () => { currentQ = i; renderPractice(); };
+    nav.appendChild(p);
+  });
+
+  document.getElementById('q-counter').textContent = `Question ${qi+1} / ${set.questions.length}`;
+
+  document.getElementById('q-tag-wrap').innerHTML = '';
+
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('a-text').textContent  = q.a;
+
+  ['q','a'].forEach(k => {
+    document.getElementById(`reveal-${k}-btn`).classList.remove('open');
+    document.getElementById(`reveal-${k}-content`).classList.remove('open');
+  });
+
+  const st = scores[currentSet][qi];
+  document.getElementById('btn-mastered').classList.toggle('active', st==='mastered');
+  document.getElementById('btn-revision').classList.toggle('active', st==='revision');
+
+  document.getElementById('btn-prev').disabled = qi === 0;
+  const nextBtn = document.getElementById('btn-next');
+  nextBtn.textContent = qi === set.questions.length - 1 ? 'Finish ✓' : 'Next →';
+
+  const allDone = scores[currentSet].every(Boolean);
+  const banner  = document.getElementById('complete-banner');
+  if (allDone) {
+    banner.classList.add('show');
+    const m = scores[currentSet].filter(v=>v==='mastered').length;
+    document.getElementById('complete-msg').textContent =
+      `${m} mastered · ${set.questions.length - m} need more practice.`;
+  } else {
+    banner.classList.remove('show');
+  }
+}
+
+function toggleReveal(key) {
+  const btn  = document.getElementById(`reveal-${key}-btn`);
+  const cont = document.getElementById(`reveal-${key}-content`);
+  btn.classList.toggle('open');
+  cont.classList.toggle('open');
+}
+
+function speakQuestion() {
+  if (!('speechSynthesis' in window)) { alert('Your browser does not support audio.'); return; }
+  const q = SETS[currentSet].questions[currentQ].q.replace(/\s*\/\s*/g, ' or ');
+  speechSynthesis.cancel();
+  const utt = new SpeechSynthesisUtterance(q);
+  utt.lang = 'en-GB'; utt.rate = 0.88;
+  const voices = speechSynthesis.getVoices();
+  const pref = voices.find(v => v.lang.startsWith('en') && v.name.toLowerCase().includes('female'))
+            || voices.find(v => v.lang.startsWith('en-GB'))
+            || voices.find(v => v.lang.startsWith('en'));
+  if (pref) utt.voice = pref;
+  const btn = document.getElementById('audio-btn');
+  btn.style.background = 'rgba(255,255,255,.25)';
+  utt.onend = () => { btn.style.background = ''; };
+  speechSynthesis.speak(utt);
+}
+if ('speechSynthesis' in window) speechSynthesis.getVoices();
+
+function assess(val) {
+  const cur = scores[currentSet][currentQ];
+  scores[currentSet][currentQ] = cur === val ? null : val;
+  renderPractice();
+}
+
+function navigate(dir) {
+  const next = currentQ + dir;
+  if (next < 0 || next >= SETS[currentSet].questions.length) return;
+  currentQ = next; renderPractice();
+}
+</script>
+</body>
+</html>
