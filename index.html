@@ -158,13 +158,13 @@ body {
 
 /* decorative crest */
 .hero-crest {
-  width: 140px; height: 140px; flex-shrink: 0;
+  width: 180px; height: 180px; flex-shrink: 0;
   border-radius: 50%;
-  background: rgba(255,255,255,.05);
-  border: 2px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  border: 2px solid rgba(255,255,255,.10);
   display: flex; align-items: center; justify-content: center;
-  font-size: 4rem;
-  box-shadow: 0 0 60px rgba(40,120,214,.25);
+  box-shadow: 0 0 60px rgba(40,120,214,.2);
+  overflow: hidden;
 }
 
 /* ── Section cards ── */
@@ -502,7 +502,66 @@ body {
           <div class="hero-pill"><span class="pill-icon">🌍</span> Everyday topics</div>
         </div>
       </div>
-      <div class="hero-crest">🪖</div>
+      <div class="hero-crest">
+        <svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Background circle -->
+          <circle cx="80" cy="80" r="78" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+
+          <!-- SPEECH BUBBLE -->
+          <rect x="68" y="12" width="72" height="38" rx="10" fill="rgba(79,163,240,0.25)" stroke="rgba(79,163,240,0.6)" stroke-width="1.5"/>
+          <polygon points="80,50 72,62 88,50" fill="rgba(79,163,240,0.25)"/>
+          <!-- Dots in bubble -->
+          <circle cx="84" cy="31" r="4" fill="white" opacity="0.9"/>
+          <circle cx="97" cy="31" r="4" fill="white" opacity="0.9"/>
+          <circle cx="110" cy="31" r="4" fill="white" opacity="0.9"/>
+          <!-- Bubble border bottom fix -->
+          <line x1="80" y1="50" x2="88" y2="50" stroke="rgba(79,163,240,0.6)" stroke-width="1.5"/>
+
+          <!-- SOLDIER -->
+          <!-- Legs -->
+          <rect x="55" y="122" width="20" height="34" rx="6" fill="#2d4820"/>
+          <rect x="80" y="122" width="20" height="34" rx="6" fill="#2d4820"/>
+          <!-- Boots -->
+          <rect x="53" y="148" width="24" height="10" rx="4" fill="#111"/>
+          <rect x="78" y="148" width="24" height="10" rx="4" fill="#111"/>
+          <!-- Body -->
+          <rect x="46" y="80" width="63" height="46" rx="8" fill="#3a5a2a"/>
+          <!-- Jacket centre line -->
+          <rect x="75" y="80" width="4" height="46" fill="#2d4820"/>
+          <!-- Belt -->
+          <rect x="46" y="112" width="63" height="7" rx="3" fill="#2d4820"/>
+          <rect x="70" y="113" width="14" height="5" rx="2" fill="#8a7040"/>
+          <!-- Rank patch on chest -->
+          <rect x="52" y="88" width="16" height="10" rx="2" fill="#2d4820"/>
+          <rect x="54" y="90" width="12" height="2" rx="1" fill="#8a9a70"/>
+          <rect x="54" y="93" width="8" height="2" rx="1" fill="#8a9a70"/>
+          <!-- Left arm down -->
+          <rect x="28" y="82" width="20" height="36" rx="8" fill="#3a5a2a"/>
+          <!-- Right arm raised (speaking gesture) -->
+          <rect x="107" y="66" width="20" height="34" rx="8" fill="#3a5a2a" transform="rotate(-30 117 72)"/>
+          <!-- Hands -->
+          <circle cx="38" cy="119" r="8" fill="#c8a882"/>
+          <circle cx="122" cy="74" r="8" fill="#c8a882"/>
+          <!-- Neck -->
+          <rect x="67" y="65" width="20" height="18" rx="6" fill="#c8a882"/>
+          <!-- Head -->
+          <ellipse cx="77" cy="52" rx="22" ry="20" fill="#c8a882"/>
+          <!-- Beret -->
+          <ellipse cx="77" cy="36" rx="24" ry="10" fill="#3a5a2a"/>
+          <ellipse cx="77" cy="34" rx="22" ry="8" fill="#4a6e34"/>
+          <circle cx="88" cy="32" r="5" fill="#3a5a2a"/>
+          <!-- Eyes -->
+          <ellipse cx="69" cy="52" rx="3.5" ry="3" fill="#2a1a0a"/>
+          <circle cx="70" cy="51" r="1.2" fill="white"/>
+          <ellipse cx="85" cy="52" rx="3.5" ry="3" fill="#2a1a0a"/>
+          <circle cx="86" cy="51" r="1.2" fill="white"/>
+          <!-- Eyebrows -->
+          <path d="M65 47 Q69 45 73 47" stroke="#5a3a1a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M81 47 Q85 45 89 47" stroke="#5a3a1a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <!-- Mouth open (speaking) -->
+          <path d="M70 60 Q77 66 84 60" stroke="#8a5a3a" stroke-width="1.8" fill="rgba(180,100,80,0.3)" stroke-linecap="round"/>
+        </svg>
+      </div>
     </div>
   </div>
 
@@ -521,7 +580,7 @@ body {
         </div>
       </div>
 
-      <div class="home-card amber" onclick="window.location.href='roleplays/hotel-booking/'">
+      <div class="home-card amber" onclick="window.location.href='roleplays/'">
         <div class="home-card-icon">🎭</div>
         <h2>Role Plays</h2>
         <p>Practise practical dialogues and scenarios from the STANAG 1 speaking examination.</p>
