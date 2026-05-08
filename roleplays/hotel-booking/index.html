@@ -293,6 +293,28 @@ body {
 .tl-who.g { background: #fff3d0; color: #8a5e00; }
 .tl-text { font-size: .93rem; line-height: 1.6; color: var(--text); }
 
+.rq-show-btn {
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.0);
+  background: var(--off); border: 1.5px solid var(--border);
+  color: var(--muted); border-radius: var(--r-md);
+  padding: 7px 14px; font-family: 'Outfit', sans-serif;
+  font-size: .82rem; font-weight: 600; cursor: pointer;
+  transition: all .2s;
+}
+.rq-show-btn:hover { border-color: var(--sky); color: var(--sky); }
+.rq-show-btn.open { border-color: var(--sky); color: var(--sky); background: var(--sky3); }
+.rq-question-reveal {
+  font-size: 1.05rem; font-weight: 600; color: var(--navy);
+  background: var(--sky3); border-left: 4px solid var(--sky);
+  border-radius: var(--r-md); padding: 0 16px;
+  max-height: 0; overflow: hidden;
+  transition: max-height .3s ease, padding .3s ease;
+  margin-bottom: 0;
+}
+.rq-question-reveal.open {
+  max-height: 80px; padding: 12px 16px; margin-bottom: 10px;
+}
+
 /* ── RESPOND TO RECEPTIONIST ── */
 .rq-list { display: flex; flex-direction: column; gap: 22px; }
 .rq-item {}
@@ -412,7 +434,7 @@ body {
 <!-- HEADER -->
 <div class="page-header">
   <div class="header-inner">
-    <a href="../index.html" class="header-back">← Back to Speaking Practice</a>
+    <a href="../index.html" class="header-back">← Back to Role Plays</a>
     <div class="header-category">🎭 Role Play · Staying at a Hotel</div>
     <h1 class="header-title">Booking a Hotel Room</h1>
     <p class="header-desc">Listen to a phone conversation between a hotel receptionist and a guest. Then answer questions, read the transcript, and practise useful phrases.</p>
@@ -624,7 +646,9 @@ body {
             <span class="rq-num">1</span>
             <button class="rq-play-btn" onclick="speakRQ(this)">🔊 Listen to the question</button>
             <span class="rq-played-hint">choose your answer below</span>
+            <button class="rq-show-btn" onclick="toggleRQQuestion(this)">👁️ Show question</button>
           </div>
+          <div class="rq-question-reveal"></div>
           <div class="rq-options">
             <div class="rq-option" onclick="pickRQ(this)">
               <span class="rq-letter">A</span>
@@ -648,7 +672,9 @@ body {
             <span class="rq-num">2</span>
             <button class="rq-play-btn" onclick="speakRQ(this)">🔊 Listen to the question</button>
             <span class="rq-played-hint">choose your answer below</span>
+            <button class="rq-show-btn" onclick="toggleRQQuestion(this)">👁️ Show question</button>
           </div>
+          <div class="rq-question-reveal"></div>
           <div class="rq-options">
             <div class="rq-option" onclick="pickRQ(this)">
               <span class="rq-letter">A</span>
@@ -672,7 +698,9 @@ body {
             <span class="rq-num">3</span>
             <button class="rq-play-btn" onclick="speakRQ(this)">🔊 Listen to the question</button>
             <span class="rq-played-hint">choose your answer below</span>
+            <button class="rq-show-btn" onclick="toggleRQQuestion(this)">👁️ Show question</button>
           </div>
+          <div class="rq-question-reveal"></div>
           <div class="rq-options">
             <div class="rq-option" onclick="pickRQ(this)">
               <span class="rq-letter">A</span>
@@ -696,7 +724,9 @@ body {
             <span class="rq-num">4</span>
             <button class="rq-play-btn" onclick="speakRQ(this)">🔊 Listen to the question</button>
             <span class="rq-played-hint">choose your answer below</span>
+            <button class="rq-show-btn" onclick="toggleRQQuestion(this)">👁️ Show question</button>
           </div>
+          <div class="rq-question-reveal"></div>
           <div class="rq-options">
             <div class="rq-option" onclick="pickRQ(this)">
               <span class="rq-letter">A</span>
@@ -720,7 +750,9 @@ body {
             <span class="rq-num">5</span>
             <button class="rq-play-btn" onclick="speakRQ(this)">🔊 Listen to the question</button>
             <span class="rq-played-hint">choose your answer below</span>
+            <button class="rq-show-btn" onclick="toggleRQQuestion(this)">👁️ Show question</button>
           </div>
+          <div class="rq-question-reveal"></div>
           <div class="rq-options">
             <div class="rq-option" onclick="pickRQ(this)">
               <span class="rq-letter">A</span>
@@ -744,7 +776,9 @@ body {
             <span class="rq-num">6</span>
             <button class="rq-play-btn" onclick="speakRQ(this)">🔊 Listen to the question</button>
             <span class="rq-played-hint">choose your answer below</span>
+            <button class="rq-show-btn" onclick="toggleRQQuestion(this)">👁️ Show question</button>
           </div>
+          <div class="rq-question-reveal"></div>
           <div class="rq-options">
             <div class="rq-option" onclick="pickRQ(this)">
               <span class="rq-letter">A</span>
@@ -768,7 +802,9 @@ body {
             <span class="rq-num">7</span>
             <button class="rq-play-btn" onclick="speakRQ(this)">🔊 Listen to the question</button>
             <span class="rq-played-hint">choose your answer below</span>
+            <button class="rq-show-btn" onclick="toggleRQQuestion(this)">👁️ Show question</button>
           </div>
+          <div class="rq-question-reveal"></div>
           <div class="rq-options">
             <div class="rq-option" onclick="pickRQ(this)">
               <span class="rq-letter">A</span>
@@ -858,7 +894,7 @@ body {
         <div style="font-size:.75rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:10px;">Word bank</div>
         <div class="phrase-options" id="word-bank">
           <span class="phrase-option" onclick="selectWord(this)">book</span>
-          <span class="phrase-option" onclick="selectWord(this)">reserve</span>
+          <span class="phrase-option" onclick="selectWord(this)">check in</span>
           <span class="phrase-option" onclick="selectWord(this)">include</span>
           <span class="phrase-option" onclick="selectWord(this)">contain</span>
           <span class="phrase-option" onclick="selectWord(this)">per night</span>
@@ -884,6 +920,15 @@ body {
 </div>
 
 <script>
+function toggleRQQuestion(btn) {
+  const item    = btn.closest('.rq-item');
+  const reveal  = item.querySelector('.rq-question-reveal');
+  const isOpen  = reveal.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  btn.textContent = isOpen ? '🙈 Hide question' : '👁️ Show question';
+  if (isOpen) reveal.textContent = item.dataset.question;
+}
+
 // ── RESPOND TO RECEPTIONIST ──────────────────────────
 function speakRQ(btn) {
   if (!('speechSynthesis' in window)) { alert('Your browser does not support audio.'); return; }
