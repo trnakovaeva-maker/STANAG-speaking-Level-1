@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Role Plays · STANAG Level 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy:  #0b1f3a; --navy2: #162d52; --sky: #2878d6; --sky2: #4fa3f0;
+  --sky3:  #deeeff; --gold: #e09a12; --gold2: #f5c040;
+  --sage:  #237a50; --sage2: #d0f0e0;
+  --white: #ffffff; --off: #f2f5fa; --muted: #7a8fa8;
+  --text:  #18293f; --border: #d8e4f0; --card: #ffffff;
+  --shadow: 0 2px 20px rgba(11,31,58,.09);
+  --shadow-lg: 0 8px 44px rgba(11,31,58,.16);
+  --r-md: 14px; --r-lg: 20px; --r-xl: 28px;
+}
+body { font-family: 'Outfit', sans-serif; background: var(--off); color: var(--text); min-height: 100vh; }
+
+/* HEADER */
+.page-header {
+  background: linear-gradient(140deg, var(--navy) 0%, var(--navy2) 60%, #1e3d6e 100%);
+  position: relative; overflow: hidden;
+}
+.page-header::before {
+  content: ''; position: absolute;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(40,120,214,.18) 0%, transparent 70%);
+  top: -200px; right: -100px; pointer-events: none;
+}
+.header-inner { max-width: 860px; margin: 0 auto; padding: 36px 24px 32px; position: relative; z-index: 1; }
+.header-back {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: rgba(255,255,255,.5); font-size: .83rem; font-weight: 500;
+  text-decoration: none; margin-bottom: 20px; transition: color .2s;
+}
+.header-back:hover { color: rgba(255,255,255,.85); }
+.header-category {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.18);
+  color: var(--sky2); font-size: .75rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 99px; margin-bottom: 14px;
+}
+.header-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 800; color: var(--white); line-height: 1.1; margin-bottom: 10px;
+}
+.header-desc { color: rgba(255,255,255,.55); font-size: .95rem; line-height: 1.55; max-width: 520px; }
+
+/* MAIN */
+.main { max-width: 860px; margin: 0 auto; padding: 32px 16px 80px; }
+
+.section-label {
+  font-size: .75rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 16px; padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ROLEPLAY CARDS GRID */
+.rp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px; margin-bottom: 40px;
+}
+
+.rp-card {
+  background: var(--card); border-radius: var(--r-xl);
+  border: 1.5px solid var(--border); box-shadow: var(--shadow);
+  padding: 24px; cursor: pointer;
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+  text-decoration: none; color: inherit;
+  display: block; position: relative; overflow: hidden;
+}
+.rp-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--sky), var(--sky2));
+  border-radius: var(--r-xl) var(--r-xl) 0 0;
+}
+.rp-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: var(--sky); }
+
+.rp-card-icon {
+  width: 52px; height: 52px; border-radius: var(--r-lg);
+  background: var(--sky3); display: flex; align-items: center;
+  justify-content: center; font-size: 1.6rem; margin-bottom: 16px;
+}
+.rp-card h3 { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
+.rp-card p  { font-size: .85rem; color: var(--muted); line-height: 1.5; margin-bottom: 14px; }
+.rp-card-meta { display: flex; flex-wrap: wrap; gap: 6px; }
+.rp-chip {
+  background: var(--off); border: 1px solid var(--border);
+  font-size: .72rem; font-weight: 600; color: var(--muted);
+  padding: 3px 10px; border-radius: 99px;
+}
+
+/* COMING SOON CARDS */
+.rp-card.soon { opacity: .55; cursor: not-allowed; }
+.rp-card.soon:hover { transform: none; box-shadow: var(--shadow); border-color: var(--border); }
+.rp-card.soon::before { background: linear-gradient(90deg, #ccc, #ddd); }
+.soon-tag {
+  position: absolute; top: 14px; right: 14px;
+  background: var(--off); border: 1px solid var(--border);
+  font-size: .68rem; font-weight: 700; color: var(--muted);
+  padding: 3px 9px; border-radius: 99px;
+  letter-spacing: .08em; text-transform: uppercase;
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="header-inner">
+    <a href="../index.html" class="header-back">← Back to Speaking Practice</a>
+    <div class="header-category">🎭 Role Plays</div>
+    <h1 class="header-title">Role Play Practice</h1>
+    <p class="header-desc">Listen to model dialogues, check your understanding and practise useful phrases for the STANAG 1 speaking exam.</p>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="section-label">Available role plays</div>
+
+  <div class="rp-grid">
+
+    <!-- ACTIVE -->
+    <a class="rp-card" href="hotel-booking/">
+      <div class="rp-card-icon">🏨</div>
+      <h3>Booking a Hotel Room</h3>
+      <p>Call a hotel and make a reservation for a business trip.</p>
+      <div class="rp-card-meta">
+        <span class="rp-chip">📞 Phone call</span>
+        <span class="rp-chip">Hotel vocabulary</span>
+        <span class="rp-chip">A2</span>
+      </div>
+    </a>
+
+    <!-- COMING SOON – add more as you build them -->
+    <div class="rp-card soon">
+      <span class="soon-tag">Soon</span>
+      <div class="rp-card-icon">🛒</div>
+      <h3>Shopping for Clothes</h3>
+      <p>Ask for help in a shop, try on items and make a purchase.</p>
+      <div class="rp-card-meta">
+        <span class="rp-chip">In a shop</span>
+        <span class="rp-chip">Shopping vocabulary</span>
+        <span class="rp-chip">A2</span>
+      </div>
+    </div>
+
+    <div class="rp-card soon">
+      <span class="soon-tag">Soon</span>
+      <div class="rp-card-icon">🍽️</div>
+      <h3>At a Restaurant</h3>
+      <p>Book a table, order a meal and ask for the bill.</p>
+      <div class="rp-card-meta">
+        <span class="rp-chip">Restaurant</span>
+        <span class="rp-chip">Food vocabulary</span>
+        <span class="rp-chip">A2</span>
+      </div>
+    </div>
+
+    <div class="rp-card soon">
+      <span class="soon-tag">Soon</span>
+      <div class="rp-card-icon">🚉</div>
+      <h3>At the Train Station</h3>
+      <p>Buy a ticket, ask about times and platforms.</p>
+      <div class="rp-card-meta">
+        <span class="rp-chip">Transport</span>
+        <span class="rp-chip">Travel vocabulary</span>
+        <span class="rp-chip">A2</span>
+      </div>
+    </div>
+
+    <div class="rp-card soon">
+      <span class="soon-tag">Soon</span>
+      <div class="rp-card-icon">🏥</div>
+      <h3>At the Doctor's</h3>
+      <p>Make an appointment and describe your symptoms.</p>
+      <div class="rp-card-meta">
+        <span class="rp-chip">Health</span>
+        <span class="rp-chip">Medical vocabulary</span>
+        <span class="rp-chip">A2</span>
+      </div>
+    </div>
+
+    <div class="rp-card soon">
+      <span class="soon-tag">Soon</span>
+      <div class="rp-card-icon">🗺️</div>
+      <h3>Asking for Directions</h3>
+      <p>Ask how to get somewhere and understand the answer.</p>
+      <div class="rp-card-meta">
+        <span class="rp-chip">In the street</span>
+        <span class="rp-chip">Directions vocabulary</span>
+        <span class="rp-chip">A2</span>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</body>
+</html>
