@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking a Hotel Room · Role Play Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:   #0b1f3a;
+  --navy2:  #162d52;
+  --sky:    #2878d6;
+  --sky2:   #4fa3f0;
+  --sky3:   #deeeff;
+  --gold:   #e09a12;
+  --gold2:  #f5c040;
+  --sage:   #237a50;
+  --sage2:  #d0f0e0;
+  --rose:   #c0392b;
+  --white:  #ffffff;
+  --off:    #f2f5fa;
+  --off2:   #e8edf6;
+  --muted:  #7a8fa8;
+  --text:   #18293f;
+  --border: #d8e4f0;
+  --card:   #ffffff;
+  --shadow: 0 2px 20px rgba(11,31,58,.09);
+  --shadow-lg: 0 8px 44px rgba(11,31,58,.16);
+  --r-md: 14px; --r-lg: 20px; --r-xl: 28px;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--off);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.page-header {
+  background: linear-gradient(140deg, var(--navy) 0%, var(--navy2) 60%, #1e3d6e 100%);
+  padding: 0;
+  position: relative; overflow: hidden;
+}
+.page-header::before {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(40,120,214,.18) 0%, transparent 70%);
+  top: -200px; right: -100px; pointer-events: none;
+}
+.header-inner {
+  max-width: 800px; margin: 0 auto;
+  padding: 36px 24px 32px;
+  position: relative; z-index: 1;
+}
+.header-back {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: rgba(255,255,255,.5); font-size: .83rem; font-weight: 500;
+  text-decoration: none; margin-bottom: 20px;
+  transition: color .2s;
+}
+.header-back:hover { color: rgba(255,255,255,.85); }
+.header-category {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.18);
+  color: var(--sky2); font-size: .75rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 99px; margin-bottom: 14px;
+}
+.header-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 800; color: var(--white); line-height: 1.1;
+  margin-bottom: 10px;
+}
+.header-desc {
+  color: rgba(255,255,255,.55); font-size: .95rem; line-height: 1.55;
+  max-width: 520px; margin-bottom: 24px;
+}
+.header-chips {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.chip {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14);
+  color: rgba(255,255,255,.65); font-size: .8rem; font-weight: 500;
+  padding: 5px 12px; border-radius: 99px;
+}
+
+/* ── MAIN CONTENT ── */
+.main { max-width: 800px; margin: 0 auto; padding: 32px 16px 80px; }
+
+/* ── SCENARIO BOX ── */
+.scenario-box {
+  background: linear-gradient(135deg, #1a3a6e 0%, #0f2a55 100%);
+  border-radius: var(--r-xl); padding: 24px 28px;
+  margin-bottom: 24px; border: 1px solid rgba(255,255,255,.08);
+}
+.scenario-label {
+  font-size: .72rem; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--sky2); margin-bottom: 10px;
+}
+.scenario-text {
+  color: rgba(255,255,255,.88); font-size: 1rem; line-height: 1.65;
+  font-weight: 400;
+}
+.scenario-text strong { color: var(--gold2); font-weight: 600; }
+
+/* ── SECTION CARD ── */
+.section-card {
+  background: var(--card); border-radius: var(--r-xl);
+  border: 1.5px solid var(--border); box-shadow: var(--shadow);
+  margin-bottom: 20px; overflow: hidden;
+}
+.section-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border);
+}
+.section-head-left {
+  display: flex; align-items: center; gap: 12px;
+}
+.section-icon {
+  width: 40px; height: 40px; border-radius: var(--r-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; flex-shrink: 0;
+}
+.section-icon.audio  { background: #deeeff; }
+.section-icon.q      { background: #fff3d0; }
+.section-icon.trans  { background: #e8f8f0; }
+.section-icon.phrase { background: #f0e8ff; }
+
+.section-title {
+  font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text);
+}
+.section-sub { font-size: .78rem; color: var(--muted); margin-top: 1px; }
+.section-body { padding: 24px; }
+
+/* ── AUDIO PLAYER ── */
+.audio-player {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  border-radius: var(--r-lg); padding: 24px;
+}
+.audio-speakers {
+  display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap;
+}
+.speaker-badge {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.15);
+  border-radius: 99px; padding: 6px 14px 6px 8px;
+}
+.speaker-avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .85rem; font-weight: 700; color: var(--white);
+}
+.speaker-avatar.r { background: var(--sky); }
+.speaker-avatar.g { background: var(--gold); }
+.speaker-name { font-size: .8rem; font-weight: 600; color: rgba(255,255,255,.75); }
+
+/* Custom audio controls */
+.audio-controls {
+  display: flex; align-items: center; gap: 14px;
+}
+.play-btn {
+  width: 52px; height: 52px; border-radius: 50%; border: none; cursor: pointer;
+  background: var(--sky); color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; flex-shrink: 0;
+  transition: background .2s, transform .15s;
+  box-shadow: 0 4px 16px rgba(40,120,214,.4);
+}
+.play-btn:hover { background: #1f66c0; transform: scale(1.05); }
+.play-btn:active { transform: scale(.97); }
+
+.audio-right { flex: 1; min-width: 0; }
+.audio-time {
+  font-size: .78rem; color: rgba(255,255,255,.45);
+  margin-bottom: 8px; font-variant-numeric: tabular-nums;
+}
+.progress-wrap {
+  background: rgba(255,255,255,.12); border-radius: 99px; height: 6px;
+  cursor: pointer; position: relative; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, var(--sky), var(--sky2));
+  border-radius: 99px; width: 0%;
+  transition: width .1s linear;
+  pointer-events: none;
+}
+.speed-btn {
+  background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.18);
+  color: rgba(255,255,255,.65); border-radius: 99px;
+  padding: 5px 12px; font-size: .78rem; font-weight: 700;
+  cursor: pointer; transition: background .2s; white-space: nowrap;
+  font-family: 'Outfit', sans-serif;
+}
+.speed-btn:hover { background: rgba(255,255,255,.18); }
+
+/* hidden real audio */
+#real-audio { display: none; }
+
+/* ── COMPREHENSION QUESTIONS ── */
+.q-list { display: flex; flex-direction: column; gap: 16px; }
+.q-item {}
+.q-text {
+  font-size: 1rem; font-weight: 600; color: var(--text);
+  margin-bottom: 10px; line-height: 1.45;
+}
+.q-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--navy); color: var(--white);
+  font-size: .72rem; font-weight: 700; margin-right: 8px; flex-shrink: 0;
+}
+.options { display: flex; flex-direction: column; gap: 7px; }
+.option {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--off); border: 1.5px solid var(--border);
+  border-radius: var(--r-md); padding: 10px 14px;
+  cursor: pointer; font-size: .92rem; color: var(--text);
+  transition: all .18s; font-weight: 400;
+}
+.option:hover { border-color: var(--sky); background: var(--sky3); }
+.option.correct { border-color: var(--sage); background: var(--sage2); color: #0f3022; font-weight: 600; }
+.option.wrong   { border-color: var(--rose); background: #fdecea; color: #7a1010; }
+.option.reveal  { border-color: var(--sage); background: var(--sage2); color: #0f3022; opacity: .7; }
+.option-letter {
+  width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
+  background: var(--border); display: flex; align-items: center; justify-content: center;
+  font-size: .72rem; font-weight: 700; color: var(--muted);
+  transition: all .18s;
+}
+.option.correct .option-letter { background: var(--sage); color: var(--white); }
+.option.wrong   .option-letter { background: var(--rose); color: var(--white); }
+.option.reveal  .option-letter { background: var(--sage); color: var(--white); }
+.q-feedback {
+  font-size: .82rem; font-weight: 600; margin-top: 6px;
+  padding: 0 4px; min-height: 20px;
+}
+.q-feedback.ok  { color: var(--sage); }
+.q-feedback.err { color: var(--rose); }
+
+.check-all-btn {
+  margin-top: 20px;
+  background: var(--navy); color: var(--white); border: none;
+  border-radius: var(--r-md); padding: 12px 24px;
+  font-family: 'Outfit', sans-serif; font-size: .92rem; font-weight: 600;
+  cursor: pointer; transition: background .2s;
+}
+.check-all-btn:hover { background: var(--sky); }
+.score-box {
+  margin-top: 14px; padding: 14px 18px;
+  background: var(--off); border-radius: var(--r-md);
+  font-size: .9rem; color: var(--text); display: none;
+}
+.score-box.show { display: block; }
+.score-box strong { color: var(--sky); font-size: 1.1rem; }
+
+/* ── TRANSCRIPT ── */
+.transcript-toggle {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  background: var(--off); border: 1.5px solid var(--border);
+  border-radius: var(--r-md); padding: 12px 18px;
+  cursor: pointer; font-family: 'Outfit', sans-serif;
+  font-size: .92rem; font-weight: 600; color: var(--muted);
+  transition: all .2s;
+}
+.transcript-toggle:hover { border-color: var(--sage); color: var(--sage); }
+.transcript-toggle .chevron { margin-left: auto; transition: transform .25s; }
+.transcript-toggle.open .chevron { transform: rotate(180deg); }
+.transcript-toggle.open { border-color: var(--sage); color: var(--sage); background: var(--sage2); }
+
+.transcript-body {
+  max-height: 0; overflow: hidden; transition: max-height .4s ease;
+}
+.transcript-body.open { max-height: 2000px; }
+
+.transcript-inner { padding-top: 16px; }
+.transcript-line {
+  display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start;
+}
+.tl-who {
+  font-size: .72rem; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; padding: 3px 10px; border-radius: 99px;
+  white-space: nowrap; margin-top: 2px; flex-shrink: 0;
+}
+.tl-who.r { background: var(--sky3); color: var(--sky); }
+.tl-who.g { background: #fff3d0; color: #8a5e00; }
+.tl-text { font-size: .93rem; line-height: 1.6; color: var(--text); }
+
+/* ── RESPOND TO RECEPTIONIST ── */
+.rq-list { display: flex; flex-direction: column; gap: 22px; }
+.rq-item {}
+.rq-header {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap;
+}
+.rq-num {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  background: var(--navy); color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .78rem; font-weight: 700;
+}
+.rq-play-btn {
+  display: flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, var(--navy), var(--navy2));
+  color: var(--white); border: none; border-radius: var(--r-md);
+  padding: 9px 18px; font-family: 'Outfit', sans-serif;
+  font-size: .88rem; font-weight: 600; cursor: pointer;
+  transition: opacity .2s, transform .15s;
+  box-shadow: 0 2px 10px rgba(11,31,58,.2);
+}
+.rq-play-btn:hover { opacity: .88; transform: translateY(-1px); }
+.rq-play-btn.playing { background: linear-gradient(135deg, var(--sky), var(--sky2)); }
+.rq-played-hint {
+  font-size: .78rem; color: var(--muted); font-style: italic; display: none;
+}
+.rq-played-hint.show { display: inline; }
+.rq-options { display: flex; flex-direction: column; gap: 8px; }
+.rq-option {
+  display: flex; align-items: flex-start; gap: 10px;
+  background: var(--off); border: 1.5px solid var(--border);
+  border-radius: var(--r-md); padding: 11px 14px;
+  cursor: pointer; font-size: .93rem; color: var(--text);
+  transition: all .18s; line-height: 1.45;
+}
+.rq-option:hover { border-color: var(--sky); background: var(--sky3); }
+.rq-option.correct { border-color: var(--sage); background: var(--sage2); color: #0f3022; font-weight: 600; }
+.rq-option.wrong   { border-color: var(--rose); background: #fdecea; color: #7a1010; }
+.rq-option.reveal  { border-color: var(--sage); background: var(--sage2); color: #0f3022; opacity: .65; }
+.rq-letter {
+  width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
+  background: var(--border); display: flex; align-items: center; justify-content: center;
+  font-size: .72rem; font-weight: 700; color: var(--muted); transition: all .18s;
+  margin-top: 1px;
+}
+.rq-option.correct .rq-letter { background: var(--sage); color: var(--white); }
+.rq-option.wrong   .rq-letter { background: var(--rose); color: var(--white); }
+.rq-option.reveal  .rq-letter { background: var(--sage); color: var(--white); }
+.rq-feedback { font-size: .82rem; font-weight: 600; margin-top: 6px; padding: 0 4px; min-height: 20px; }
+.rq-feedback.ok  { color: var(--sage); }
+.rq-feedback.err { color: var(--rose); }
+
+/* ── PHRASE EXERCISE ── */
+.phrase-intro {
+  font-size: .88rem; color: var(--muted); margin-bottom: 18px; line-height: 1.55;
+}
+.phrase-list { display: flex; flex-direction: column; gap: 20px; }
+.phrase-item {}
+.phrase-prompt {
+  font-size: .88rem; color: var(--muted); margin-bottom: 8px; font-style: italic;
+}
+.phrase-sentence {
+  font-size: 1rem; line-height: 1.7; color: var(--text);
+  display: flex; align-items: center; flex-wrap: wrap; gap: 4px;
+}
+.phrase-blank {
+  display: inline-block;
+  min-width: 130px; border-bottom: 2.5px solid var(--sky);
+  padding: 2px 8px; margin: 0 2px;
+  font-weight: 600; color: var(--sky);
+  text-align: center; cursor: pointer;
+  border-radius: 4px 4px 0 0;
+  background: var(--sky3);
+  transition: background .2s;
+}
+.phrase-blank:focus { outline: 2px solid var(--sky); outline-offset: 2px; }
+.phrase-blank.correct { border-color: var(--sage); background: var(--sage2); color: var(--sage); }
+.phrase-blank.wrong   { border-color: var(--rose); background: #fdecea; color: var(--rose); }
+
+.phrase-options {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;
+}
+.phrase-option {
+  background: var(--off); border: 1.5px solid var(--border);
+  border-radius: 99px; padding: 5px 14px;
+  font-size: .85rem; font-weight: 600; cursor: pointer; color: var(--text);
+  transition: all .15s;
+}
+.phrase-option:hover { border-color: var(--sky); color: var(--sky); background: var(--sky3); }
+.phrase-option.used { opacity: .35; pointer-events: none; text-decoration: line-through; }
+
+.phrase-check-btn {
+  margin-top: 20px;
+  background: var(--sage); color: var(--white); border: none;
+  border-radius: var(--r-md); padding: 12px 24px;
+  font-family: 'Outfit', sans-serif; font-size: .92rem; font-weight: 600;
+  cursor: pointer; transition: background .2s;
+}
+.phrase-check-btn:hover { background: #1a5c3a; }
+.phrase-reset-btn {
+  margin-top: 10px; margin-left: 10px;
+  background: var(--off); color: var(--muted); border: 1.5px solid var(--border);
+  border-radius: var(--r-md); padding: 11px 20px;
+  font-family: 'Outfit', sans-serif; font-size: .88rem; font-weight: 600;
+  cursor: pointer; transition: all .2s;
+}
+.phrase-reset-btn:hover { border-color: var(--muted); color: var(--text); }
+
+.phrase-result {
+  margin-top: 12px; font-size: .88rem; color: var(--muted); display: none;
+}
+.phrase-result.show { display: block; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="header-inner">
+    <a href="../index.html" class="header-back">← Back to Speaking Practice</a>
+    <div class="header-category">🎭 Role Play · Staying at a Hotel</div>
+    <h1 class="header-title">Booking a Hotel Room</h1>
+    <p class="header-desc">Listen to a phone conversation between a hotel receptionist and a guest. Then answer questions, read the transcript, and practise useful phrases.</p>
+    <div class="header-chips">
+      <span class="chip">📞 Phone call</span>
+      <span class="chip">🏨 Hotel vocabulary</span>
+      <span class="chip">⭐ STANAG Level 1 · A2</span>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- SCENARIO -->
+  <div class="scenario-box">
+    <div class="scenario-label">📋 Your situation</div>
+    <div class="scenario-text">
+      You are going on a business trip to London. Call the hotel and make a reservation.
+    </div>
+  </div>
+
+  <!-- AUDIO PLAYER -->
+  <div class="section-card">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-icon audio">🔊</div>
+        <div>
+          <div class="section-title">Listen to the conversation</div>
+          <div class="section-sub">Play the full dialogue before answering questions</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="audio-player">
+        <div class="audio-speakers">
+          <div class="speaker-badge">
+            <div class="speaker-avatar r">R</div>
+            <span class="speaker-name">Receptionist</span>
+          </div>
+          <div class="speaker-badge">
+            <div class="speaker-avatar g">G</div>
+            <span class="speaker-name">Guest – Martin</span>
+          </div>
+        </div>
+        <div class="audio-controls">
+          <button class="play-btn" id="play-btn" onclick="togglePlay()">▶</button>
+          <div class="audio-right">
+            <div class="audio-time" id="audio-time">0:00 / 0:00</div>
+            <div class="progress-wrap" id="progress-wrap" onclick="seekAudio(event)">
+              <div class="progress-fill" id="progress-fill"></div>
+            </div>
+          </div>
+          <button class="speed-btn" id="speed-btn" onclick="cycleSpeed()">1×</button>
+        </div>
+        <audio id="real-audio" src="audio/Booking_a_hotel_room.mp3" preload="metadata"></audio>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPREHENSION QUESTIONS -->
+  <div class="section-card">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-icon q">❓</div>
+        <div>
+          <div class="section-title">Comprehension questions</div>
+          <div class="section-sub">Choose the correct answer for each question</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="q-list" id="q-list">
+
+        <!-- Q1 -->
+        <div class="q-item" data-correct="b">
+          <div class="q-text"><span class="q-num">1</span>How many nights does Martin want to stay?</div>
+          <div class="options">
+            <div class="option" onclick="pickOption(this)"><span class="option-letter">A</span> Two nights</div>
+            <div class="option" onclick="pickOption(this)"><span class="option-letter">B</span> Three nights</div>
+            <div class="option" onclick="pickOption(this)"><span class="option-letter">C</span> Four nights</div>
+          </div>
+          <div class="q-feedback"></div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="q-item" data-correct="a">
+          <div class="q-text"><span class="q-num">2</span>What type of room does Martin book?</div>
+          <div class="options">
+            <div class="option" onclick="pickOption(this)"><span class="option-letter">A</span> A single room with breakfast</div>
+            <div class="option" onclick="pickOption(this)"><span class="option-letter">B</span> A double room with half board</div>
+            <div class="option" onclick="pickOption(this)"><span class="option-letter">C</span> A twin room without meals</div>
+          </div>
+          <div class="q-feedback"></div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="q-item" data-correct="c">
+          <div class="q-text"><span class="q-num">3</span>How much does the room cost per night?</div>
+          <div class="options">
+            <div class="option" onclick="pickOption(this)"><span class="option-letter">A</span> £75 per night</div>
+            <div class="option" onclick="pickOption(this)"><span class="option-letter">B</span> £100 per night</div>
+            <div class="option" onclick="pickOption(this)"><span class="option-letter">C</span> £85 per night</div>
+          </div>
+          <div class="q-feedback"></div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="q-item" data-correct="b">
+          <div class="q-text"><span class="q-num">4</span>Is Wi-Fi included in the price?</div>
+          <div class="options">
+            <div class="option" onclick="pickOption(this)"><span class="option-letter">A</span> No, Wi-Fi costs extra</div>
+            <div class="option" onclick="pickOption(this)"><span class="option-letter">B</span> Yes, Wi-Fi is free in all rooms</div>
+            <div class="option" onclick="pickOption(this)"><span class="option-letter">C</span> Wi-Fi is only in the lobby</div>
+          </div>
+          <div class="q-feedback"></div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="q-item" data-correct="a">
+          <div class="q-text"><span class="q-num">5</span>How does Martin spell his surname?</div>
+          <div class="options">
+            <div class="option" onclick="pickOption(this)"><span class="option-letter">A</span> N-O-V-Á-K</div>
+            <div class="option" onclick="pickOption(this)"><span class="option-letter">B</span> N-O-V-A-C-K</div>
+            <div class="option" onclick="pickOption(this)"><span class="option-letter">C</span> N-O-W-A-K</div>
+          </div>
+          <div class="q-feedback"></div>
+        </div>
+
+      </div>
+
+      <button class="check-all-btn" onclick="checkAll()">Check my answers</button>
+      <div class="score-box" id="score-box"></div>
+    </div>
+  </div>
+
+  <!-- TRANSCRIPT -->
+  <div class="section-card">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-icon trans">📄</div>
+        <div>
+          <div class="section-title">Transcript</div>
+          <div class="section-sub">Read along or check what you heard</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-body">
+      <button class="transcript-toggle" id="trans-btn" onclick="toggleTranscript()">
+        <span>👁️ Show transcript</span>
+        <span class="chevron">▾</span>
+      </button>
+      <div class="transcript-body" id="trans-body">
+        <div class="transcript-inner" id="trans-inner">
+          <div class="transcript-line"><span class="tl-who r">R</span><span class="tl-text">Good afternoon. The Grand Hotel. How can I help you?</span></div>
+          <div class="transcript-line"><span class="tl-who g">G</span><span class="tl-text">Hello. I'd like to book a room, please.</span></div>
+          <div class="transcript-line"><span class="tl-who r">R</span><span class="tl-text">Of course. When would you like to stay?</span></div>
+          <div class="transcript-line"><span class="tl-who g">G</span><span class="tl-text">From the fifteenth to the eighteenth of June. That's three nights.</span></div>
+          <div class="transcript-line"><span class="tl-who r">R</span><span class="tl-text">And how many people is the room for?</span></div>
+          <div class="transcript-line"><span class="tl-who g">G</span><span class="tl-text">Just for me. I need a single room.</span></div>
+          <div class="transcript-line"><span class="tl-who r">R</span><span class="tl-text">Would you like a room with a bath or a shower?</span></div>
+          <div class="transcript-line"><span class="tl-who g">G</span><span class="tl-text">A shower is fine, thank you.</span></div>
+          <div class="transcript-line"><span class="tl-who r">R</span><span class="tl-text">And would you like breakfast included?</span></div>
+          <div class="transcript-line"><span class="tl-who g">G</span><span class="tl-text">Yes, please. How much is it per night with breakfast?</span></div>
+          <div class="transcript-line"><span class="tl-who r">R</span><span class="tl-text">It's eighty-five pounds per night. That includes breakfast.</span></div>
+          <div class="transcript-line"><span class="tl-who g">G</span><span class="tl-text">That sounds good. Is there Wi-Fi in the room?</span></div>
+          <div class="transcript-line"><span class="tl-who r">R</span><span class="tl-text">Yes, Wi-Fi is free in all rooms.</span></div>
+          <div class="transcript-line"><span class="tl-who g">G</span><span class="tl-text">Great. And is there a car park at the hotel?</span></div>
+          <div class="transcript-line"><span class="tl-who r">R</span><span class="tl-text">Yes, there is. It's ten pounds per night.</span></div>
+          <div class="transcript-line"><span class="tl-who g">G</span><span class="tl-text">OK, I'd like to make the reservation, please.</span></div>
+          <div class="transcript-line"><span class="tl-who r">R</span><span class="tl-text">Certainly. Can I have your name, please?</span></div>
+          <div class="transcript-line"><span class="tl-who g">G</span><span class="tl-text">My name is Martin Novák.</span></div>
+          <div class="transcript-line"><span class="tl-who r">R</span><span class="tl-text">Could you spell your surname, please?</span></div>
+          <div class="transcript-line"><span class="tl-who g">G</span><span class="tl-text">Yes. N-O-V-Á-K.</span></div>
+          <div class="transcript-line"><span class="tl-who r">R</span><span class="tl-text">Thank you, Mr. Novák. So that's a single room with breakfast, from the fifteenth to the eighteenth of June. Is that correct?</span></div>
+          <div class="transcript-line"><span class="tl-who g">G</span><span class="tl-text">Yes, that's right.</span></div>
+          <div class="transcript-line"><span class="tl-who r">R</span><span class="tl-text">How will you be paying – by card or cash?</span></div>
+          <div class="transcript-line"><span class="tl-who g">G</span><span class="tl-text">By credit card, please.</span></div>
+          <div class="transcript-line"><span class="tl-who r">R</span><span class="tl-text">Perfect. We'll send you a confirmation by email. What's your email address?</span></div>
+          <div class="transcript-line"><span class="tl-who g">G</span><span class="tl-text">It's novak.martin at gmail dot com.</span></div>
+          <div class="transcript-line"><span class="tl-who r">R</span><span class="tl-text">Thank you, Mr. Novák. We look forward to seeing you in June.</span></div>
+          <div class="transcript-line"><span class="tl-who g">G</span><span class="tl-text">Thank you very much. Goodbye.</span></div>
+          <div class="transcript-line"><span class="tl-who r">R</span><span class="tl-text">Goodbye. Have a lovely day.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESPOND TO THE RECEPTIONIST -->
+  <div class="section-card">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-icon" style="background:#fde8f0;">🎧</div>
+        <div>
+          <div class="section-title">Respond to the receptionist</div>
+          <div class="section-sub">Listen to each question and choose the best answer</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-body">
+      <p style="font-size:.88rem;color:var(--muted);margin-bottom:20px;line-height:1.55;">
+        The receptionist asks you a question. Click 🔊 to hear it, then choose the most suitable reply.
+      </p>
+
+      <div class="rq-list" id="rq-list">
+
+        <div class="rq-item" data-correct="1"
+             data-question="When would you like to stay?">
+          <div class="rq-header">
+            <span class="rq-num">1</span>
+            <button class="rq-play-btn" onclick="speakRQ(this)">🔊 Listen to the question</button>
+            <span class="rq-played-hint">choose your answer below</span>
+          </div>
+          <div class="rq-options">
+            <div class="rq-option" onclick="pickRQ(this)">
+              <span class="rq-letter">A</span>
+              <span>Yes, I'd like a single room.</span>
+            </div>
+            <div class="rq-option" onclick="pickRQ(this)">
+              <span class="rq-letter">B</span>
+              <span>From the fifteenth to the eighteenth of June. That's three nights.</span>
+            </div>
+            <div class="rq-option" onclick="pickRQ(this)">
+              <span class="rq-letter">C</span>
+              <span>I'd like to pay by credit card.</span>
+            </div>
+          </div>
+          <div class="rq-feedback"></div>
+        </div>
+
+        <div class="rq-item" data-correct="0"
+             data-question="How many people is the room for?">
+          <div class="rq-header">
+            <span class="rq-num">2</span>
+            <button class="rq-play-btn" onclick="speakRQ(this)">🔊 Listen to the question</button>
+            <span class="rq-played-hint">choose your answer below</span>
+          </div>
+          <div class="rq-options">
+            <div class="rq-option" onclick="pickRQ(this)">
+              <span class="rq-letter">A</span>
+              <span>Just for me. I need a single room.</span>
+            </div>
+            <div class="rq-option" onclick="pickRQ(this)">
+              <span class="rq-letter">B</span>
+              <span>I'd like to stay for three nights.</span>
+            </div>
+            <div class="rq-option" onclick="pickRQ(this)">
+              <span class="rq-letter">C</span>
+              <span>I prefer a room on the top floor.</span>
+            </div>
+          </div>
+          <div class="rq-feedback"></div>
+        </div>
+
+        <div class="rq-item" data-correct="2"
+             data-question="Would you like a room with a bath or a shower?">
+          <div class="rq-header">
+            <span class="rq-num">3</span>
+            <button class="rq-play-btn" onclick="speakRQ(this)">🔊 Listen to the question</button>
+            <span class="rq-played-hint">choose your answer below</span>
+          </div>
+          <div class="rq-options">
+            <div class="rq-option" onclick="pickRQ(this)">
+              <span class="rq-letter">A</span>
+              <span>Yes, breakfast is included.</span>
+            </div>
+            <div class="rq-option" onclick="pickRQ(this)">
+              <span class="rq-letter">B</span>
+              <span>I'd like a room with a view, please.</span>
+            </div>
+            <div class="rq-option" onclick="pickRQ(this)">
+              <span class="rq-letter">C</span>
+              <span>A shower is fine, thank you.</span>
+            </div>
+          </div>
+          <div class="rq-feedback"></div>
+        </div>
+
+        <div class="rq-item" data-correct="0"
+             data-question="Would you like breakfast included?">
+          <div class="rq-header">
+            <span class="rq-num">4</span>
+            <button class="rq-play-btn" onclick="speakRQ(this)">🔊 Listen to the question</button>
+            <span class="rq-played-hint">choose your answer below</span>
+          </div>
+          <div class="rq-options">
+            <div class="rq-option" onclick="pickRQ(this)">
+              <span class="rq-letter">A</span>
+              <span>Yes, please. How much is it per night with breakfast?</span>
+            </div>
+            <div class="rq-option" onclick="pickRQ(this)">
+              <span class="rq-letter">B</span>
+              <span>No, I don't need a car park.</span>
+            </div>
+            <div class="rq-option" onclick="pickRQ(this)">
+              <span class="rq-letter">C</span>
+              <span>I'd like to check out on Monday.</span>
+            </div>
+          </div>
+          <div class="rq-feedback"></div>
+        </div>
+
+        <div class="rq-item" data-correct="1"
+             data-question="Can I have your name, please?">
+          <div class="rq-header">
+            <span class="rq-num">5</span>
+            <button class="rq-play-btn" onclick="speakRQ(this)">🔊 Listen to the question</button>
+            <span class="rq-played-hint">choose your answer below</span>
+          </div>
+          <div class="rq-options">
+            <div class="rq-option" onclick="pickRQ(this)">
+              <span class="rq-letter">A</span>
+              <span>I'll arrive at three o'clock.</span>
+            </div>
+            <div class="rq-option" onclick="pickRQ(this)">
+              <span class="rq-letter">B</span>
+              <span>My name is Martin Novák.</span>
+            </div>
+            <div class="rq-option" onclick="pickRQ(this)">
+              <span class="rq-letter">C</span>
+              <span>I'd like a double room, please.</span>
+            </div>
+          </div>
+          <div class="rq-feedback"></div>
+        </div>
+
+        <div class="rq-item" data-correct="2"
+             data-question="Could you spell your surname, please?">
+          <div class="rq-header">
+            <span class="rq-num">6</span>
+            <button class="rq-play-btn" onclick="speakRQ(this)">🔊 Listen to the question</button>
+            <span class="rq-played-hint">choose your answer below</span>
+          </div>
+          <div class="rq-options">
+            <div class="rq-option" onclick="pickRQ(this)">
+              <span class="rq-letter">A</span>
+              <span>My surname is quite long.</span>
+            </div>
+            <div class="rq-option" onclick="pickRQ(this)">
+              <span class="rq-letter">B</span>
+              <span>I don't understand the question.</span>
+            </div>
+            <div class="rq-option" onclick="pickRQ(this)">
+              <span class="rq-letter">C</span>
+              <span>Yes. N-O-V-Á-K.</span>
+            </div>
+          </div>
+          <div class="rq-feedback"></div>
+        </div>
+
+        <div class="rq-item" data-correct="0"
+             data-question="How will you be paying – by card or cash?">
+          <div class="rq-header">
+            <span class="rq-num">7</span>
+            <button class="rq-play-btn" onclick="speakRQ(this)">🔊 Listen to the question</button>
+            <span class="rq-played-hint">choose your answer below</span>
+          </div>
+          <div class="rq-options">
+            <div class="rq-option" onclick="pickRQ(this)">
+              <span class="rq-letter">A</span>
+              <span>By credit card, please.</span>
+            </div>
+            <div class="rq-option" onclick="pickRQ(this)">
+              <span class="rq-letter">B</span>
+              <span>I'd like to pay after breakfast.</span>
+            </div>
+            <div class="rq-option" onclick="pickRQ(this)">
+              <span class="rq-letter">C</span>
+              <span>The room costs eighty-five pounds.</span>
+            </div>
+          </div>
+          <div class="rq-feedback"></div>
+        </div>
+
+      </div><!-- /rq-list -->
+
+      <button class="check-all-btn" onclick="checkAllRQ()" style="margin-top:20px;">Check my answers</button>
+      <div class="score-box" id="rq-score-box"></div>
+    </div>
+  </div>
+
+  <!-- PHRASE EXERCISE -->
+  <div class="section-card">
+    <div class="section-head">
+      <div class="section-head-left">
+        <div class="section-icon phrase">💬</div>
+        <div>
+          <div class="section-title">Useful phrases</div>
+          <div class="section-sub">Complete the sentences with the correct word or phrase</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-body">
+      <p class="phrase-intro">These phrases are common when booking a hotel room. Click a word from the box to fill in each gap.</p>
+
+      <div class="phrase-list" id="phrase-list">
+
+        <div class="phrase-item" data-answer="book">
+          <div class="phrase-prompt">The guest wants to make a reservation:</div>
+          <div class="phrase-sentence">
+            I'd like to <span class="phrase-blank" data-index="0" onclick="fillBlank(this)"></span> a room, please.
+          </div>
+        </div>
+
+        <div class="phrase-item" data-answer="include">
+          <div class="phrase-prompt">Asking if breakfast is part of the price:</div>
+          <div class="phrase-sentence">
+            Does that <span class="phrase-blank" data-index="1" onclick="fillBlank(this)"></span> breakfast?
+          </div>
+        </div>
+
+        <div class="phrase-item" data-answer="per night">
+          <div class="phrase-prompt">Asking about the price:</div>
+          <div class="phrase-sentence">
+            How much is a single room <span class="phrase-blank" data-index="2" onclick="fillBlank(this)"></span>?
+          </div>
+        </div>
+
+        <div class="phrase-item" data-answer="spell">
+          <div class="phrase-prompt">The receptionist needs to write the name correctly:</div>
+          <div class="phrase-sentence">
+            Could you <span class="phrase-blank" data-index="3" onclick="fillBlank(this)"></span> your surname, please?
+          </div>
+        </div>
+
+        <div class="phrase-item" data-answer="reservation">
+          <div class="phrase-prompt">The guest is ready to confirm:</div>
+          <div class="phrase-sentence">
+            I'd like to make the <span class="phrase-blank" data-index="4" onclick="fillBlank(this)"></span>, please.
+          </div>
+        </div>
+
+        <div class="phrase-item" data-answer="credit card">
+          <div class="phrase-prompt">Saying how you will pay:</div>
+          <div class="phrase-sentence">
+            Can I pay by <span class="phrase-blank" data-index="5" onclick="fillBlank(this)"></span>, please?
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Word bank -->
+      <div style="margin-top:24px; padding-top:16px; border-top: 1px solid var(--border);">
+        <div style="font-size:.75rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:10px;">Word bank</div>
+        <div class="phrase-options" id="word-bank">
+          <span class="phrase-option" onclick="selectWord(this)">book</span>
+          <span class="phrase-option" onclick="selectWord(this)">reserve</span>
+          <span class="phrase-option" onclick="selectWord(this)">include</span>
+          <span class="phrase-option" onclick="selectWord(this)">contain</span>
+          <span class="phrase-option" onclick="selectWord(this)">per night</span>
+          <span class="phrase-option" onclick="selectWord(this)">in advance</span>
+          <span class="phrase-option" onclick="selectWord(this)">spell</span>
+          <span class="phrase-option" onclick="selectWord(this)">say</span>
+          <span class="phrase-option" onclick="selectWord(this)">reservation</span>
+          <span class="phrase-option" onclick="selectWord(this)">complaint</span>
+          <span class="phrase-option" onclick="selectWord(this)">credit card</span>
+          <span class="phrase-option" onclick="selectWord(this)">the reception</span>
+        </div>
+      </div>
+
+      <div>
+        <button class="phrase-check-btn" onclick="checkPhrases()">Check answers</button>
+        <button class="phrase-reset-btn" onclick="resetPhrases()">Reset</button>
+      </div>
+      <div class="phrase-result" id="phrase-result"></div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── RESPOND TO RECEPTIONIST ──────────────────────────
+function speakRQ(btn) {
+  if (!('speechSynthesis' in window)) { alert('Your browser does not support audio.'); return; }
+  const question = btn.closest('.rq-item').dataset.question;
+  speechSynthesis.cancel();
+  const utt = new SpeechSynthesisUtterance(question);
+  utt.lang = 'en-GB'; utt.rate = 0.88;
+  const voices = speechSynthesis.getVoices();
+  const pref = voices.find(v => v.lang.startsWith('en') && v.name.toLowerCase().includes('female'))
+            || voices.find(v => v.lang.startsWith('en-GB'))
+            || voices.find(v => v.lang.startsWith('en'));
+  if (pref) utt.voice = pref;
+  btn.classList.add('playing');
+  btn.textContent = '🔊 Playing…';
+  const hint = btn.closest('.rq-header').querySelector('.rq-played-hint');
+  utt.onend = () => {
+    btn.classList.remove('playing');
+    btn.textContent = '🔊 Listen again';
+    hint.classList.add('show');
+  };
+  speechSynthesis.speak(utt);
+}
+
+function pickRQ(el) {
+  const item = el.closest('.rq-item');
+  const correctIdx = parseInt(item.dataset.correct);
+  const picked = Array.from(item.querySelectorAll('.rq-option')).indexOf(el);
+
+  // Don't allow clicking an already-marked option
+  if (el.classList.contains('correct') || el.classList.contains('wrong')) return;
+
+  item.dataset.picked = picked;
+
+  if (picked === correctIdx) {
+    el.classList.add('correct');
+    el.style.borderColor = ''; el.style.background = '';
+    playCorrectSound();
+    // Speak the correct answer
+    const correctText = el.querySelector('span:last-child').textContent;
+    speakText(correctText, 600);
+    // Disable all options in this item
+    item.querySelectorAll('.rq-option').forEach(o => o.style.pointerEvents = 'none');
+  } else {
+    el.classList.add('wrong');
+    el.style.borderColor = ''; el.style.background = '';
+    playWrongSound();
+  }
+}
+
+function checkAllRQ() {
+  const items = document.querySelectorAll('.rq-item');
+  let correctCount = 0;
+  let anyWrong = false;
+
+  items.forEach(item => {
+    const opts       = Array.from(item.querySelectorAll('.rq-option'));
+    const correctIdx = parseInt(item.dataset.correct);
+    const picked     = parseInt(item.dataset.picked ?? -1);
+    const fb         = item.querySelector('.rq-feedback');
+
+    opts.forEach(o => { o.style.borderColor = ''; o.style.background = ''; });
+
+    if (picked === -1) {
+      fb.textContent = 'Please choose an answer.';
+      fb.className = 'rq-feedback err';
+      opts[correctIdx].classList.add('reveal');
+      return;
+    }
+
+    opts[correctIdx].classList.add('correct');
+    if (picked === correctIdx) {
+      correctCount++;
+      fb.textContent = '✓ Correct!';
+      fb.className = 'rq-feedback ok';
+    } else {
+      opts[picked].classList.add('wrong');
+      fb.textContent = '✗ Not quite. The correct answer is highlighted.';
+      fb.className = 'rq-feedback err';
+      anyWrong = true;
+    }
+  });
+
+  // Sound + speak first correct answer text as model
+  if (anyWrong) {
+    playWrongSound();
+    // After a pause, speak the correct answers for wrong items
+    let delay = 500;
+    items.forEach(item => {
+      const picked     = parseInt(item.dataset.picked ?? -1);
+      const correctIdx = parseInt(item.dataset.correct);
+      if (picked !== -1 && picked !== correctIdx) {
+        const correctText = item.querySelectorAll('.rq-option')[correctIdx].querySelector('span:last-child').textContent;
+        speakText(correctText, delay);
+        delay += correctText.length * 60 + 800;
+      }
+    });
+  } else {
+    playCorrectSound();
+  }
+
+  const box = document.getElementById('rq-score-box');
+  box.classList.add('show');
+  box.innerHTML = `Your score: <strong>${correctCount} / ${items.length}</strong> &nbsp;${correctCount === items.length ? '🎉 Perfect!' : correctCount >= 5 ? '👍 Good work!' : '📚 Try listening again before checking.'}`;
+}
+
+if ('speechSynthesis' in window) speechSynthesis.getVoices();
+
+const audio     = document.getElementById('real-audio');
+const playBtn   = document.getElementById('play-btn');
+const timeLbl   = document.getElementById('audio-time');
+const progFill  = document.getElementById('progress-fill');
+const speedBtn  = document.getElementById('speed-btn');
+const speeds    = [1, 0.75, 1.25];
+let speedIdx    = 0;
+
+function fmt(s) {
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return `${m}:${sec.toString().padStart(2,'0')}`;
+}
+
+audio.addEventListener('timeupdate', () => {
+  if (!audio.duration) return;
+  const pct = (audio.currentTime / audio.duration) * 100;
+  progFill.style.width = pct + '%';
+  timeLbl.textContent = `${fmt(audio.currentTime)} / ${fmt(audio.duration)}`;
+});
+
+audio.addEventListener('ended', () => {
+  playBtn.textContent = '▶';
+  progFill.style.width = '0%';
+  audio.currentTime = 0;
+});
+
+audio.addEventListener('loadedmetadata', () => {
+  timeLbl.textContent = `0:00 / ${fmt(audio.duration)}`;
+});
+
+function togglePlay() {
+  if (audio.paused) {
+    audio.play();
+    playBtn.textContent = '⏸';
+  } else {
+    audio.pause();
+    playBtn.textContent = '▶';
+  }
+}
+
+function seekAudio(e) {
+  const rect = e.currentTarget.getBoundingClientRect();
+  const ratio = (e.clientX - rect.left) / rect.width;
+  audio.currentTime = ratio * audio.duration;
+}
+
+function cycleSpeed() {
+  speedIdx = (speedIdx + 1) % speeds.length;
+  audio.playbackRate = speeds[speedIdx];
+  speedBtn.textContent = speeds[speedIdx] + '×';
+}
+
+// ── SOUNDS ────────────────────────────────────────────
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let actx = null;
+
+function getACtx() {
+  if (!actx) actx = new AudioCtx();
+  return actx;
+}
+
+function playCorrectSound() {
+  try {
+    const ctx = getACtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(523, ctx.currentTime);       // C5
+    osc.frequency.setValueAtTime(659, ctx.currentTime + 0.12); // E5
+    osc.frequency.setValueAtTime(784, ctx.currentTime + 0.24); // G5
+    gain.gain.setValueAtTime(0.25, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.55);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 0.55);
+  } catch(e) {}
+}
+
+function playWrongSound() {
+  try {
+    const ctx = getACtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(220, ctx.currentTime);
+    osc.frequency.setValueAtTime(180, ctx.currentTime + 0.15);
+    gain.gain.setValueAtTime(0.18, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 0.4);
+  } catch(e) {}
+}
+
+function speakText(text, delay = 0) {
+  if (!('speechSynthesis' in window)) return;
+  setTimeout(() => {
+    speechSynthesis.cancel();
+    const utt = new SpeechSynthesisUtterance(text);
+    utt.lang = 'en-GB'; utt.rate = 0.88;
+    const voices = speechSynthesis.getVoices();
+    const pref = voices.find(v => v.lang.startsWith('en') && v.name.toLowerCase().includes('male'))
+              || voices.find(v => v.lang.startsWith('en-GB') && !v.name.toLowerCase().includes('female'))
+              || voices.find(v => v.lang.startsWith('en'));
+    if (pref) utt.voice = pref;
+    speechSynthesis.speak(utt);
+  }, delay);
+}
+
+// ── COMPREHENSION ─────────────────────────────────────
+function pickOption(el) {
+  const item = el.closest('.q-item');
+  const letters = ['a','b','c','d'];
+  const correctIdx = letters.indexOf(item.dataset.correct);
+  const picked = Array.from(item.querySelectorAll('.option')).indexOf(el);
+
+  // Don't allow clicking an already-marked option
+  if (el.classList.contains('correct') || el.classList.contains('wrong')) return;
+
+  item.dataset.picked = picked;
+
+  if (picked === correctIdx) {
+    el.classList.add('correct');
+    el.style.borderColor = ''; el.style.background = '';
+    playCorrectSound();
+    // Disable all options in this item
+    item.querySelectorAll('.option').forEach(o => o.style.pointerEvents = 'none');
+  } else {
+    el.classList.add('wrong');
+    el.style.borderColor = ''; el.style.background = '';
+    playWrongSound();
+  }
+}
+
+function checkAll() {
+  const items = document.querySelectorAll('.q-item');
+  let correctCount = 0;
+  let firstWrong = null;
+  const letters = ['a','b','c','d'];
+
+  items.forEach(item => {
+    const opts       = Array.from(item.querySelectorAll('.option'));
+    const correctIdx = letters.indexOf(item.dataset.correct);
+    const picked     = parseInt(item.dataset.picked ?? -1);
+    const fb         = item.querySelector('.q-feedback');
+
+    opts.forEach(o => { o.style.borderColor = ''; o.style.background = ''; });
+
+    if (picked === -1) {
+      fb.textContent = 'Please choose an answer.';
+      fb.className = 'q-feedback err';
+      opts[correctIdx].classList.add('reveal');
+      return;
+    }
+
+    opts[correctIdx].classList.add('correct');
+    if (picked === correctIdx) {
+      correctCount++;
+      fb.textContent = '✓ Correct!';
+      fb.className = 'q-feedback ok';
+    } else {
+      opts[picked].classList.add('wrong');
+      fb.textContent = '✗ Not quite. The correct answer is highlighted.';
+      fb.className = 'q-feedback err';
+      if (!firstWrong) firstWrong = opts[correctIdx].querySelector('span:last-child')?.textContent;
+    }
+  });
+
+  // Play sound for overall result
+  if (firstWrong) {
+    playWrongSound();
+  } else {
+    playCorrectSound();
+  }
+
+  const box = document.getElementById('score-box');
+  box.classList.add('show');
+  box.innerHTML = `Your score: <strong>${correctCount} / ${items.length}</strong> &nbsp;${correctCount === items.length ? '🎉 Perfect!' : correctCount >= 3 ? '👍 Good work!' : '📚 Listen again and try once more.'}`;
+}
+
+// ── TRANSCRIPT ────────────────────────────────────────
+function toggleTranscript() {
+  const btn  = document.getElementById('trans-btn');
+  const body = document.getElementById('trans-body');
+  const open = body.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  btn.querySelector('span:first-child').textContent = open ? '🙈 Hide transcript' : '👁️ Show transcript';
+}
+
+// ── PHRASE EXERCISE ───────────────────────────────────
+let selectedWord = null;
+
+function selectWord(el) {
+  if (el.classList.contains('used')) return;
+  // deselect previous
+  document.querySelectorAll('.phrase-option').forEach(o => o.style.outline = '');
+  selectedWord = el;
+  el.style.outline = '2px solid var(--sky)';
+}
+
+function fillBlank(blankEl) {
+  if (!selectedWord) return;
+  blankEl.textContent = selectedWord.getAttribute('data-word') || selectedWord.textContent;
+  blankEl.dataset.filled = selectedWord.textContent;
+  blankEl.classList.remove('correct','wrong');
+  selectedWord.classList.add('used');
+  selectedWord.style.outline = '';
+  selectedWord = null;
+}
+
+function checkPhrases() {
+  const items = document.querySelectorAll('.phrase-item');
+  let correct = 0;
+  items.forEach(item => {
+    const blank  = item.querySelector('.phrase-blank');
+    const answer = item.dataset.answer;
+    const filled = (blank.dataset.filled || '').trim().toLowerCase();
+    if (!filled) return;
+    if (filled === answer.toLowerCase()) {
+      blank.classList.add('correct'); blank.classList.remove('wrong'); correct++;
+    } else {
+      blank.classList.add('wrong'); blank.classList.remove('correct');
+    }
+  });
+  const res = document.getElementById('phrase-result');
+  res.classList.add('show');
+  res.textContent = `${correct} / ${items.length} correct. ${correct === items.length ? '🎉 Excellent!' : 'Check the highlighted blanks and try again.'}`;
+}
+
+function resetPhrases() {
+  document.querySelectorAll('.phrase-blank').forEach(b => {
+    b.textContent = ''; b.dataset.filled = '';
+    b.classList.remove('correct','wrong');
+  });
+  document.querySelectorAll('.phrase-option').forEach(o => {
+    o.classList.remove('used'); o.style.outline = '';
+  });
+  document.getElementById('phrase-result').classList.remove('show');
+  selectedWord = null;
+}
+</script>
+</body>
+</html>
