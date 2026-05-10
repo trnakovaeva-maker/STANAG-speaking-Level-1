@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STANAG Level 1 – Interview Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --olive:#4a5240;--olive-lt:#6b7560;--tan:#c8b99a;
+    --tan-lt:#e8dfd0;--cream:#f5f0e8;--khaki:#9a8c72;
+    --red:#8b2020;--white:#ffffff;
+    --shadow:0 2px 14px rgba(0,0,0,0.13);
+    --shadow-lg:0 6px 28px rgba(0,0,0,0.18);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Barlow',sans-serif;background:var(--cream);color:var(--olive);min-height:100vh;}
+
+  /* ── HEADER ── */
+  .page-header{
+    background:linear-gradient(160deg,rgba(74,82,64,0.93) 0%,rgba(28,32,24,0.97) 100%);
+    padding:1.6rem 1.5rem 1.5rem;
+    display:flex;align-items:center;gap:1.2rem;
+    position:relative;overflow:hidden;
+  }
+  .page-header::before{
+    content:'';position:absolute;inset:0;
+    background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+    pointer-events:none;
+  }
+  .header-photo{
+    width:72px;height:72px;border-radius:50%;
+    overflow:hidden;border:3px solid var(--tan);
+    background:var(--olive-lt);flex-shrink:0;
+    position:relative;z-index:1;
+  }
+  .header-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+  .header-photo-placeholder{
+    width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+    font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.4rem;color:var(--tan);
+  }
+  .header-text{flex:1;position:relative;z-index:1;}
+  .header-badge{
+    display:inline-block;background:var(--red);color:var(--white);
+    font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.65rem;
+    letter-spacing:0.15em;text-transform:uppercase;
+    padding:0.2rem 0.6rem;border-radius:2px;margin-bottom:0.35rem;
+  }
+  .header-title{
+    font-family:'Barlow Condensed',sans-serif;font-weight:800;
+    font-size:clamp(1.5rem,5vw,2rem);color:var(--white);
+    line-height:1.05;letter-spacing:0.01em;
+  }
+  .header-title span{color:var(--tan);}
+  .header-sub{font-size:0.8rem;color:rgba(255,255,255,0.5);margin-top:0.2rem;}
+
+  /* ── MAIN ── */
+  .main{max-width:680px;margin:0 auto;padding:1.8rem 1rem 2rem;}
+
+  /* ── INSTRUCTIONS ── */
+  .instructions{
+    background:var(--white);border-radius:10px;
+    border:1px solid var(--tan-lt);
+    padding:0.9rem 1.1rem;margin-bottom:1.4rem;
+    font-size:0.82rem;color:var(--khaki);line-height:1.5;
+  }
+  .instructions strong{color:var(--olive);}
+
+  /* ── QUESTION CARDS ── */
+  .question-card{
+    background:var(--white);border-radius:10px;
+    box-shadow:var(--shadow);border:1px solid rgba(200,185,154,0.35);
+    margin-bottom:0.85rem;overflow:hidden;
+  }
+
+  .q-row{
+    display:flex;align-items:center;gap:0.6rem;
+    padding:0.75rem 1rem;cursor:pointer;
+    transition:background 0.15s;
+  }
+  .q-row:hover{background:#faf7f2;}
+
+  .q-num-btn{
+    flex-shrink:0;width:30px;height:30px;
+    border-radius:50%;border:1.5px solid var(--tan);
+    background:transparent;color:var(--khaki);
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;font-size:0.85rem;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;
+    transition:background 0.15s,color 0.15s,border-color 0.15s;
+    line-height:1;
+  }
+  .q-num-btn:hover{background:var(--tan-lt);border-color:var(--khaki);}
+  .q-num-btn.revealed{background:var(--olive);color:var(--white);border-color:var(--olive);}
+
+  .q-text{
+    flex:1;font-size:0.9rem;color:var(--olive);
+    line-height:1.4;display:none;
+  }
+  .q-text.visible{display:inline;}
+
+  .q-hint{
+    flex:1;font-size:0.8rem;color:var(--khaki);
+    font-style:italic;
+  }
+  .q-hint.hidden{display:none;}
+
+  .q-play-btn{
+    flex-shrink:0;width:32px;height:32px;border-radius:50%;
+    border:none;background:var(--olive);color:var(--white);
+    cursor:pointer;display:flex;align-items:center;justify-content:center;
+    transition:background 0.15s,transform 0.1s;font-size:0.7rem;
+  }
+  .q-play-btn:hover{background:var(--red);transform:scale(1.08);}
+  .q-play-btn.playing{background:var(--red);}
+  .q-play-btn svg{pointer-events:none;}
+
+  .q-toggle{
+    flex-shrink:0;width:24px;height:24px;border-radius:4px;
+    border:1px solid var(--tan);background:transparent;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;
+    transition:background 0.15s;color:var(--khaki);font-size:0.65rem;
+  }
+  .q-toggle:hover{background:var(--tan-lt);}
+
+  /* ── ANSWER PANEL ── */
+  .answer-panel{
+    display:none;
+    padding:0.5rem 1rem 0.7rem 2.9rem;
+    background:#f9f6f0;
+    border-top:1px dashed var(--tan-lt);
+  }
+  .answer-panel.open{display:block;}
+  .answer-panel p{font-size:0.82rem;color:var(--khaki);font-style:italic;line-height:1.5;}
+
+  /* ── SELF-CHECK ── */
+  .self-check{
+    display:flex;align-items:center;gap:0.4rem;
+    padding:0.35rem 1rem 0.4rem 2.9rem;
+    background:#f9f6f0;
+    border-top:1px dashed var(--tan-lt);
+    cursor:pointer;
+  }
+  .self-check input[type="checkbox"]{
+    accent-color:var(--olive);width:13px;height:13px;
+    cursor:pointer;flex-shrink:0;
+  }
+  .self-check label{font-size:0.75rem;color:var(--khaki);cursor:pointer;user-select:none;}
+
+  /* ── PROGRESS ── */
+  .set-progress-bar{
+    background:var(--white);border-radius:10px;
+    border:1px solid var(--tan-lt);
+    padding:0.85rem 1.1rem;
+    margin-bottom:1.4rem;
+    display:flex;align-items:center;gap:0.75rem;
+  }
+  .spb-label{font-size:0.75rem;font-weight:600;color:var(--khaki);white-space:nowrap;}
+  .spb-track{flex:1;height:6px;background:var(--tan-lt);border-radius:3px;overflow:hidden;}
+  .spb-fill{height:100%;background:var(--olive);border-radius:3px;transition:width 0.3s;}
+  .spb-count{font-size:0.72rem;color:var(--khaki);white-space:nowrap;}
+  .spb-reset{font-size:0.68rem;color:var(--khaki);background:none;border:none;cursor:pointer;padding:0 0.2rem;}
+  .spb-reset:hover{color:var(--red);}
+
+  /* ── BACK BUTTON ── */
+  .back-row{
+    margin-top:2rem;padding-top:1.5rem;
+    border-top:1px solid var(--tan-lt);
+    display:flex;justify-content:center;
+  }
+  .back-btn{
+    display:inline-flex;align-items:center;gap:0.5rem;
+    background:var(--olive);color:var(--white);
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;font-size:0.9rem;letter-spacing:0.06em;
+    text-transform:uppercase;text-decoration:none;
+    padding:0.7rem 1.5rem;border-radius:6px;
+    transition:background 0.2s;
+  }
+  .back-btn:hover{background:var(--olive-lt);}
+
+  footer{text-align:center;padding:1.5rem;font-size:0.75rem;color:var(--khaki);border-top:1px solid var(--tan-lt);background:var(--white);}
+</style>
+</head>
+<body>
+
+<header class="page-header" id="page-header">
+  <div class="header-photo" id="header-photo">
+    <img id="header-img" src="" alt="">
+    <div class="header-photo-placeholder" id="header-placeholder" style="display:none"></div>
+  </div>
+  <div class="header-text">
+    <div class="header-badge">STANAG 6001 · Level 1</div>
+    <div class="header-title"><span id="set-title">Set —</span></div>
+    <div class="header-sub">10 questions · Interview Practice</div>
+  </div>
+</header>
+
+<main class="main">
+  <div class="instructions">
+    <strong>How to practise:</strong> Click the <strong>number circle</strong> to reveal the question · 
+    Click <strong>▶</strong> to hear the audio · Click <strong>▼</strong> to see a model answer · 
+    Tick the checkbox when you can answer confidently.
+  </div>
+
+  <div class="set-progress-bar">
+    <span class="spb-label">Progress</span>
+    <div class="spb-track"><div class="spb-fill" id="spb-fill" style="width:0%"></div></div>
+    <span class="spb-count" id="spb-count">0/10</span>
+    <button class="spb-reset" id="spb-reset" title="Reset progress">↺ Reset</button>
+  </div>
+
+  <div id="questions-list"></div>
+
+  <div class="back-row">
+    <a href="../index.html" class="back-btn">← Back to all sets</a>
+  </div>
+</main>
+
+<footer>STANAG Level 1 Speaking Practice · University of Defence · Brno</footer>
+
+<script>
+const SETS = [
+  {
+    id:1,
+    questions:[
+      {q:"What is your full name? How do you spell your surname?", a:"My full name is… I spell my surname…"},
+      {q:"Where are you from?", a:"I am from… / I come from…"},
+      {q:"What is your military rank?", a:"My rank is… / I am a…"},
+      {q:"Are you married or single?", a:"I am married / single / divorced."},
+      {q:"What is your wife's / husband's name? How old is she / he?", a:"My wife's / husband's name is… She / He is… years old."},
+      {q:"What does your wife / husband do? Where does she / he work?", a:"She / He is a… She / He works at / in…"},
+      {q:"Do you live in a house or a flat?", a:"I live in a house / a flat."},
+      {q:"What time do you start and finish work?", a:"I start at… and I finish at…"},
+      {q:"What do you do in your free time?", a:"In my free time I…"},
+      {q:"What sports do you like?", a:"I like… / I enjoy playing / doing…"}
+    ]
+  },
+  {
+    id:2,
+    questions:[
+      {q:"How old are you?", a:"I am… years old."},
+      {q:"What is your job in the army?", a:"I am a… / My job is to…"},
+      {q:"Do you have any children?", a:"Yes, I have… / No, I don't have any children."},
+      {q:"How old is your son / daughter? What does he / she do?", a:"My son / daughter is… years old. He / She…"},
+      {q:"What does your son / daughter like to do after school?", a:"He / She likes to…"},
+      {q:"How do you travel to work?", a:"I travel to work by… / I drive / walk…"},
+      {q:"Why do you need English for your job?", a:"I need English because…"},
+      {q:"What is the weather like today?", a:"Today it is… / The weather is…"},
+      {q:"What languages do you speak?", a:"I speak Czech and… / I also speak a little…"},
+      {q:"Is there a shop near your home?", a:"Yes, there is a… near my home. / No, the nearest shop is…"}
+    ]
+  },
+  {
+    id:3,
+    questions:[
+      {q:"How many rooms are there in your home?", a:"There are… rooms in my home."},
+      {q:"What do your parents do? Are they retired?", a:"My mother is… / My father is… They are / are not retired."},
+      {q:"What is your military specialisation?", a:"My specialisation is…"},
+      {q:"Do you have a best friend? What is his / her name?", a:"Yes, my best friend's name is…"},
+      {q:"What does your best friend do? Where does he / she work?", a:"He / She is a… He / She works at…"},
+      {q:"What do you and your best friend usually do together?", a:"We usually… / We often…"},
+      {q:"What do you have for breakfast?", a:"For breakfast I usually have…"},
+      {q:"How far is your home from the base?", a:"My home is… kilometres / minutes from the base."},
+      {q:"What time do you go to bed on weekdays?", a:"I usually go to bed at…"},
+      {q:"What is a typical lunch for you?", a:"A typical lunch for me is…"}
+    ]
+  },
+  {
+    id:4,
+    questions:[
+      {q:"What is your favourite season? Why?", a:"My favourite season is… because…"},
+      {q:"Do you use a computer at work?", a:"Yes, I use a computer every day. / I use it to…"},
+      {q:"What is your commander's name and rank?", a:"My commander's name is… His / Her rank is…"},
+      {q:"What is your commander like? Is he / she strict?", a:"My commander is… He / She is quite / very…"},
+      {q:"Does your commander speak English?", a:"Yes, he / she speaks English. / He / She speaks a little English."},
+      {q:"Do you play any sports?", a:"Yes, I play… / I do… regularly."},
+      {q:"Where do you usually go on holiday?", a:"I usually go to… on holiday."},
+      {q:"What do you usually drink with your meals?", a:"I usually drink…"},
+      {q:"Do you have any hobbies?", a:"Yes, my hobbies are… / I enjoy…"},
+      {q:"Do you have a garden or a balcony?", a:"Yes, I have a… / No, I don't have one."}
+    ]
+  },
+  {
+    id:5,
+    questions:[
+      {q:"Do you have any pets?", a:"Yes, I have a… / No, I don't have any pets."},
+      {q:"Describe your typical morning routine.", a:"I usually wake up at… Then I…"},
+      {q:"Do you have any brothers or sisters?", a:"Yes, I have… brothers and… sisters. / I am an only child."},
+      {q:"What is your brother's / sister's name? How old is he / she?", a:"My brother's / sister's name is… He / She is… years old."},
+      {q:"What does your brother / sister do? Where does he / she live?", a:"He / She is a… He / She lives in…"},
+      {q:"How often do you see your brother / sister?", a:"I see him / her… / We meet about once a…"},
+      {q:"Do you have a car? What kind?", a:"Yes, I have a… / No, I don't have a car."},
+      {q:"What time do you finish work?", a:"I finish work at…"},
+      {q:"What is your favourite type of film?", a:"I like… films. My favourite is…"},
+      {q:"Can you cook? What can you cook?", a:"Yes, I can cook… / I am good at making…"}
+    ]
+  },
+  {
+    id:6,
+    questions:[
+      {q:"Where is your military base located?", a:"My base is located in / near…"},
+      {q:"Is your office big or small?", a:"My office is… / It is quite…"},
+      {q:"What is your colleague's name? What is his / her rank?", a:"My colleague's name is… His / Her rank is…"},
+      {q:"What is your colleague like as a person?", a:"He / She is very… / He / She is a…"},
+      {q:"What does your colleague do after work?", a:"After work he / she usually…"},
+      {q:"Can you swim well?", a:"Yes, I can swim well. / I can swim but not very well."},
+      {q:"What do you usually do on Sunday?", a:"On Sunday I usually…"},
+      {q:"What is your favourite sport to watch?", a:"My favourite sport to watch is…"},
+      {q:"Do you prefer coffee or tea?", a:"I prefer… / I usually drink…"},
+      {q:"How do you usually pay – by card or cash?", a:"I usually pay by card / cash. / I prefer to pay by…"}
+    ]
+  },
+  {
+    id:7,
+    questions:[
+      {q:"How do you spell your first name?", a:"My first name is… I spell it…"},
+      {q:"Do you live in a big city or a small town?", a:"I live in a… city / small town called…"},
+      {q:"What is your favourite animal? Why?", a:"My favourite animal is… because…"},
+      {q:"How long is your journey to work?", a:"My journey takes about… minutes / an hour."},
+      {q:"Is your wife / husband / partner good at cooking?", a:"Yes, he / she is a great cook. / He / She is quite good at…"},
+      {q:"What does your wife / husband / partner do in the evenings?", a:"In the evenings he / she usually…"},
+      {q:"What do you usually do in the afternoon after work?", a:"After work I usually…"},
+      {q:"Do you like watching documentaries?", a:"Yes, I love documentaries. / I sometimes watch… I enjoy documentaries about…"},
+      {q:"Do you like winter sports?", a:"Yes, I enjoy… / I like skiing / snowboarding. / I prefer indoor sports in winter."},
+      {q:"What do you eat for lunch at the base?", a:"At the base I usually eat…"}
+    ]
+  },
+  {
+    id:8,
+    questions:[
+      {q:"What do you do every morning at work?", a:"Every morning I… / First I… then I…"},
+      {q:"Do you speak any foreign languages?", a:"Yes, I speak… / I also speak a little…"},
+      {q:"Is there a gym or sports facility at your base?", a:"Yes, there is a… / We have a gym where I…"},
+      {q:"Do you have a son or daughter? How old is he / she?", a:"Yes, I have a… He / She is… years old. / No, I don't have children."},
+      {q:"What does your daughter / son like to do at the weekend?", a:"At the weekend he / she likes to…"},
+      {q:"What school does your son / daughter go to?", a:"He / She goes to… school in…"},
+      {q:"What kind of music do you listen to?", a:"I listen to… / My favourite genre is…"},
+      {q:"What do you need English for at work?", a:"I need English for… / I use English when…"},
+      {q:"What do you usually do in the evening?", a:"In the evening I usually…"},
+      {q:"What is your favourite colour?", a:"My favourite colour is…"}
+    ]
+  },
+  {
+    id:9,
+    questions:[
+      {q:"What is your address?", a:"My address is…"},
+      {q:"Do you live near your parents?", a:"Yes, they live… minutes / km away. / No, they live in…"},
+      {q:"What is your best friend's name?", a:"My best friend's name is…"},
+      {q:"What does your best friend look like?", a:"He / She is… tall / short / slim. He / She has…"},
+      {q:"How often do you meet your best friend? What do you do together?", a:"We meet… a week / month. We usually…"},
+      {q:"Is English difficult for you?", a:"Yes, I find… quite difficult. / English is not too difficult for me."},
+      {q:"What is there to do in your town or city?", a:"In my town / city there is… / You can…"},
+      {q:"What time do you usually have dinner?", a:"I usually have dinner at about…"},
+      {q:"What is there in your living room?", a:"In my living room there is / are… / We have a…"},
+      {q:"Do you use social media?", a:"Yes, I use… / I mainly use… to…"}
+    ]
+  },
+  {
+    id:10,
+    questions:[
+      {q:"Do you have any children? How old are they?", a:"Yes, I have… children. They are… years old. / No, I don't."},
+      {q:"How do you travel to work?", a:"I travel by… / I drive my car / take the bus."},
+      {q:"What is the typical weather in your region?", a:"In my region the weather is usually…"},
+      {q:"Do you have a colleague you work with closely? What is he / she like?", a:"Yes, I work closely with… He / She is…"},
+      {q:"Does your colleague speak English?", a:"Yes, he / she speaks quite good English. / He / She speaks a little."},
+      {q:"How often do you visit your parents?", a:"I visit them… / We see each other about once a…"},
+      {q:"Do you prefer to read a book or watch TV?", a:"I prefer… because… / I enjoy both but…"},
+      {q:"What is your least favourite household chore?", a:"My least favourite chore is… / I hate…"},
+      {q:"What is there near your home?", a:"Near my home there is / are…"},
+      {q:"Do you like your job? Why?", a:"Yes, I like my job because… / I enjoy…"}
+    ]
+  },
+  {
+    id:11,
+    questions:[
+      {q:"How many floors does your building have? Which floor do you live on?", a:"My building has… floors. I live on the… floor."},
+      {q:"What time do you wake up on weekdays?", a:"On weekdays I wake up at…"},
+      {q:"What is your favourite Czech dish?", a:"My favourite Czech dish is… / I love…"},
+      {q:"Do you have a brother or a sister? Tell me about him / her.", a:"Yes, I have a… His / Her name is… He / She is…"},
+      {q:"What is your sister / brother like as a person?", a:"He / She is very… / He / She is quite…"},
+      {q:"How often do you see your brother / sister?", a:"I see him / her… / We usually meet…"},
+      {q:"Why do you want to learn English?", a:"I want to learn English because…"},
+      {q:"Is there a lift in your building?", a:"Yes, there is a lift. / No, there isn't."},
+      {q:"How often do you go to the cinema?", a:"I go to the cinema… / about once a month."},
+      {q:"What do you do when you have a cold?", a:"When I have a cold I…"}
+    ]
+  },
+  {
+    id:12,
+    questions:[
+      {q:"Is your home far from the base?", a:"My home is about… km / minutes from the base."},
+      {q:"Do you like reading? What kind of books?", a:"Yes, I like… / I enjoy reading… books."},
+      {q:"What is your commander's best quality?", a:"My commander's best quality is… / He / She is very…"},
+      {q:"How does your commander communicate with the unit?", a:"He / She usually communicates by… / We have…"},
+      {q:"Does your commander work long hours?", a:"Yes, he / she often works long hours. / He / She usually works…"},
+      {q:"Do you have a balcony? What do you use it for?", a:"Yes, I have a balcony. I use it for… / No, I don't have one."},
+      {q:"How often do you use the internet?", a:"I use the internet… / every day for…"},
+      {q:"What do you usually do on Saturday evenings?", a:"On Saturday evenings I usually…"},
+      {q:"Is the area around your home safe?", a:"Yes, my area is quite safe. / It is a… neighbourhood."},
+      {q:"What do you wear at the base?", a:"At the base I wear a uniform. / I wear…"}
+    ]
+  },
+  {
+    id:13,
+    questions:[
+      {q:"What is your job in the army?", a:"My job in the army is…"},
+      {q:"How do you go to work every day?", a:"I go to work by… / I drive / take…"},
+      {q:"What is your wife's / husband's daily routine like?", a:"He / She usually gets up at… Then…"},
+      {q:"Does your wife / husband do any sport?", a:"Yes, he / she… / He / She plays… goes to the gym…"},
+      {q:"What does your wife / husband like to eat?", a:"He / She likes… / His / Her favourite food is…"},
+      {q:"How often do you meet your friends?", a:"I meet my friends… / about once a week / month."},
+      {q:"What do you do on your days off?", a:"On my days off I usually…"},
+      {q:"What is the weather like today?", a:"Today it is… / The weather is…"},
+      {q:"Is there a sports centre near your home?", a:"Yes, there is a sports centre about… away. / No, there isn't."},
+      {q:"What things do you need to bring to work every day?", a:"Every day I bring… / I always take…"}
+    ]
+  },
+  {
+    id:14,
+    questions:[
+      {q:"What is your hometown?", a:"My hometown is… / I come from…"},
+      {q:"What is your rank?", a:"My rank is… / I am a…"},
+      {q:"Do you have a son or daughter? What is he / she like?", a:"Yes, I have a… He / She is… / He / She is very…"},
+      {q:"What is your son's / daughter's favourite food?", a:"His / Her favourite food is…"},
+      {q:"Does your son / daughter have any hobbies or do any sport?", a:"Yes, he / she… / He / She likes…"},
+      {q:"Do you like cooking? What do you cook?", a:"Yes, I enjoy cooking… / I often cook…"},
+      {q:"Why is English important for you?", a:"English is important because…"},
+      {q:"What do you usually do on Saturday morning?", a:"On Saturday morning I usually…"},
+      {q:"How much free time do you have after work?", a:"After work I have about… hours of free time."},
+      {q:"What equipment do you use at work?", a:"At work I use…"}
+    ]
+  },
+  {
+    id:15,
+    questions:[
+      {q:"What is your military specialisation?", a:"My specialisation is…"},
+      {q:"What is the best thing about your job?", a:"The best thing about my job is…"},
+      {q:"What is your best friend like as a person?", a:"My best friend is very… / He / She is…"},
+      {q:"Does your best friend have a family?", a:"Yes, he / she has… / He / She is married and…"},
+      {q:"What are your best friend's hobbies?", a:"His / Her hobbies are… / He / She likes…"},
+      {q:"Do you like watching movies? What kind?", a:"Yes, I love… films. / My favourite genre is…"},
+      {q:"How do you stay healthy?", a:"I stay healthy by… / I exercise… and try to eat…"},
+      {q:"What do you eat for breakfast?", a:"For breakfast I usually have…"},
+      {q:"What is a typical Saturday for you?", a:"A typical Saturday for me is… I usually…"},
+      {q:"What do you do when the weather is bad?", a:"When the weather is bad I…"}
+    ]
+  },
+  {
+    id:16,
+    questions:[
+      {q:"What is your phone number?", a:"My phone number is…"},
+      {q:"How many rooms are there in your home? Which is your favourite?", a:"There are… rooms. My favourite is the… because…"},
+      {q:"What do your parents do?", a:"My mother is… / My father is… / They are retired."},
+      {q:"Do you have a brother or a sister? What does he / she do?", a:"Yes, I have a… He / She is a… / He / She works as…"},
+      {q:"What is your brother / sister good at?", a:"He / She is good at… / He / She is very good at…"},
+      {q:"How often do you talk to your brother / sister?", a:"We talk… / I call him / her about once a…"},
+      {q:"What time do you usually go to bed?", a:"I usually go to bed at about…"},
+      {q:"How do you usually get to the city centre from your home?", a:"I usually take… / I go by… / I drive."},
+      {q:"Do you prefer to eat at home or in a restaurant?", a:"I prefer to eat at home / in a restaurant because…"},
+      {q:"What sports facilities are near your home?", a:"Near my home there is / are… / I can use…"}
+    ]
+  },
+  {
+    id:17,
+    questions:[
+      {q:"What is your name? How do you spell your surname?", a:"My name is… I spell my surname…"},
+      {q:"Who do you live with?", a:"I live with my… / I live alone."},
+      {q:"Who does the housework in your family?", a:"In my family… does most of the housework. / We share the housework."},
+      {q:"Do you have a garden?", a:"Yes, I have a garden. / No, I don't. I have a balcony instead."},
+      {q:"What do you do to relax after a long day?", a:"After a long day I… / I relax by…"},
+      {q:"What are you planning to do this weekend?", a:"This weekend I am planning to… / I hope to…"},
+      {q:"What is your favourite film or book?", a:"My favourite film is… / My favourite book is… by…"},
+      {q:"What are your work responsibilities?", a:"My main responsibilities are… / I am responsible for…"},
+      {q:"Is the canteen at your base good?", a:"Yes, the food is quite good. / The canteen has… / I usually eat…"},
+      {q:"Do you get on well with your colleagues at work?", a:"Yes, I get on well with my colleagues. / We have a good…"}
+    ]
+  },
+  {
+    id:18,
+    questions:[
+      {q:"How old are you?", a:"I am… years old."},
+      {q:"What is your job in the army?", a:"My job is… / I work as a…"},
+      {q:"What is your favourite season?", a:"My favourite season is… because…"},
+      {q:"What does your wife or husband look like?", a:"He / She is… tall. He / She has… hair and…"},
+      {q:"What is your wife or husband like as a person?", a:"He / She is very… / He / She is quite…"},
+      {q:"How does your wife or husband relax after work?", a:"After work he / she usually… / He / She likes to…"},
+      {q:"What public transport is there in your town or city?", a:"In my town / city there is… / We have buses / trams…"},
+      {q:"Do you like your neighbourhood?", a:"Yes, I like my neighbourhood because… / It is a… area."},
+      {q:"How often do you contact your family when you are away?", a:"I contact them… / I call or message them…"},
+      {q:"What is there to see near your base?", a:"Near my base there is… / You can visit…"}
+    ]
+  },
+  {
+    id:19,
+    questions:[
+      {q:"What is your hometown? What is it like?", a:"My hometown is… It is a… city / town. There is / are…"},
+      {q:"What is your rank?", a:"My rank is…"},
+      {q:"Do you have any children?", a:"Yes, I have… children. / No, I don't have children yet."},
+      {q:"How old are your sons / daughters? What do they do?", a:"My son / daughter is… years old. He / She…"},
+      {q:"What sport does your son / daughter do?", a:"He / She does / plays… / He / She goes to…"},
+      {q:"What do you have for breakfast?", a:"For breakfast I usually have…"},
+      {q:"Do you like watching sport on TV?", a:"Yes, I love watching… / My favourite sport to watch is…"},
+      {q:"What is the name of your favourite restaurant?", a:"My favourite restaurant is called… / I often go to…"},
+      {q:"What is on your bedside table?", a:"On my bedside table there is / are…"},
+      {q:"What are your plans for this weekend?", a:"This weekend I plan to… / I am going to…"}
+    ]
+  },
+  {
+    id:20,
+    questions:[
+      {q:"What is your military specialisation?", a:"My specialisation is…"},
+      {q:"What time do you finish work?", a:"I finish work at…"},
+      {q:"Do you like your job? What is the hardest part?", a:"Yes, I like my job. The hardest part is…"},
+      {q:"What is your best friend's name? Where does he / she live?", a:"My best friend's name is… He / She lives in…"},
+      {q:"How does your best friend usually spend his / her weekends?", a:"At the weekend he / she usually…"},
+      {q:"Does your best friend have a car? What kind?", a:"Yes, he / she has a… / No, he / she doesn't."},
+      {q:"What kind of books or magazines do you read?", a:"I read… / My favourite magazines are… I like… books."},
+      {q:"What is your favourite room in the house? Why?", a:"My favourite room is the… because…"},
+      {q:"Do you prefer coffee or tea? How many cups a day?", a:"I prefer… I drink about… cups a day."},
+      {q:"Where is a good place to go on holiday in the Czech Republic?", a:"A good place is… / I recommend… because…"}
+    ]
+  },
+  {
+    id:21,
+    questions:[
+      {q:"How do you spell your surname?", a:"I spell my surname…"},
+      {q:"What is your home city or town famous for?", a:"My city / town is famous for… / It is known for…"},
+      {q:"How often do you do sport?", a:"I do sport… / I exercise about… times a week."},
+      {q:"What is your commander's rank?", a:"My commander's rank is…"},
+      {q:"How often does your commander organise exercises?", a:"He / She organises exercises… / We have exercises about…"},
+      {q:"What do your colleagues think about your commander?", a:"My colleagues think he / she is… / Most people think…"},
+      {q:"Is there a lot of traffic near your base?", a:"Yes, there is quite a lot of traffic near the base. / The traffic is…"},
+      {q:"What is special about Christmas in your family?", a:"At Christmas we usually… / My family always…"},
+      {q:"Do you like going to restaurants? What kind?", a:"Yes, I love going to… restaurants. / I prefer…"},
+      {q:"What do you take with you on a military exercise?", a:"On a military exercise I take… / The most important things are…"}
+    ]
+  },
+  {
+    id:22,
+    questions:[
+      {q:"What is the name of the base where you work?", a:"The name of my base is… / I work at…"},
+      {q:"How many bedrooms does your home have?", a:"My home has… bedrooms."},
+      {q:"What do you usually do on a rainy day?", a:"On a rainy day I usually…"},
+      {q:"Do you have a brother or sister? What does he / she do in his / her free time?", a:"Yes, I have a… In his / her free time he / she…"},
+      {q:"Is your brother / sister married? Does he / she have children?", a:"Yes, he / she is married and has… / No, he / she is not married yet."},
+      {q:"How many hours a week do you work?", a:"I work about… hours a week."},
+      {q:"Do you like summer or winter more? Why?", a:"I prefer summer / winter because…"},
+      {q:"How do you get to the nearest big city from where you live?", a:"I get there by… / I drive / take the train / bus."},
+      {q:"What is a good present for a soldier?", a:"A good present for a soldier is… / I think soldiers appreciate…"},
+      {q:"What sport facilities do you have at your base?", a:"At my base there is / are… / We have a gym / football pitch…"}
+    ]
+  },
+  {
+    id:23,
+    questions:[
+      {q:"What is your date of birth?", a:"I was born on the… of… / My date of birth is…"},
+      {q:"How many people do you have in your immediate family?", a:"In my immediate family there are… of us."},
+      {q:"What is your son's / daughter's favourite subject at school?", a:"His / Her favourite subject is…"},
+      {q:"What does your son / daughter want to do in the future?", a:"He / She wants to be a… / He / She would like to…"},
+      {q:"Do you have a mobile phone? What do you use it for?", a:"Yes, I use my phone for… / I mainly use it to…"},
+      {q:"Is English useful in everyday life in the Czech Republic?", a:"Yes, English is very useful. You need it for… / I use it when…"},
+      {q:"How often does your family eat together?", a:"We eat together… / About… times a week."},
+      {q:"What sport is the most popular in the Czech Republic?", a:"The most popular sport is… / Czechs love…"},
+      {q:"What do you usually have for dinner?", a:"For dinner I usually have…"},
+      {q:"What is the address of your military base?", a:"The address of my base is…"}
+    ]
+  },
+  {
+    id:24,
+    questions:[
+      {q:"How do you usually spend your evenings after work?", a:"After work I usually… / In the evenings I…"},
+      {q:"What is your base like? Describe it.", a:"My base is… / It is quite large / small. There is / are…"},
+      {q:"What is your best friend's job? Does he / she like it?", a:"My best friend is a… He / She… likes / doesn't really like it."},
+      {q:"What does your best friend think about your life in the army?", a:"He / She thinks it is… / He / She says that…"},
+      {q:"What do you and your best friend talk about?", a:"We usually talk about… / We often discuss…"},
+      {q:"Is there a market in your town? Do you shop there?", a:"Yes, there is a market in… / I sometimes go there to buy…"},
+      {q:"What season is it now? What is the weather like?", a:"It is… now. The weather is…"},
+      {q:"What is your morning routine before you go to work?", a:"In the morning I… / First I… then I…"},
+      {q:"What kind of clothes do you wear at the weekend?", a:"At the weekend I wear… / I usually dress…"},
+      {q:"Do you have central heating at home?", a:"Yes, we have central heating. / No, we heat our home with…"}
+    ]
+  },
+  {
+    id:25,
+    questions:[
+      {q:"What is your full name and rank?", a:"My full name is… and my rank is…"},
+      {q:"What does your partner do? Where does he / she work?", a:"My partner is a… He / She works at / in…"},
+      {q:"Does your wife / husband like his / her job? Why?", a:"Yes, he / she likes it because… / He / She enjoys…"},
+      {q:"Does your wife / husband speak any foreign languages?", a:"Yes, he / she speaks… / He / She also knows a little…"},
+      {q:"What do you do to improve your English?", a:"To improve my English I… / I try to…"},
+      {q:"Describe the street where you live.", a:"The street where I live is… / There are… / It is a… street."},
+      {q:"What is the most important meal of the day for you?", a:"The most important meal for me is… because…"},
+      {q:"Do you have a first aid kit at home?", a:"Yes, I have a first aid kit. / No, I should get one."},
+      {q:"What are your children interested in? What are their hobbies?", a:"My children are interested in… / Their hobbies are…"},
+      {q:"What would be your perfect day off?", a:"My perfect day off would be… / I would love to…"}
+    ]
+  }
+];
+
+// ── INIT ──
+const params = new URLSearchParams(window.location.search);
+const setId = parseInt(params.get('set')) || 1;
+const setData = SETS.find(s => s.id === setId);
+
+if (!setData) {
+  document.getElementById('questions-list').innerHTML = '<p style="color:var(--red);padding:1rem">Set not found.</p>';
+} else {
+  // Header
+  document.title = `Set ${String(setId).padStart(2,'0')} – STANAG Level 1 Interview`;
+  document.getElementById('set-title').textContent = 'Set ' + String(setId).padStart(2,'0');
+  const img = document.getElementById('header-img');
+  const placeholder = document.getElementById('header-placeholder');
+  img.src = `../interview/photos/picture_set${setId}.jpg`;
+  img.alt = `Set ${setId}`;
+  img.onerror = () => { img.style.display='none'; placeholder.style.display='flex'; placeholder.textContent = setId; };
+
+  // Progress
+  function getProgress() {
+    try { return JSON.parse(localStorage.getItem('stanag1_set'+setId)) || {}; } catch { return {}; }
+  }
+  function saveProgress(p) { localStorage.setItem('stanag1_set'+setId, JSON.stringify(p)); }
+  function countDone() { return Object.values(getProgress()).filter(Boolean).length; }
+  function updateProgressBar() {
+    const done = countDone();
+    const pct = Math.round(done/10*100);
+    document.getElementById('spb-fill').style.width = pct+'%';
+    document.getElementById('spb-count').textContent = done+'/10';
+  }
+
+  document.getElementById('spb-reset').addEventListener('click', () => {
+    if (!confirm('Reset progress for this set?')) return;
+    localStorage.removeItem('stanag1_set'+setId);
+    // uncheck all
+    document.querySelectorAll('.self-check input').forEach(cb => cb.checked = false);
+    updateProgressBar();
+  });
+
+  // Audio
+  let currentAudio = null, currentBtn = null;
+  function playIcon(){return`<svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><polygon points="0,0 10,6 0,12"/></svg>`;}
+  function stopIcon(){return`<svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><rect x="0" y="0" width="4" height="12"/><rect x="6" y="0" width="4" height="12"/></svg>`;}
+
+  function playQuestion(qIdx, btn) {
+    const path = `../interview/audio/Set${setId}/S${setId}Q${qIdx+1}.mp3`;
+    if (currentAudio) {
+      currentAudio.pause(); currentAudio = null;
+      if (currentBtn) { currentBtn.innerHTML = playIcon(); currentBtn.classList.remove('playing'); }
+    }
+    const audio = new Audio(path);
+    currentAudio = audio; currentBtn = btn;
+    btn.innerHTML = stopIcon(); btn.classList.add('playing');
+    audio.addEventListener('ended', () => { btn.innerHTML=playIcon(); btn.classList.remove('playing'); currentAudio=null; currentBtn=null; });
+    audio.addEventListener('error', () => { btn.innerHTML=playIcon(); btn.classList.remove('playing'); btn.title='Audio not yet available'; currentAudio=null; currentBtn=null; });
+    audio.play();
+  }
+
+  // Build questions
+  const list = document.getElementById('questions-list');
+  const progress = getProgress();
+
+  setData.questions.forEach((item, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+
+    const checked = !!progress[i];
+    const cbId = `cb_${setId}_${i}`;
+
+    card.innerHTML = `
+      <div class="q-row">
+        <button class="q-num-btn" title="Reveal question" aria-expanded="false">${i+1}</button>
+        <span class="q-hint">Click number to reveal question</span>
+        <span class="q-text">${item.q}</span>
+        <button class="q-play-btn" title="Play audio">${playIcon()}</button>
+        <button class="q-toggle" title="Show model answer" aria-expanded="false">▼</button>
+      </div>
+      <div class="answer-panel">
+        <p>${item.a}</p>
+      </div>
+      <div class="self-check">
+        <input type="checkbox" id="${cbId}" ${checked?'checked':''}>
+        <label for="${cbId}">I can answer this question</label>
+      </div>
+    `;
+
+    // Number button: reveal/hide question text
+    const numBtn = card.querySelector('.q-num-btn');
+    const qText = card.querySelector('.q-text');
+    const hint = card.querySelector('.q-hint');
+    numBtn.addEventListener('click', () => {
+      const revealed = qText.classList.toggle('visible');
+      hint.classList.toggle('hidden', revealed);
+      numBtn.classList.toggle('revealed', revealed);
+      numBtn.setAttribute('aria-expanded', revealed);
+      if (!revealed) {
+        // hide answer too
+        const panel = card.querySelector('.answer-panel');
+        if (panel.classList.contains('open')) {
+          panel.classList.remove('open');
+          card.querySelector('.q-toggle').textContent = '▼';
+        }
+      }
+    });
+
+    // Play button
+    const playBtn = card.querySelector('.q-play-btn');
+    playBtn.addEventListener('click', () => playQuestion(i, playBtn));
+
+    // Answer toggle
+    const toggle = card.querySelector('.q-toggle');
+    const panel = card.querySelector('.answer-panel');
+    toggle.addEventListener('click', () => {
+      const open = panel.classList.toggle('open');
+      toggle.textContent = open ? '▲' : '▼';
+      toggle.setAttribute('aria-expanded', open);
+    });
+
+    // Checkbox
+    const cb = card.querySelector('input[type="checkbox"]');
+    cb.addEventListener('change', () => {
+      const p = getProgress();
+      p[i] = cb.checked;
+      saveProgress(p);
+      updateProgressBar();
+    });
+
+    list.appendChild(card);
+  });
+
+  updateProgressBar();
+}
+</script>
+</body>
+</html>
