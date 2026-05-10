@@ -9,727 +9,258 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root{
-    --olive:#4a5240;--olive-lt:#6b7560;--tan:#c8b99a;
-    --tan-lt:#e8dfd0;--cream:#f5f0e8;--khaki:#9a8c72;
-    --red:#8b2020;--white:#ffffff;
-    --shadow:0 2px 14px rgba(0,0,0,0.13);
-    --shadow-lg:0 6px 28px rgba(0,0,0,0.18);
+    --olive:#3a4232;--olive-md:#4a5240;--olive-lt:#6b7560;
+    --tan:#c8b99a;--tan-lt:#e8dfd0;--cream:#f5f0e8;
+    --khaki:#6b5e48;--red:#8b2020;--white:#ffffff;
+    --text:#1e2018;--text-mid:#3a3428;--text-mute:#5a4e3a;
+    --shadow:0 2px 12px rgba(0,0,0,0.10);
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'Barlow',sans-serif;background:var(--cream);color:var(--olive);min-height:100vh;}
+  body{font-family:'Barlow',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;font-size:16px;line-height:1.5;}
 
-  /* ── HEADER ── */
-  .page-header{
-    background:linear-gradient(160deg,rgba(74,82,64,0.93) 0%,rgba(28,32,24,0.97) 100%);
-    padding:1.6rem 1.5rem 1.5rem;
-    display:flex;align-items:center;gap:1.2rem;
-    position:relative;overflow:hidden;
-  }
-  .page-header::before{
-    content:'';position:absolute;inset:0;
-    background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
-    pointer-events:none;
-  }
-  .header-photo{
-    width:72px;height:72px;border-radius:50%;
-    overflow:hidden;border:3px solid var(--tan);
-    background:var(--olive-lt);flex-shrink:0;
-    position:relative;z-index:1;
-  }
+  /* PAGE HEADER */
+  .page-header{background:linear-gradient(160deg,rgba(58,66,50,0.95) 0%,rgba(20,24,16,0.98) 100%);padding:1.6rem 1.5rem;display:flex;align-items:center;gap:1.2rem;position:relative;overflow:hidden;}
+  .page-header::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none;}
+  .header-photo{width:72px;height:72px;border-radius:50%;overflow:hidden;border:3px solid var(--tan);background:var(--olive-lt);flex-shrink:0;position:relative;z-index:1;}
   .header-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
-  .header-photo-placeholder{
-    width:100%;height:100%;display:flex;align-items:center;justify-content:center;
-    font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.4rem;color:var(--tan);
-  }
+  .header-photo-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.5rem;color:var(--tan);}
   .header-text{flex:1;position:relative;z-index:1;}
-  .header-badge{
-    display:inline-block;background:var(--red);color:var(--white);
-    font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.65rem;
-    letter-spacing:0.15em;text-transform:uppercase;
-    padding:0.2rem 0.6rem;border-radius:2px;margin-bottom:0.35rem;
-  }
-  .header-title{
-    font-family:'Barlow Condensed',sans-serif;font-weight:800;
-    font-size:clamp(1.5rem,5vw,2rem);color:var(--white);
-    line-height:1.05;letter-spacing:0.01em;
-  }
+  .header-badge{display:inline-block;background:var(--red);color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:2px;margin-bottom:0.35rem;}
+  .header-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(1.6rem,5vw,2.1rem);color:#fff;line-height:1.05;}
   .header-title span{color:var(--tan);}
-  .header-sub{font-size:0.8rem;color:rgba(255,255,255,0.5);margin-top:0.2rem;}
+  .header-sub{font-size:0.85rem;color:rgba(255,255,255,0.5);margin-top:0.2rem;}
 
-  /* ── MAIN ── */
-  .main{max-width:680px;margin:0 auto;padding:1.8rem 1rem 2rem;}
+  /* MAIN */
+  .main{max-width:700px;margin:0 auto;padding:1.8rem 1rem 2.5rem;}
 
-  /* ── INSTRUCTIONS ── */
-  .instructions{
-    background:var(--white);border-radius:10px;
-    border:1px solid var(--tan-lt);
-    padding:0.9rem 1.1rem;margin-bottom:1.4rem;
-    font-size:0.82rem;color:var(--khaki);line-height:1.5;
-  }
-  .instructions strong{color:var(--olive);}
+  /* INSTRUCTIONS */
+  .instructions{background:var(--white);border-radius:10px;border:1px solid var(--tan-lt);padding:1rem 1.2rem;margin-bottom:1.25rem;font-size:1rem;color:var(--text-mid);line-height:1.6;}
+  .instructions strong{color:var(--text);}
 
-  /* ── QUESTION CARDS ── */
-  .question-card{
-    background:var(--white);border-radius:10px;
-    box-shadow:var(--shadow);border:1px solid rgba(200,185,154,0.35);
-    margin-bottom:0.85rem;overflow:hidden;
-  }
+  /* PROGRESS BAR */
+  .progress-wrap{background:var(--white);border-radius:10px;border:1px solid var(--tan-lt);padding:0.85rem 1.2rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.75rem;}
+  .prog-label{font-size:0.85rem;font-weight:600;color:var(--text-mid);white-space:nowrap;}
+  .prog-track{flex:1;height:7px;background:var(--tan-lt);border-radius:4px;overflow:hidden;}
+  .prog-fill{height:100%;background:var(--olive);border-radius:4px;transition:width 0.3s;}
+  .prog-count{font-size:0.82rem;color:var(--text-mid);font-weight:600;white-space:nowrap;}
+  .prog-reset{font-size:0.75rem;color:var(--khaki);background:none;border:none;cursor:pointer;padding:0 0.2rem;}
+  .prog-reset:hover{color:var(--red);}
 
-  .q-row{
-    display:flex;align-items:center;gap:0.6rem;
-    padding:0.75rem 1rem;cursor:pointer;
-    transition:background 0.15s;
-  }
-  .q-row:hover{background:#faf7f2;}
+  /* QUESTION CARD */
+  .q-card{background:var(--white);border-radius:10px;border:1px solid #ccc5b5;box-shadow:var(--shadow);margin-bottom:1.1rem;overflow:hidden;}
 
-  .q-num-btn{
-    flex-shrink:0;width:30px;height:30px;
-    border-radius:50%;border:1.5px solid var(--tan);
-    background:transparent;color:var(--khaki);
-    font-family:'Barlow Condensed',sans-serif;
-    font-weight:700;font-size:0.85rem;
-    cursor:pointer;display:flex;align-items:center;justify-content:center;
-    transition:background 0.15s,color 0.15s,border-color 0.15s;
-    line-height:1;
-  }
-  .q-num-btn:hover{background:var(--tan-lt);border-color:var(--khaki);}
-  .q-num-btn.revealed{background:var(--olive);color:var(--white);border-color:var(--olive);}
+  /* CARD HEADER ROW */
+  .q-header{display:flex;align-items:flex-start;gap:12px;padding:14px 16px 13px;border-bottom:1px solid #e0d8cc;}
+  .q-num{width:30px;height:30px;border-radius:50%;background:var(--olive);color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .q-num.done{background:var(--olive-lt);}
+  .q-question-text{font-size:1rem;color:var(--text);line-height:1.5;font-weight:500;display:none;flex:1;}
+  .q-question-text.visible{display:block;}
+  .q-placeholder{font-size:0.9rem;color:#888070;font-style:italic;flex:1;padding-top:3px;}
+  .q-placeholder.hidden{display:none;}
 
-  .q-text{
-    flex:1;font-size:0.9rem;color:var(--olive);
-    line-height:1.4;display:none;
-  }
-  .q-text.visible{display:inline;}
+  /* ACTION BUTTONS */
+  .q-actions{display:flex;gap:8px;padding:12px 16px;flex-wrap:wrap;border-bottom:1px solid #e0d8cc;}
+  .btn{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:7px;font-size:0.95rem;font-weight:600;cursor:pointer;font-family:'Barlow',sans-serif;transition:background 0.15s,border-color 0.15s;border:2px solid;}
+  .btn-listen{background:var(--olive);border-color:var(--olive);color:#fff;}
+  .btn-listen:hover{background:var(--olive-md);}
+  .btn-listen.playing{background:var(--red);border-color:var(--red);}
+  .btn-show{background:transparent;border-color:var(--olive);color:var(--olive);}
+  .btn-show:hover{background:var(--tan-lt);}
+  .btn-show.revealed{background:var(--tan-lt);border-color:var(--olive-lt);color:var(--text-mid);}
 
-  .q-hint{
-    flex:1;font-size:0.8rem;color:var(--khaki);
-    font-style:italic;
-  }
-  .q-hint.hidden{display:none;}
+  /* WRITE AREA */
+  .q-write{padding:12px 16px 14px;border-bottom:1px solid #e0d8cc;}
+  .section-label{font-size:0.82rem;font-weight:700;color:var(--text-mid);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;}
+  .write-area{width:100%;border:1.5px solid #bbb5a8;border-radius:7px;padding:10px 12px;font-size:0.95rem;color:var(--text);background:#faf8f4;resize:vertical;min-height:78px;font-family:'Barlow',sans-serif;line-height:1.55;}
+  .write-area::placeholder{color:#a09080;font-style:italic;}
+  .write-area:focus{outline:none;border-color:var(--olive-lt);}
 
-  .q-play-btn{
-    flex-shrink:0;width:32px;height:32px;border-radius:50%;
-    border:none;background:var(--olive);color:var(--white);
-    cursor:pointer;display:flex;align-items:center;justify-content:center;
-    transition:background 0.15s,transform 0.1s;font-size:0.7rem;
-  }
-  .q-play-btn:hover{background:var(--red);transform:scale(1.08);}
-  .q-play-btn.playing{background:var(--red);}
-  .q-play-btn svg{pointer-events:none;}
+  /* EXAMPLE ANSWER */
+  .q-example{padding:12px 16px 14px;}
+  .btn-example{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:7px;font-size:0.95rem;font-weight:600;cursor:pointer;font-family:'Barlow',sans-serif;background:transparent;border:2px solid #bbb5a8;color:var(--text-mid);transition:background 0.15s,border-color 0.15s;}
+  .btn-example:hover{background:var(--tan-lt);border-color:var(--olive-lt);}
+  .btn-example.open{background:var(--tan-lt);border-color:var(--olive-lt);}
+  .example-box{display:none;margin-top:10px;border-left:3px solid var(--olive);border-radius:0 7px 7px 0;padding:11px 14px;background:#f5f1ea;}
+  .example-box.open{display:block;}
+  .example-speaker{font-size:0.75rem;color:var(--text-mute);font-weight:700;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px;}
+  .example-text{font-size:0.97rem;color:#1e2018;line-height:1.65;}
 
-  .q-toggle{
-    flex-shrink:0;width:24px;height:24px;border-radius:4px;
-    border:1px solid var(--tan);background:transparent;
-    cursor:pointer;display:flex;align-items:center;justify-content:center;
-    transition:background 0.15s;color:var(--khaki);font-size:0.65rem;
-  }
-  .q-toggle:hover{background:var(--tan-lt);}
+  /* FOOTER CHECKBOX */
+  .q-footer{display:flex;align-items:center;gap:9px;padding:10px 16px;background:#f5f1ea;border-top:1px solid #e0d8cc;}
+  .q-footer input[type="checkbox"]{accent-color:var(--olive);width:16px;height:16px;cursor:pointer;flex-shrink:0;}
+  .q-footer label{font-size:0.9rem;color:var(--text-mid);cursor:pointer;font-weight:500;}
 
-  /* ── ANSWER PANEL ── */
-  .answer-panel{
-    display:none;
-    padding:0.5rem 1rem 0.7rem 2.9rem;
-    background:#f9f6f0;
-    border-top:1px dashed var(--tan-lt);
-  }
-  .answer-panel.open{display:block;}
-  .answer-panel p{font-size:0.82rem;color:var(--khaki);font-style:italic;line-height:1.5;}
+  /* BACK BUTTON */
+  .back-row{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan-lt);display:flex;justify-content:center;}
+  .back-btn{display:inline-flex;align-items:center;gap:0.5rem;background:var(--olive);color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;padding:0.8rem 1.8rem;border-radius:7px;transition:background 0.2s;}
+  .back-btn:hover{background:var(--olive-md);}
 
-  /* ── SELF-CHECK ── */
-  .self-check{
-    display:flex;align-items:center;gap:0.4rem;
-    padding:0.35rem 1rem 0.4rem 2.9rem;
-    background:#f9f6f0;
-    border-top:1px dashed var(--tan-lt);
-    cursor:pointer;
-  }
-  .self-check input[type="checkbox"]{
-    accent-color:var(--olive);width:13px;height:13px;
-    cursor:pointer;flex-shrink:0;
-  }
-  .self-check label{font-size:0.75rem;color:var(--khaki);cursor:pointer;user-select:none;}
-
-  /* ── PROGRESS ── */
-  .set-progress-bar{
-    background:var(--white);border-radius:10px;
-    border:1px solid var(--tan-lt);
-    padding:0.85rem 1.1rem;
-    margin-bottom:1.4rem;
-    display:flex;align-items:center;gap:0.75rem;
-  }
-  .spb-label{font-size:0.75rem;font-weight:600;color:var(--khaki);white-space:nowrap;}
-  .spb-track{flex:1;height:6px;background:var(--tan-lt);border-radius:3px;overflow:hidden;}
-  .spb-fill{height:100%;background:var(--olive);border-radius:3px;transition:width 0.3s;}
-  .spb-count{font-size:0.72rem;color:var(--khaki);white-space:nowrap;}
-  .spb-reset{font-size:0.68rem;color:var(--khaki);background:none;border:none;cursor:pointer;padding:0 0.2rem;}
-  .spb-reset:hover{color:var(--red);}
-
-  /* ── BACK BUTTON ── */
-  .back-row{
-    margin-top:2rem;padding-top:1.5rem;
-    border-top:1px solid var(--tan-lt);
-    display:flex;justify-content:center;
-  }
-  .back-btn{
-    display:inline-flex;align-items:center;gap:0.5rem;
-    background:var(--olive);color:var(--white);
-    font-family:'Barlow Condensed',sans-serif;
-    font-weight:700;font-size:0.9rem;letter-spacing:0.06em;
-    text-transform:uppercase;text-decoration:none;
-    padding:0.7rem 1.5rem;border-radius:6px;
-    transition:background 0.2s;
-  }
-  .back-btn:hover{background:var(--olive-lt);}
-
-  footer{text-align:center;padding:1.5rem;font-size:0.75rem;color:var(--khaki);border-top:1px solid var(--tan-lt);background:var(--white);}
+  footer{text-align:center;padding:1.5rem;font-size:0.82rem;color:var(--khaki);border-top:1px solid var(--tan-lt);background:var(--white);}
 </style>
 </head>
 <body>
 
-<header class="page-header" id="page-header">
-  <div class="header-photo" id="header-photo">
+<header class="page-header">
+  <div class="header-photo">
     <img id="header-img" src="" alt="">
     <div class="header-photo-placeholder" id="header-placeholder" style="display:none"></div>
   </div>
   <div class="header-text">
-    <div class="header-badge">STANAG 6001 · Level 1</div>
-    <div class="header-title"><span id="set-title">Set —</span></div>
-    <div class="header-sub">10 questions · Interview Practice</div>
+    <div class="header-badge">STANAG 6001 &middot; Level 1</div>
+    <div class="header-title"><span id="set-title">Set &mdash;</span></div>
+    <div class="header-sub">10 questions &middot; Interview Practice</div>
   </div>
 </header>
 
 <main class="main">
   <div class="instructions">
-    <strong>How to practise:</strong> Click the <strong>number circle</strong> to reveal the question · 
-    Click <strong>▶</strong> to hear the audio · Click <strong>▼</strong> to see a model answer · 
-    Tick the checkbox when you can answer confidently.
+    For each question: <strong>listen first</strong>, then <strong>answer aloud or in writing</strong>, then <strong>check the example answer</strong>.
   </div>
 
-  <div class="set-progress-bar">
-    <span class="spb-label">Progress</span>
-    <div class="spb-track"><div class="spb-fill" id="spb-fill" style="width:0%"></div></div>
-    <span class="spb-count" id="spb-count">0/10</span>
-    <button class="spb-reset" id="spb-reset" title="Reset progress">↺ Reset</button>
+  <div class="progress-wrap">
+    <span class="prog-label">Progress</span>
+    <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+    <span class="prog-count" id="prog-count">0/10</span>
+    <button class="prog-reset" id="prog-reset">&#8634; Reset</button>
   </div>
 
   <div id="questions-list"></div>
 
   <div class="back-row">
-    <a href="../index.html" class="back-btn">← Back to all sets</a>
+    <a href="../index.html" class="back-btn">&#8592; Back to all sets</a>
   </div>
 </main>
 
-<footer>STANAG Level 1 Speaking Practice · University of Defence · Brno</footer>
+<footer>STANAG Level 1 Speaking Practice &middot; University of Defence &middot; Brno</footer>
 
 <script>
-const SETS = [
-  {
-    id:1,
-    questions:[
-      {q:"What is your full name? How do you spell your surname?", a:"My full name is… I spell my surname…"},
-      {q:"Where are you from?", a:"I am from… / I come from…"},
-      {q:"What is your military rank?", a:"My rank is… / I am a…"},
-      {q:"Are you married or single?", a:"I am married / single / divorced."},
-      {q:"What is your wife's / husband's name? How old is she / he?", a:"My wife's / husband's name is… She / He is… years old."},
-      {q:"What does your wife / husband do? Where does she / he work?", a:"She / He is a… She / He works at / in…"},
-      {q:"Do you live in a house or a flat?", a:"I live in a house / a flat."},
-      {q:"What time do you start and finish work?", a:"I start at… and I finish at…"},
-      {q:"What do you do in your free time?", a:"In my free time I…"},
-      {q:"What sports do you like?", a:"I like… / I enjoy playing / doing…"}
-    ]
-  },
-  {
-    id:2,
-    questions:[
-      {q:"How old are you?", a:"I am… years old."},
-      {q:"What is your job in the army?", a:"I am a… / My job is to…"},
-      {q:"Do you have any children?", a:"Yes, I have… / No, I don't have any children."},
-      {q:"How old is your son / daughter? What does he / she do?", a:"My son / daughter is… years old. He / She…"},
-      {q:"What does your son / daughter like to do after school?", a:"He / She likes to…"},
-      {q:"How do you travel to work?", a:"I travel to work by… / I drive / walk…"},
-      {q:"Why do you need English for your job?", a:"I need English because…"},
-      {q:"What is the weather like today?", a:"Today it is… / The weather is…"},
-      {q:"What languages do you speak?", a:"I speak Czech and… / I also speak a little…"},
-      {q:"Is there a shop near your home?", a:"Yes, there is a… near my home. / No, the nearest shop is…"}
-    ]
-  },
-  {
-    id:3,
-    questions:[
-      {q:"How many rooms are there in your home?", a:"There are… rooms in my home."},
-      {q:"What do your parents do? Are they retired?", a:"My mother is… / My father is… They are / are not retired."},
-      {q:"What is your military specialisation?", a:"My specialisation is…"},
-      {q:"Do you have a best friend? What is his / her name?", a:"Yes, my best friend's name is…"},
-      {q:"What does your best friend do? Where does he / she work?", a:"He / She is a… He / She works at…"},
-      {q:"What do you and your best friend usually do together?", a:"We usually… / We often…"},
-      {q:"What do you have for breakfast?", a:"For breakfast I usually have…"},
-      {q:"How far is your home from the base?", a:"My home is… kilometres / minutes from the base."},
-      {q:"What time do you go to bed on weekdays?", a:"I usually go to bed at…"},
-      {q:"What is a typical lunch for you?", a:"A typical lunch for me is…"}
-    ]
-  },
-  {
-    id:4,
-    questions:[
-      {q:"What is your favourite season? Why?", a:"My favourite season is… because…"},
-      {q:"Do you use a computer at work?", a:"Yes, I use a computer every day. / I use it to…"},
-      {q:"What is your commander's name and rank?", a:"My commander's name is… His / Her rank is…"},
-      {q:"What is your commander like? Is he / she strict?", a:"My commander is… He / She is quite / very…"},
-      {q:"Does your commander speak English?", a:"Yes, he / she speaks English. / He / She speaks a little English."},
-      {q:"Do you play any sports?", a:"Yes, I play… / I do… regularly."},
-      {q:"Where do you usually go on holiday?", a:"I usually go to… on holiday."},
-      {q:"What do you usually drink with your meals?", a:"I usually drink…"},
-      {q:"Do you have any hobbies?", a:"Yes, my hobbies are… / I enjoy…"},
-      {q:"Do you have a garden or a balcony?", a:"Yes, I have a… / No, I don't have one."}
-    ]
-  },
-  {
-    id:5,
-    questions:[
-      {q:"Do you have any pets?", a:"Yes, I have a… / No, I don't have any pets."},
-      {q:"Describe your typical morning routine.", a:"I usually wake up at… Then I…"},
-      {q:"Do you have any brothers or sisters?", a:"Yes, I have… brothers and… sisters. / I am an only child."},
-      {q:"What is your brother's / sister's name? How old is he / she?", a:"My brother's / sister's name is… He / She is… years old."},
-      {q:"What does your brother / sister do? Where does he / she live?", a:"He / She is a… He / She lives in…"},
-      {q:"How often do you see your brother / sister?", a:"I see him / her… / We meet about once a…"},
-      {q:"Do you have a car? What kind?", a:"Yes, I have a… / No, I don't have a car."},
-      {q:"What time do you finish work?", a:"I finish work at…"},
-      {q:"What is your favourite type of film?", a:"I like… films. My favourite is…"},
-      {q:"Can you cook? What can you cook?", a:"Yes, I can cook… / I am good at making…"}
-    ]
-  },
-  {
-    id:6,
-    questions:[
-      {q:"Where is your military base located?", a:"My base is located in / near…"},
-      {q:"Is your office big or small?", a:"My office is… / It is quite…"},
-      {q:"What is your colleague's name? What is his / her rank?", a:"My colleague's name is… His / Her rank is…"},
-      {q:"What is your colleague like as a person?", a:"He / She is very… / He / She is a…"},
-      {q:"What does your colleague do after work?", a:"After work he / she usually…"},
-      {q:"Can you swim well?", a:"Yes, I can swim well. / I can swim but not very well."},
-      {q:"What do you usually do on Sunday?", a:"On Sunday I usually…"},
-      {q:"What is your favourite sport to watch?", a:"My favourite sport to watch is…"},
-      {q:"Do you prefer coffee or tea?", a:"I prefer… / I usually drink…"},
-      {q:"How do you usually pay – by card or cash?", a:"I usually pay by card / cash. / I prefer to pay by…"}
-    ]
-  },
-  {
-    id:7,
-    questions:[
-      {q:"How do you spell your first name?", a:"My first name is… I spell it…"},
-      {q:"Do you live in a big city or a small town?", a:"I live in a… city / small town called…"},
-      {q:"What is your favourite animal? Why?", a:"My favourite animal is… because…"},
-      {q:"How long is your journey to work?", a:"My journey takes about… minutes / an hour."},
-      {q:"Is your wife / husband / partner good at cooking?", a:"Yes, he / she is a great cook. / He / She is quite good at…"},
-      {q:"What does your wife / husband / partner do in the evenings?", a:"In the evenings he / she usually…"},
-      {q:"What do you usually do in the afternoon after work?", a:"After work I usually…"},
-      {q:"Do you like watching documentaries?", a:"Yes, I love documentaries. / I sometimes watch… I enjoy documentaries about…"},
-      {q:"Do you like winter sports?", a:"Yes, I enjoy… / I like skiing / snowboarding. / I prefer indoor sports in winter."},
-      {q:"What do you eat for lunch at the base?", a:"At the base I usually eat…"}
-    ]
-  },
-  {
-    id:8,
-    questions:[
-      {q:"What do you do every morning at work?", a:"Every morning I… / First I… then I…"},
-      {q:"Do you speak any foreign languages?", a:"Yes, I speak… / I also speak a little…"},
-      {q:"Is there a gym or sports facility at your base?", a:"Yes, there is a… / We have a gym where I…"},
-      {q:"Do you have a son or daughter? How old is he / she?", a:"Yes, I have a… He / She is… years old. / No, I don't have children."},
-      {q:"What does your daughter / son like to do at the weekend?", a:"At the weekend he / she likes to…"},
-      {q:"What school does your son / daughter go to?", a:"He / She goes to… school in…"},
-      {q:"What kind of music do you listen to?", a:"I listen to… / My favourite genre is…"},
-      {q:"What do you need English for at work?", a:"I need English for… / I use English when…"},
-      {q:"What do you usually do in the evening?", a:"In the evening I usually…"},
-      {q:"What is your favourite colour?", a:"My favourite colour is…"}
-    ]
-  },
-  {
-    id:9,
-    questions:[
-      {q:"What is your address?", a:"My address is…"},
-      {q:"Do you live near your parents?", a:"Yes, they live… minutes / km away. / No, they live in…"},
-      {q:"What is your best friend's name?", a:"My best friend's name is…"},
-      {q:"What does your best friend look like?", a:"He / She is… tall / short / slim. He / She has…"},
-      {q:"How often do you meet your best friend? What do you do together?", a:"We meet… a week / month. We usually…"},
-      {q:"Is English difficult for you?", a:"Yes, I find… quite difficult. / English is not too difficult for me."},
-      {q:"What is there to do in your town or city?", a:"In my town / city there is… / You can…"},
-      {q:"What time do you usually have dinner?", a:"I usually have dinner at about…"},
-      {q:"What is there in your living room?", a:"In my living room there is / are… / We have a…"},
-      {q:"Do you use social media?", a:"Yes, I use… / I mainly use… to…"}
-    ]
-  },
-  {
-    id:10,
-    questions:[
-      {q:"Do you have any children? How old are they?", a:"Yes, I have… children. They are… years old. / No, I don't."},
-      {q:"How do you travel to work?", a:"I travel by… / I drive my car / take the bus."},
-      {q:"What is the typical weather in your region?", a:"In my region the weather is usually…"},
-      {q:"Do you have a colleague you work with closely? What is he / she like?", a:"Yes, I work closely with… He / She is…"},
-      {q:"Does your colleague speak English?", a:"Yes, he / she speaks quite good English. / He / She speaks a little."},
-      {q:"How often do you visit your parents?", a:"I visit them… / We see each other about once a…"},
-      {q:"Do you prefer to read a book or watch TV?", a:"I prefer… because… / I enjoy both but…"},
-      {q:"What is your least favourite household chore?", a:"My least favourite chore is… / I hate…"},
-      {q:"What is there near your home?", a:"Near my home there is / are…"},
-      {q:"Do you like your job? Why?", a:"Yes, I like my job because… / I enjoy…"}
-    ]
-  },
-  {
-    id:11,
-    questions:[
-      {q:"How many floors does your building have? Which floor do you live on?", a:"My building has… floors. I live on the… floor."},
-      {q:"What time do you wake up on weekdays?", a:"On weekdays I wake up at…"},
-      {q:"What is your favourite Czech dish?", a:"My favourite Czech dish is… / I love…"},
-      {q:"Do you have a brother or a sister? Tell me about him / her.", a:"Yes, I have a… His / Her name is… He / She is…"},
-      {q:"What is your sister / brother like as a person?", a:"He / She is very… / He / She is quite…"},
-      {q:"How often do you see your brother / sister?", a:"I see him / her… / We usually meet…"},
-      {q:"Why do you want to learn English?", a:"I want to learn English because…"},
-      {q:"Is there a lift in your building?", a:"Yes, there is a lift. / No, there isn't."},
-      {q:"How often do you go to the cinema?", a:"I go to the cinema… / about once a month."},
-      {q:"What do you do when you have a cold?", a:"When I have a cold I…"}
-    ]
-  },
-  {
-    id:12,
-    questions:[
-      {q:"Is your home far from the base?", a:"My home is about… km / minutes from the base."},
-      {q:"Do you like reading? What kind of books?", a:"Yes, I like… / I enjoy reading… books."},
-      {q:"What is your commander's best quality?", a:"My commander's best quality is… / He / She is very…"},
-      {q:"How does your commander communicate with the unit?", a:"He / She usually communicates by… / We have…"},
-      {q:"Does your commander work long hours?", a:"Yes, he / she often works long hours. / He / She usually works…"},
-      {q:"Do you have a balcony? What do you use it for?", a:"Yes, I have a balcony. I use it for… / No, I don't have one."},
-      {q:"How often do you use the internet?", a:"I use the internet… / every day for…"},
-      {q:"What do you usually do on Saturday evenings?", a:"On Saturday evenings I usually…"},
-      {q:"Is the area around your home safe?", a:"Yes, my area is quite safe. / It is a… neighbourhood."},
-      {q:"What do you wear at the base?", a:"At the base I wear a uniform. / I wear…"}
-    ]
-  },
-  {
-    id:13,
-    questions:[
-      {q:"What is your job in the army?", a:"My job in the army is…"},
-      {q:"How do you go to work every day?", a:"I go to work by… / I drive / take…"},
-      {q:"What is your wife's / husband's daily routine like?", a:"He / She usually gets up at… Then…"},
-      {q:"Does your wife / husband do any sport?", a:"Yes, he / she… / He / She plays… goes to the gym…"},
-      {q:"What does your wife / husband like to eat?", a:"He / She likes… / His / Her favourite food is…"},
-      {q:"How often do you meet your friends?", a:"I meet my friends… / about once a week / month."},
-      {q:"What do you do on your days off?", a:"On my days off I usually…"},
-      {q:"What is the weather like today?", a:"Today it is… / The weather is…"},
-      {q:"Is there a sports centre near your home?", a:"Yes, there is a sports centre about… away. / No, there isn't."},
-      {q:"What things do you need to bring to work every day?", a:"Every day I bring… / I always take…"}
-    ]
-  },
-  {
-    id:14,
-    questions:[
-      {q:"What is your hometown?", a:"My hometown is… / I come from…"},
-      {q:"What is your rank?", a:"My rank is… / I am a…"},
-      {q:"Do you have a son or daughter? What is he / she like?", a:"Yes, I have a… He / She is… / He / She is very…"},
-      {q:"What is your son's / daughter's favourite food?", a:"His / Her favourite food is…"},
-      {q:"Does your son / daughter have any hobbies or do any sport?", a:"Yes, he / she… / He / She likes…"},
-      {q:"Do you like cooking? What do you cook?", a:"Yes, I enjoy cooking… / I often cook…"},
-      {q:"Why is English important for you?", a:"English is important because…"},
-      {q:"What do you usually do on Saturday morning?", a:"On Saturday morning I usually…"},
-      {q:"How much free time do you have after work?", a:"After work I have about… hours of free time."},
-      {q:"What equipment do you use at work?", a:"At work I use…"}
-    ]
-  },
-  {
-    id:15,
-    questions:[
-      {q:"What is your military specialisation?", a:"My specialisation is…"},
-      {q:"What is the best thing about your job?", a:"The best thing about my job is…"},
-      {q:"What is your best friend like as a person?", a:"My best friend is very… / He / She is…"},
-      {q:"Does your best friend have a family?", a:"Yes, he / she has… / He / She is married and…"},
-      {q:"What are your best friend's hobbies?", a:"His / Her hobbies are… / He / She likes…"},
-      {q:"Do you like watching movies? What kind?", a:"Yes, I love… films. / My favourite genre is…"},
-      {q:"How do you stay healthy?", a:"I stay healthy by… / I exercise… and try to eat…"},
-      {q:"What do you eat for breakfast?", a:"For breakfast I usually have…"},
-      {q:"What is a typical Saturday for you?", a:"A typical Saturday for me is… I usually…"},
-      {q:"What do you do when the weather is bad?", a:"When the weather is bad I…"}
-    ]
-  },
-  {
-    id:16,
-    questions:[
-      {q:"What is your phone number?", a:"My phone number is…"},
-      {q:"How many rooms are there in your home? Which is your favourite?", a:"There are… rooms. My favourite is the… because…"},
-      {q:"What do your parents do?", a:"My mother is… / My father is… / They are retired."},
-      {q:"Do you have a brother or a sister? What does he / she do?", a:"Yes, I have a… He / She is a… / He / She works as…"},
-      {q:"What is your brother / sister good at?", a:"He / She is good at… / He / She is very good at…"},
-      {q:"How often do you talk to your brother / sister?", a:"We talk… / I call him / her about once a…"},
-      {q:"What time do you usually go to bed?", a:"I usually go to bed at about…"},
-      {q:"How do you usually get to the city centre from your home?", a:"I usually take… / I go by… / I drive."},
-      {q:"Do you prefer to eat at home or in a restaurant?", a:"I prefer to eat at home / in a restaurant because…"},
-      {q:"What sports facilities are near your home?", a:"Near my home there is / are… / I can use…"}
-    ]
-  },
-  {
-    id:17,
-    questions:[
-      {q:"What is your name? How do you spell your surname?", a:"My name is… I spell my surname…"},
-      {q:"Who do you live with?", a:"I live with my… / I live alone."},
-      {q:"Who does the housework in your family?", a:"In my family… does most of the housework. / We share the housework."},
-      {q:"Do you have a garden?", a:"Yes, I have a garden. / No, I don't. I have a balcony instead."},
-      {q:"What do you do to relax after a long day?", a:"After a long day I… / I relax by…"},
-      {q:"What are you planning to do this weekend?", a:"This weekend I am planning to… / I hope to…"},
-      {q:"What is your favourite film or book?", a:"My favourite film is… / My favourite book is… by…"},
-      {q:"What are your work responsibilities?", a:"My main responsibilities are… / I am responsible for…"},
-      {q:"Is the canteen at your base good?", a:"Yes, the food is quite good. / The canteen has… / I usually eat…"},
-      {q:"Do you get on well with your colleagues at work?", a:"Yes, I get on well with my colleagues. / We have a good…"}
-    ]
-  },
-  {
-    id:18,
-    questions:[
-      {q:"How old are you?", a:"I am… years old."},
-      {q:"What is your job in the army?", a:"My job is… / I work as a…"},
-      {q:"What is your favourite season?", a:"My favourite season is… because…"},
-      {q:"What does your wife or husband look like?", a:"He / She is… tall. He / She has… hair and…"},
-      {q:"What is your wife or husband like as a person?", a:"He / She is very… / He / She is quite…"},
-      {q:"How does your wife or husband relax after work?", a:"After work he / she usually… / He / She likes to…"},
-      {q:"What public transport is there in your town or city?", a:"In my town / city there is… / We have buses / trams…"},
-      {q:"Do you like your neighbourhood?", a:"Yes, I like my neighbourhood because… / It is a… area."},
-      {q:"How often do you contact your family when you are away?", a:"I contact them… / I call or message them…"},
-      {q:"What is there to see near your base?", a:"Near my base there is… / You can visit…"}
-    ]
-  },
-  {
-    id:19,
-    questions:[
-      {q:"What is your hometown? What is it like?", a:"My hometown is… It is a… city / town. There is / are…"},
-      {q:"What is your rank?", a:"My rank is…"},
-      {q:"Do you have any children?", a:"Yes, I have… children. / No, I don't have children yet."},
-      {q:"How old are your sons / daughters? What do they do?", a:"My son / daughter is… years old. He / She…"},
-      {q:"What sport does your son / daughter do?", a:"He / She does / plays… / He / She goes to…"},
-      {q:"What do you have for breakfast?", a:"For breakfast I usually have…"},
-      {q:"Do you like watching sport on TV?", a:"Yes, I love watching… / My favourite sport to watch is…"},
-      {q:"What is the name of your favourite restaurant?", a:"My favourite restaurant is called… / I often go to…"},
-      {q:"What is on your bedside table?", a:"On my bedside table there is / are…"},
-      {q:"What are your plans for this weekend?", a:"This weekend I plan to… / I am going to…"}
-    ]
-  },
-  {
-    id:20,
-    questions:[
-      {q:"What is your military specialisation?", a:"My specialisation is…"},
-      {q:"What time do you finish work?", a:"I finish work at…"},
-      {q:"Do you like your job? What is the hardest part?", a:"Yes, I like my job. The hardest part is…"},
-      {q:"What is your best friend's name? Where does he / she live?", a:"My best friend's name is… He / She lives in…"},
-      {q:"How does your best friend usually spend his / her weekends?", a:"At the weekend he / she usually…"},
-      {q:"Does your best friend have a car? What kind?", a:"Yes, he / she has a… / No, he / she doesn't."},
-      {q:"What kind of books or magazines do you read?", a:"I read… / My favourite magazines are… I like… books."},
-      {q:"What is your favourite room in the house? Why?", a:"My favourite room is the… because…"},
-      {q:"Do you prefer coffee or tea? How many cups a day?", a:"I prefer… I drink about… cups a day."},
-      {q:"Where is a good place to go on holiday in the Czech Republic?", a:"A good place is… / I recommend… because…"}
-    ]
-  },
-  {
-    id:21,
-    questions:[
-      {q:"How do you spell your surname?", a:"I spell my surname…"},
-      {q:"What is your home city or town famous for?", a:"My city / town is famous for… / It is known for…"},
-      {q:"How often do you do sport?", a:"I do sport… / I exercise about… times a week."},
-      {q:"What is your commander's rank?", a:"My commander's rank is…"},
-      {q:"How often does your commander organise exercises?", a:"He / She organises exercises… / We have exercises about…"},
-      {q:"What do your colleagues think about your commander?", a:"My colleagues think he / she is… / Most people think…"},
-      {q:"Is there a lot of traffic near your base?", a:"Yes, there is quite a lot of traffic near the base. / The traffic is…"},
-      {q:"What is special about Christmas in your family?", a:"At Christmas we usually… / My family always…"},
-      {q:"Do you like going to restaurants? What kind?", a:"Yes, I love going to… restaurants. / I prefer…"},
-      {q:"What do you take with you on a military exercise?", a:"On a military exercise I take… / The most important things are…"}
-    ]
-  },
-  {
-    id:22,
-    questions:[
-      {q:"What is the name of the base where you work?", a:"The name of my base is… / I work at…"},
-      {q:"How many bedrooms does your home have?", a:"My home has… bedrooms."},
-      {q:"What do you usually do on a rainy day?", a:"On a rainy day I usually…"},
-      {q:"Do you have a brother or sister? What does he / she do in his / her free time?", a:"Yes, I have a… In his / her free time he / she…"},
-      {q:"Is your brother / sister married? Does he / she have children?", a:"Yes, he / she is married and has… / No, he / she is not married yet."},
-      {q:"How many hours a week do you work?", a:"I work about… hours a week."},
-      {q:"Do you like summer or winter more? Why?", a:"I prefer summer / winter because…"},
-      {q:"How do you get to the nearest big city from where you live?", a:"I get there by… / I drive / take the train / bus."},
-      {q:"What is a good present for a soldier?", a:"A good present for a soldier is… / I think soldiers appreciate…"},
-      {q:"What sport facilities do you have at your base?", a:"At my base there is / are… / We have a gym / football pitch…"}
-    ]
-  },
-  {
-    id:23,
-    questions:[
-      {q:"What is your date of birth?", a:"I was born on the… of… / My date of birth is…"},
-      {q:"How many people do you have in your immediate family?", a:"In my immediate family there are… of us."},
-      {q:"What is your son's / daughter's favourite subject at school?", a:"His / Her favourite subject is…"},
-      {q:"What does your son / daughter want to do in the future?", a:"He / She wants to be a… / He / She would like to…"},
-      {q:"Do you have a mobile phone? What do you use it for?", a:"Yes, I use my phone for… / I mainly use it to…"},
-      {q:"Is English useful in everyday life in the Czech Republic?", a:"Yes, English is very useful. You need it for… / I use it when…"},
-      {q:"How often does your family eat together?", a:"We eat together… / About… times a week."},
-      {q:"What sport is the most popular in the Czech Republic?", a:"The most popular sport is… / Czechs love…"},
-      {q:"What do you usually have for dinner?", a:"For dinner I usually have…"},
-      {q:"What is the address of your military base?", a:"The address of my base is…"}
-    ]
-  },
-  {
-    id:24,
-    questions:[
-      {q:"How do you usually spend your evenings after work?", a:"After work I usually… / In the evenings I…"},
-      {q:"What is your base like? Describe it.", a:"My base is… / It is quite large / small. There is / are…"},
-      {q:"What is your best friend's job? Does he / she like it?", a:"My best friend is a… He / She… likes / doesn't really like it."},
-      {q:"What does your best friend think about your life in the army?", a:"He / She thinks it is… / He / She says that…"},
-      {q:"What do you and your best friend talk about?", a:"We usually talk about… / We often discuss…"},
-      {q:"Is there a market in your town? Do you shop there?", a:"Yes, there is a market in… / I sometimes go there to buy…"},
-      {q:"What season is it now? What is the weather like?", a:"It is… now. The weather is…"},
-      {q:"What is your morning routine before you go to work?", a:"In the morning I… / First I… then I…"},
-      {q:"What kind of clothes do you wear at the weekend?", a:"At the weekend I wear… / I usually dress…"},
-      {q:"Do you have central heating at home?", a:"Yes, we have central heating. / No, we heat our home with…"}
-    ]
-  },
-  {
-    id:25,
-    questions:[
-      {q:"What is your full name and rank?", a:"My full name is… and my rank is…"},
-      {q:"What does your partner do? Where does he / she work?", a:"My partner is a… He / She works at / in…"},
-      {q:"Does your wife / husband like his / her job? Why?", a:"Yes, he / she likes it because… / He / She enjoys…"},
-      {q:"Does your wife / husband speak any foreign languages?", a:"Yes, he / she speaks… / He / She also knows a little…"},
-      {q:"What do you do to improve your English?", a:"To improve my English I… / I try to…"},
-      {q:"Describe the street where you live.", a:"The street where I live is… / There are… / It is a… street."},
-      {q:"What is the most important meal of the day for you?", a:"The most important meal for me is… because…"},
-      {q:"Do you have a first aid kit at home?", a:"Yes, I have a first aid kit. / No, I should get one."},
-      {q:"What are your children interested in? What are their hobbies?", a:"My children are interested in… / Their hobbies are…"},
-      {q:"What would be your perfect day off?", a:"My perfect day off would be… / I would love to…"}
-    ]
-  }
-];
+const SETS = [{"id": 1, "speaker": "Sergeant Tomáš Kovář, 4th Brigade, Žatec", "questions": [{"q": "What is your full name? How do you spell your surname?", "a": "My name is Tomáš Kovář. I spell my surname K-O-V-Á-Ř. I am a sergeant in the Czech Army and I work at the base in Žatec."}, {"q": "Where are you from?", "a": "I am from Louny. It is a small town in the north of Bohemia, about thirty kilometres from Žatec. I live there with my wife and two children."}, {"q": "What is your military rank?", "a": "My rank is sergeant. I have been a sergeant for three years. Before that, I was a corporal."}, {"q": "Are you married or single?", "a": "I am married. My wife's name is Lenka. We got married six years ago. We have two children."}, {"q": "What is your wife's name? How old is she?", "a": "My wife's name is Lenka. She is thirty-two years old. She is two years younger than me."}, {"q": "What does your wife do? Where does she work?", "a": "My wife is a nurse. She works at the hospital in Louny. She works long hours but she likes her job."}, {"q": "Do you live in a house or a flat?", "a": "We live in a small house in Louny. We have a garden and a garage. I like it because it is quiet."}, {"q": "What time do you start and finish work?", "a": "I start work at six thirty in the morning and I finish at three thirty in the afternoon. Sometimes I finish later if we have an exercise."}, {"q": "What do you do in your free time?", "a": "In my free time I like to work in the garden and play football with my friends. At weekends I spend time with my family."}, {"q": "What sports do you like?", "a": "I like football and cycling. I play football with colleagues at the base twice a week. In summer I go cycling in the countryside."}]}, {"id": 2, "speaker": "Corporal Petra Horáková, Pardubice Air Base", "questions": [{"q": "How old are you?", "a": "I am twenty-six years old. I was born in nineteen ninety-nine in Pardubice."}, {"q": "What is your job in the army?", "a": "I am a corporal at the air base in Pardubice. I work as a technical specialist. I am responsible for checking aircraft equipment."}, {"q": "Do you have any children?", "a": "No, I don't have any children yet. I am not married. Maybe in the future."}, {"q": "How old is your son or daughter? What does he or she do?", "a": "I don't have children, but my sister has a son. He is four years old and he goes to kindergarten in Pardubice."}, {"q": "What does your son or daughter like to do after school?", "a": "My nephew likes playing with cars and watching cartoons. He also loves going to the playground near their house."}, {"q": "How do you travel to work?", "a": "I travel to work by car. The base is about fifteen kilometres from my flat. It takes me about twenty minutes."}, {"q": "Why do you need English for your job?", "a": "I need English because we use English technical manuals. We also sometimes work with NATO colleagues and we communicate in English."}, {"q": "What is the weather like today?", "a": "Today it is sunny but a little cold. It is about ten degrees. It is typical weather for this time of year in the Czech Republic."}, {"q": "What languages do you speak?", "a": "I speak Czech and a little English. I am learning English now for my STANAG exam. I also know a few words of German."}, {"q": "Is there a shop near your home?", "a": "Yes, there is a supermarket about five minutes from my flat. There is also a small bakery on the corner of my street."}]}, {"id": 3, "speaker": "Staff Sergeant Martin Blažek, Olomouc Garrison", "questions": [{"q": "How many rooms are there in your home?", "a": "There are four rooms in my home. We have a living room, two bedrooms, a kitchen, and a bathroom. We also have a small balcony."}, {"q": "What do your parents do? Are they retired?", "a": "My father is retired. He was a teacher. My mother still works. She is a shop assistant in a grocery store in Prostějov."}, {"q": "What is your military specialisation?", "a": "My specialisation is logistics. I am responsible for organising supplies and equipment for the unit. It is important work."}, {"q": "Do you have a best friend? What is his name?", "a": "Yes, my best friend's name is Radek. I know him from school. We grew up together in the same village near Olomouc."}, {"q": "What does your best friend do? Where does he work?", "a": "Radek is a mechanic. He works in a car repair shop in Olomouc. He is very good at his job."}, {"q": "What do you and your best friend usually do together?", "a": "We usually go fishing at the weekends. We also sometimes go to a pub to watch football. We meet about once a week."}, {"q": "What do you have for breakfast?", "a": "For breakfast I usually have bread with butter and cheese, and a cup of coffee. Sometimes I have yoghurt too. I eat breakfast at home before work."}, {"q": "How far is your home from the base?", "a": "My home is about twenty kilometres from the base. I drive to work. It takes me about twenty-five minutes."}, {"q": "What time do you go to bed on weekdays?", "a": "On weekdays I usually go to bed at about ten o'clock. I have to get up early so I try to sleep at least seven hours."}, {"q": "What is a typical lunch for you?", "a": "A typical lunch for me is soup and a main dish. I eat in the mess hall at the base. We usually have meat with potatoes or rice."}]}, {"id": 4, "speaker": "Private First Class Jana Součková, Přáslavice Base", "questions": [{"q": "What is your favourite season? Why?", "a": "My favourite season is summer. I like warm weather and I love swimming in the lake near our village. We also have more exercises outside in summer."}, {"q": "Do you use a computer at work?", "a": "Yes, I use a computer every day at work. I use it for writing reports and sending emails. We also have special military software."}, {"q": "What is your commander's name and rank?", "a": "My commander's name is Captain Novák. He is a very experienced officer. He has been our commander for two years."}, {"q": "What is your commander like? Is he strict?", "a": "My commander is quite strict but fair. He expects us to work hard and follow the rules. But he is also helpful when we have problems."}, {"q": "Does your commander speak English?", "a": "Yes, my commander speaks very good English. He studied English at the military university and he also worked on a NATO mission abroad."}, {"q": "Do you play any sports?", "a": "Yes, I play volleyball. I play in a team with other women from the base. We train every Tuesday evening."}, {"q": "Where do you usually go on holiday?", "a": "I usually go to the mountains in Slovakia with my family. We like hiking and cycling. Sometimes we go to the sea in Croatia."}, {"q": "What do you usually drink with your meals?", "a": "I usually drink water or tea with my meals. I don't drink much coffee. In the evenings I sometimes have a glass of juice."}, {"q": "Do you have any hobbies?", "a": "Yes, I enjoy reading and cooking. I like to read crime novels. At weekends I often cook something special for my family."}, {"q": "Do you have a garden or a balcony?", "a": "Yes, we have a small garden behind our house. I grow tomatoes and herbs there in summer. My husband takes care of the grass."}]}, {"id": 5, "speaker": "Warrant Officer Radek Fiala, Prostějov Base", "questions": [{"q": "Do you have any pets?", "a": "Yes, I have a dog. His name is Rex and he is a German shepherd. I take him for a walk every morning before work."}, {"q": "Describe your typical morning routine.", "a": "I wake up at five thirty. I have a shower and eat breakfast. Then I take the dog for a walk and drive to the base. I start work at seven."}, {"q": "Do you have any brothers or sisters?", "a": "Yes, I have one brother. His name is Pavel. He is three years older than me. I don't have any sisters."}, {"q": "What is your brother's name? How old is he?", "a": "My brother's name is Pavel. He is thirty-eight years old. He lives in Brno with his wife and their daughter."}, {"q": "What does your brother do? Where does he live?", "a": "Pavel is an engineer. He works for a company in Brno that makes car parts. He lives in a flat in the south of Brno."}, {"q": "How often do you see your brother?", "a": "I see my brother about once a month. We usually meet at our parents' house in Vyškov. At Christmas we always spend time together."}, {"q": "Do you have a car? What kind?", "a": "Yes, I have a car. It is a Škoda Octavia. It is five years old. I use it to go to work and for family trips at weekends."}, {"q": "What time do you finish work?", "a": "I usually finish work at three thirty in the afternoon. But when we have an exercise or a special task, I finish later."}, {"q": "What is your favourite type of film?", "a": "I like action films and war films. My favourite film is Saving Private Ryan. I also like Czech comedies, especially the older ones."}, {"q": "Can you cook? What can you cook?", "a": "Yes, I can cook a few things. I am good at making goulash and roast pork. My wife says my svíčková is also very good."}]}, {"id": 6, "speaker": "Captain Lucie Novotná, Brno Garrison", "questions": [{"q": "Where is your military base located?", "a": "My base is located in Brno, in the south of the Czech Republic. It is a large garrison in the city. I live nearby, so I walk to work."}, {"q": "Is your office big or small?", "a": "My office is quite small. I share it with two other colleagues. We have three desks, a computer each, and a small meeting table."}, {"q": "What is your colleague's name? What is his rank?", "a": "My colleague's name is Lieutenant Kratochvíl. He is a first lieutenant. We work together in the planning department."}, {"q": "What is your colleague like as a person?", "a": "He is very professional and organised. He is also friendly and easy to work with. We get on well together."}, {"q": "What does your colleague do after work?", "a": "After work he usually goes to the gym. He is very fit. At weekends he plays tennis and spends time with his family."}, {"q": "Can you swim well?", "a": "Yes, I can swim quite well. I go swimming at the pool near my home twice a week. I find it very relaxing."}, {"q": "What do you usually do on Sunday?", "a": "On Sunday I usually have a late breakfast with my family, then we go for a walk in the park or visit my parents. In the evening I prepare for the week."}, {"q": "What is your favourite sport to watch?", "a": "My favourite sport to watch is ice hockey. I am a big fan of the Czech national team. I also like watching tennis."}, {"q": "Do you prefer coffee or tea?", "a": "I prefer coffee. I drink about three cups a day. In the morning I have a strong black coffee and during the day I have it with milk."}, {"q": "How do you usually pay, by card or cash?", "a": "I usually pay by card. It is more convenient. I only use cash at the market or in small shops that don't accept cards."}]}, {"id": 7, "speaker": "Sergeant Pavel Šimánek, Tábor Base", "questions": [{"q": "How do you spell your first name?", "a": "My first name is Pavel. I spell it P-A-V-E-L. It is a common Czech name. In English it is similar to Paul."}, {"q": "Do you live in a big city or a small town?", "a": "I live in a small town called Tábor. It is in South Bohemia. It has about thirty-five thousand people. I like it because it is not too busy."}, {"q": "What is your favourite animal? Why?", "a": "My favourite animal is a dog. I have a dog at home. He is loyal and friendly. Dogs are great companions."}, {"q": "How long is your journey to work?", "a": "My journey to work takes about ten minutes. I drive a car. The base is on the edge of the town, not far from where I live."}, {"q": "Is your wife good at cooking?", "a": "Yes, my wife is an excellent cook. She makes very good traditional Czech food. Her soup is the best I have ever tasted."}, {"q": "What does your wife do in the evenings?", "a": "In the evenings my wife usually watches TV or reads a book. Sometimes she goes to a yoga class on Wednesdays. She likes to relax after work."}, {"q": "What do you usually do in the afternoon after work?", "a": "After work I usually pick up my son from school and then we go to the playground. Later I help my wife with cooking dinner."}, {"q": "Do you like watching documentaries?", "a": "Yes, I enjoy watching nature documentaries. I like programmes about animals and history. I find them very interesting and educational."}, {"q": "Do you like winter sports?", "a": "Yes, I like skiing. I go to the mountains in January or February every year. I am not very good but I enjoy it."}, {"q": "What do you eat for lunch at the base?", "a": "At the base I usually eat in the mess hall. We have soup and a main course. I like the days when they serve roast pork or grilled chicken."}]}, {"id": 8, "speaker": "Corporal Markéta Dvořáčková, České Budějovice Base", "questions": [{"q": "What do you do every morning at work?", "a": "Every morning I check my emails and prepare a report for my commander. Then we have a short meeting with the team at eight o'clock."}, {"q": "Do you speak any foreign languages?", "a": "Yes, I speak English and a little German. I studied German at school for six years. Now I am focusing on English for my STANAG exam."}, {"q": "Is there a gym or sports facility at your base?", "a": "Yes, there is a gym at our base. We also have a football pitch and a running track. I use the gym about three times a week."}, {"q": "Do you have a son or daughter? How old is he or she?", "a": "Yes, I have a daughter. Her name is Sofie and she is seven years old. She goes to primary school in České Budějovice."}, {"q": "What does your daughter like to do at the weekend?", "a": "At the weekend Sofie likes to go to the swimming pool and ride her bike. She also loves drawing and making things with paper."}, {"q": "What school does your son or daughter go to?", "a": "Sofie goes to a primary school near our home. It is a good school. She likes her teacher and she has many friends there."}, {"q": "What kind of music do you listen to?", "a": "I listen to pop music and sometimes classical music. I like Czech singers and also some English pop music. I often listen to music when I drive."}, {"q": "What do you need English for at work?", "a": "I need English for reading technical documents and for communication during NATO exercises. Sometimes we have foreign colleagues visiting the base."}, {"q": "What do you usually do in the evening?", "a": "In the evening I usually cook dinner, help my daughter with homework, and then watch a bit of TV. I go to bed at around ten thirty."}, {"q": "What is your favourite colour?", "a": "My favourite colour is blue. I like all shades of blue. Many things in my home are blue, like the curtains in the living room."}]}, {"id": 9, "speaker": "Staff Sergeant Ondřej Marek, Vyškov Garrison", "questions": [{"q": "What is your address?", "a": "My address is Sokolská 14, Vyškov. I live in a flat on the second floor. It is about two kilometres from the base."}, {"q": "Do you live near your parents?", "a": "Yes, my parents live about five kilometres away in a village called Drysice. I visit them almost every weekend."}, {"q": "What is your best friend's name?", "a": "My best friend's name is Jakub. We have been friends since we were at school together. We still live in the same town."}, {"q": "What does your best friend look like?", "a": "Jakub is tall and slim. He has short dark hair and brown eyes. He always wears glasses. He is quite good-looking."}, {"q": "How often do you meet your best friend? What do you do together?", "a": "We meet about twice a month. We usually go for a beer or watch a football match together. Sometimes we go cycling in the countryside."}, {"q": "Is English difficult for you?", "a": "Yes, English is quite difficult for me, especially speaking. I can read and understand quite well but speaking is harder. I am practising every day."}, {"q": "What is there to do in your town or city?", "a": "In Vyškov there is a cinema, a swimming pool, a few restaurants, and a nice town square. There is also a military museum near the base."}, {"q": "What time do you usually have dinner?", "a": "I usually have dinner at about seven o'clock in the evening. I eat at home with my wife. We always eat together when I am not on exercise."}, {"q": "What is there in your living room?", "a": "In our living room there is a sofa, an armchair, a TV, a coffee table, and a bookcase. We also have a carpet and a lamp in the corner."}, {"q": "Do you use social media?", "a": "Yes, I use Facebook and sometimes Instagram. I mainly use Facebook to stay in contact with friends and family. I don't use it too much."}]}, {"id": 10, "speaker": "Private First Class Věra Čermáková, Jindřichův Hradec Base", "questions": [{"q": "Do you have any children? How old are they?", "a": "Yes, I have two children. My son is ten years old and my daughter is seven. They both go to school in Jindřichův Hradec."}, {"q": "How do you travel to work?", "a": "I travel to work by car. I drive about twelve kilometres every morning. It takes me about fifteen minutes. I share the drive with a colleague sometimes."}, {"q": "What is the typical weather in your region?", "a": "In our region the weather is quite changeable. Summers are warm and sunny. Winters can be cold with snow. Spring and autumn are mild."}, {"q": "Do you have a colleague you work with closely? What is he or she like?", "a": "Yes, I work closely with Corporal Horáková. She is friendly and reliable. She has a lot of experience and she always helps me when I have questions."}, {"q": "Does your colleague speak English?", "a": "Yes, she speaks quite good English. She passed her STANAG Level 2 exam last year. She sometimes helps me practise English conversation."}, {"q": "How often do you visit your parents?", "a": "I visit my parents about once a month. They live in Třeboň, about thirty kilometres away. We usually go there on Sundays for lunch."}, {"q": "Do you prefer to read a book or watch TV?", "a": "I prefer to read a book. I find books more relaxing than TV. I read in bed before I go to sleep. I like crime stories and historical novels."}, {"q": "What is your least favourite household chore?", "a": "My least favourite chore is ironing. I find it very boring and it takes a long time. My husband usually helps me with it at weekends."}, {"q": "What is there near your home?", "a": "Near my home there is a park, a primary school, and a small supermarket. There is also a bus stop just around the corner."}, {"q": "Do you like your job? Why?", "a": "Yes, I like my job. I like working as part of a team and I enjoy the physical activity. The salary is also good and we have good benefits."}]}, {"id": 11, "speaker": "Warrant Officer Jan Procházka, Liberec Base", "questions": [{"q": "How many floors does your building have? Which floor do you live on?", "a": "My building has eight floors. I live on the fourth floor. There is a lift, which is useful when I carry shopping."}, {"q": "What time do you wake up on weekdays?", "a": "On weekdays I wake up at five fifteen. I need time to have a shower, eat breakfast, and drive to work. I start at seven."}, {"q": "What is your favourite Czech dish?", "a": "My favourite Czech dish is svíčková na smetaně. I love the cream sauce and the bread dumplings. My mother makes the best version of it."}, {"q": "Do you have a brother or a sister? Tell me about him or her.", "a": "Yes, I have a younger sister. Her name is Tereza. She is twenty-nine years old and she lives in Prague with her partner."}, {"q": "What is your sister like as a person?", "a": "Tereza is very cheerful and talkative. She is also very creative. She works as a graphic designer and she is very good at her job."}, {"q": "How often do you see your sister?", "a": "I see Tereza about once every two months. It is a bit far from Liberec to Prague. But we talk on the phone every week."}, {"q": "Why do you want to learn English?", "a": "I want to learn English because I need it for my work. We sometimes go on NATO exercises and I need to communicate with foreign soldiers."}, {"q": "Is there a lift in your building?", "a": "Yes, there is a lift in my building. It is quite old but it works well. I use it every day because I live on the fourth floor."}, {"q": "How often do you go to the cinema?", "a": "I go to the cinema about once a month, usually at the weekend. I like to see action films. My wife prefers romantic comedies."}, {"q": "What do you do when you have a cold?", "a": "When I have a cold I drink a lot of tea with lemon and honey. I try to rest and stay warm. If it is bad, I go to the doctor."}]}, {"id": 12, "speaker": "Sergeant Eva Nováková, Olomouc Base", "questions": [{"q": "Is your home far from the base?", "a": "No, my home is quite close. I live about four kilometres from the base. I cycle to work when the weather is good."}, {"q": "Do you like reading? What kind of books?", "a": "Yes, I like reading very much. I mainly read crime novels and historical books. My favourite Czech author is Michal Viewegh."}, {"q": "What is your commander's best quality?", "a": "My commander's best quality is that she is fair. She treats everyone the same and she always explains her decisions clearly. We respect her very much."}, {"q": "How does your commander communicate with the unit?", "a": "She usually communicates through daily briefings in the morning. She also sends emails and uses the unit communication system for urgent messages."}, {"q": "Does your commander work long hours?", "a": "Yes, she often works long hours. She usually arrives before us and leaves after us. She is very dedicated to her work."}, {"q": "Do you have a balcony? What do you use it for?", "a": "Yes, I have a small balcony. In summer I put some plants and flowers there. I also sometimes sit there in the evening with a cup of tea."}, {"q": "How often do you use the internet?", "a": "I use the internet every day, both at work and at home. At work I use it for official communication. At home I use it for shopping and news."}, {"q": "What do you usually do on Saturday evenings?", "a": "On Saturday evenings I usually cook a nice dinner and eat with my husband. Sometimes we invite friends over or we go out to a restaurant."}, {"q": "Is the area around your home safe?", "a": "Yes, my area is very safe. It is a quiet residential neighbourhood. There are families and older people living there. I feel comfortable walking at night."}, {"q": "What do you wear at the base?", "a": "At the base I wear a military uniform. We have a working uniform for daily duties and a combat uniform for exercises. I also have a dress uniform for ceremonies."}]}, {"id": 13, "speaker": "Corporal Michal Kratochvíl, Plzeň Garrison", "questions": [{"q": "What is your job in the army?", "a": "I am a corporal in the Czech Army. I work as a vehicle mechanic. I am responsible for maintaining and repairing military vehicles."}, {"q": "How do you go to work every day?", "a": "I go to work by car every day. I live about eight kilometres from the base. The journey takes about fifteen minutes."}, {"q": "What is your wife's daily routine like?", "a": "My wife gets up at six thirty. She makes breakfast for us and our son. Then she goes to work at eight. She finishes at four thirty."}, {"q": "Does your wife do any sport?", "a": "Yes, my wife goes to a fitness class on Monday evenings. She also goes jogging in the park near our home two or three times a week."}, {"q": "What does your wife like to eat?", "a": "My wife likes Italian food. She loves pasta and pizza. She also cooks a lot at home and her favourite thing to make is risotto."}, {"q": "How often do you meet your friends?", "a": "I meet my friends about once a week. We usually go for a beer on Friday evening. Some of my friends are also soldiers at the same base."}, {"q": "What do you do on your days off?", "a": "On my days off I usually spend time with my family. We go for walks or trips in the countryside. Sometimes I do some repairs around the house."}, {"q": "What is the weather like today?", "a": "Today it is cloudy and cool. It looks like it might rain later. The temperature is about twelve degrees. It is typical autumn weather."}, {"q": "Is there a sports centre near your home?", "a": "Yes, there is a sports centre about one kilometre from my home. It has a swimming pool and a gym. I go there about twice a week."}, {"q": "What things do you need to bring to work every day?", "a": "Every day I bring my military ID, my phone, and my work notebook. I also bring my lunch box because I prefer to eat my own food."}]}, {"id": 14, "speaker": "Staff Sergeant Barbora Sedláčková, Stará Boleslav Base", "questions": [{"q": "What is your hometown?", "a": "My hometown is Mladá Boleslav. It is a town in central Bohemia, famous for the Škoda car factory. I grew up there and I still live nearby."}, {"q": "What is your rank?", "a": "My rank is staff sergeant. I have been a staff sergeant for two years. I joined the army ten years ago as a private."}, {"q": "Do you have a son or daughter? What is he or she like?", "a": "Yes, I have a son. His name is Marek and he is twelve years old. He is tall for his age and he loves sport, especially ice hockey."}, {"q": "What is your son's favourite food?", "a": "His favourite food is pizza. He could eat it every day. He also likes hamburgers and French fries, like most boys his age."}, {"q": "Does your son have any hobbies or do any sport?", "a": "Yes, Marek plays ice hockey three times a week. He is in a junior team in Mladá Boleslav. He also likes playing computer games."}, {"q": "Do you like cooking? What do you cook?", "a": "Yes, I enjoy cooking. I often cook traditional Czech food like goulash or roast duck. At weekends I try new recipes from the internet."}, {"q": "Why is English important for you?", "a": "English is important for my career. I need to pass the STANAG exam to get a promotion. I also use English on international exercises."}, {"q": "What do you usually do on Saturday morning?", "a": "On Saturday morning I usually sleep a little longer, then have a big breakfast with the family. After that I take my son to his hockey training."}, {"q": "How much free time do you have after work?", "a": "After work I have about three hours of free time before I go to bed. I use it for exercise, cooking, and spending time with my family."}, {"q": "What equipment do you use at work?", "a": "At work I use a computer, radio communication equipment, and various military tools. I also use maps and GPS devices during field exercises."}]}, {"id": 15, "speaker": "Private First Class Lukáš Pospíšil, Chrudim Base", "questions": [{"q": "What is your military specialisation?", "a": "My specialisation is communications. I work with radio systems and signal equipment. I am responsible for communication between units during exercises."}, {"q": "What is the best thing about your job?", "a": "The best thing about my job is working as part of a strong team. I also like the physical challenges and the feeling that my work is important."}, {"q": "What is your best friend like as a person?", "a": "My best friend Ondra is very funny and relaxed. He is always in a good mood. He makes everyone laugh. He is also very loyal and honest."}, {"q": "Does your best friend have a family?", "a": "Yes, Ondra is married and has a three-year-old daughter. They live in Chrudim, not far from me. We sometimes meet as families at weekends."}, {"q": "What are your best friend's hobbies?", "a": "Ondra loves fishing and watching football. He goes fishing every other weekend. He is also a big fan of AC Sparta Praha."}, {"q": "Do you like watching movies? What kind?", "a": "Yes, I love watching movies. I prefer action films and science fiction. My favourite film is Interstellar. I also enjoy war films."}, {"q": "How do you stay healthy?", "a": "I stay healthy by exercising regularly and trying to eat well. I run three times a week and I do not eat much fast food. I also drink a lot of water."}, {"q": "What do you eat for breakfast?", "a": "For breakfast I usually have oatmeal with fruit and a cup of green tea. I try to eat a healthy breakfast because I have a long and physical day at work."}, {"q": "What is a typical Saturday for you?", "a": "On a typical Saturday I sleep until seven, then go running. After that I do some shopping and housework. In the evening I meet friends or watch a film."}, {"q": "What do you do when the weather is bad?", "a": "When the weather is bad I stay at home and read or watch TV. I also sometimes go to the gym or the swimming pool. I don't mind bad weather much."}]}, {"id": 16, "speaker": "Captain Hana Kopecká, Kroměříž Base", "questions": [{"q": "What is your phone number?", "a": "My phone number is seven three five four two eight nine one six. I always have my phone with me because I need to be reachable at work."}, {"q": "How many rooms are there in your home? Which is your favourite?", "a": "There are five rooms in my home. My favourite room is the living room because it is large and comfortable. We have a big sofa and a fireplace."}, {"q": "What do your parents do?", "a": "My father is a retired police officer. My mother is a retired teacher. They both enjoy their retirement and travel a lot."}, {"q": "Do you have a brother or a sister? What does he or she do?", "a": "Yes, I have a younger brother. His name is Tomáš and he is thirty years old. He is an IT specialist and works for a company in Prague."}, {"q": "What is your brother good at?", "a": "Tomáš is very good at computers and technology. He can fix any technical problem. He is also very good at chess and languages."}, {"q": "How often do you talk to your brother?", "a": "We call each other about twice a week. We also use messaging apps. He is very busy with work but we always find time to stay in contact."}, {"q": "What time do you usually go to bed?", "a": "I usually go to bed at about ten thirty. Sometimes later if I have work to finish at home. I try to get at least seven hours of sleep."}, {"q": "How do you usually get to the city centre from your home?", "a": "I usually drive to the city centre. It takes about ten minutes. Sometimes I walk if the weather is nice. It takes about twenty-five minutes."}, {"q": "Do you prefer to eat at home or in a restaurant?", "a": "I prefer to eat at home. Home-cooked food is healthier and cheaper. But I also enjoy going to a restaurant with my husband on special occasions."}, {"q": "What sports facilities are near your home?", "a": "Near my home there is a swimming pool and a sports hall. There is also a cycle path that goes along the river. I use the swimming pool regularly."}]}, {"id": 17, "speaker": "Sergeant Jiří Holub, Náměšť nad Oslavou Air Base", "questions": [{"q": "What is your name? How do you spell your surname?", "a": "My name is Jiří Holub. I spell my surname H-O-L-U-B. It means pigeon in Czech. I work as a sergeant at the air base in Náměšť nad Oslavou."}, {"q": "Who do you live with?", "a": "I live with my wife and our son. We live in a house in a small village about ten kilometres from the base. It is a quiet place."}, {"q": "Who does the housework in your family?", "a": "We share the housework. My wife does most of the cooking and I do the cleaning and repairs. At weekends we do the bigger tasks together."}, {"q": "Do you have a garden?", "a": "Yes, we have a garden. We grow vegetables like tomatoes, cucumbers, and peppers. I also cut the grass and look after the fruit trees."}, {"q": "What do you do to relax after a long day?", "a": "After a long day I usually sit in the garden with a beer and read the news on my phone. Sometimes I watch TV or play with my son."}, {"q": "What are you planning to do this weekend?", "a": "This weekend I am planning to go cycling with my son on Saturday. On Sunday we want to visit my parents in Brno and have lunch with them."}, {"q": "What is your favourite film or book?", "a": "My favourite film is Forrest Gump. I have watched it many times. I like the story and the characters. It always makes me think about life."}, {"q": "What are your work responsibilities?", "a": "I am responsible for supervising a team of eight soldiers. I organise the daily schedule, do roll call, and write reports for my commander."}, {"q": "Is the canteen at your base good?", "a": "Yes, the canteen is quite good. The food is fresh and the portions are large. I usually eat there every day. The soup is always very good."}, {"q": "Do you get on well with your colleagues at work?", "a": "Yes, I get on well with most of my colleagues. We have a good team and we trust each other. We also sometimes meet socially after work."}]}, {"id": 18, "speaker": "Corporal Zuzana Vlčková, Čáslav Air Base", "questions": [{"q": "How old are you?", "a": "I am twenty-four years old. I was born in two thousand and one in Kutná Hora. I joined the army two years ago."}, {"q": "What is your job in the army?", "a": "I am a corporal at the air base in Čáslav. I work in administration. I help organise schedules, write documents, and manage official correspondence."}, {"q": "What is your favourite season?", "a": "My favourite season is spring. I love when the flowers start to bloom and the days get longer. The weather is usually pleasant and not too hot."}, {"q": "What does your husband look like?", "a": "My husband is tall and has short brown hair. He is quite athletic because he plays football. He has blue eyes and always smiles."}, {"q": "What is your husband like as a person?", "a": "He is very kind and patient. He is also very funny. He always knows how to make me laugh when I am tired or stressed after work."}, {"q": "How does your husband relax after work?", "a": "After work he usually goes for a run or plays football with friends. In the evenings he likes to watch sports on TV or play video games."}, {"q": "What public transport is there in your town or city?", "a": "In Čáslav there are buses. There is also a train station with connections to Prague and other cities. I sometimes take the train to Prague at weekends."}, {"q": "Do you like your neighbourhood?", "a": "Yes, I like my neighbourhood. It is a quiet area with parks and good shops nearby. The neighbours are friendly and it feels safe."}, {"q": "How often do you contact your family when you are away?", "a": "When I am away on exercise I call my husband every evening if I can. I also send messages to my parents to let them know I am fine."}, {"q": "What is there to see near your base?", "a": "Near our base there is a historic town centre with an old church and a castle. There is also a beautiful lake nearby where people go in summer."}]}, {"id": 19, "speaker": "Staff Sergeant Roman Beneš, Hradec Králové Garrison", "questions": [{"q": "What is your hometown? What is it like?", "a": "My hometown is Hradec Králové. It is a city in East Bohemia with about ninety thousand people. It is a clean and pleasant city with a beautiful old town."}, {"q": "What is your rank?", "a": "My rank is staff sergeant. I have served in the Czech Army for twelve years. I joined when I was twenty and I plan to stay until retirement."}, {"q": "Do you have any children?", "a": "Yes, I have two children. A daughter who is nine and a son who is six. They are both in primary school here in Hradec Králové."}, {"q": "How old are your sons or daughters? What do they do?", "a": "My daughter Eliška is nine and she loves dancing. My son Tomáš is six and he just started school this year. He loves playing with Lego."}, {"q": "What sport does your son or daughter do?", "a": "Eliška does ballroom dancing twice a week. She is very good at it and already competed in several competitions. Tomáš plays football in the garden."}, {"q": "What do you have for breakfast?", "a": "For breakfast I usually have two slices of bread with ham and cheese and a cup of black coffee. Sometimes I add a boiled egg. It is quick and filling."}, {"q": "Do you like watching sport on TV?", "a": "Yes, I love watching football and ice hockey on TV. I am a fan of FC Hradec Králové and also the Czech national team. I watch matches every week."}, {"q": "What is the name of your favourite restaurant?", "a": "My favourite restaurant is called U Zlatého lva, the Golden Lion. It is in the old town in Hradec Králové. They serve excellent traditional Czech food."}, {"q": "What is on your bedside table?", "a": "On my bedside table there is a lamp, my mobile phone, a glass of water, and a book. I always read a few pages before I go to sleep."}, {"q": "What are your plans for this weekend?", "a": "This weekend I am going to take my children to the swimming pool on Saturday morning. On Sunday we plan to visit my parents in a village nearby."}]}, {"id": 20, "speaker": "Private First Class Lenka Marková, Brno Garrison", "questions": [{"q": "What is your military specialisation?", "a": "My specialisation is medical support. I work as a military nurse at the base in Brno. I provide first aid during exercises and look after injured soldiers."}, {"q": "What time do you finish work?", "a": "I usually finish work at three o'clock in the afternoon. But when we have a field exercise or medical training, I sometimes finish much later."}, {"q": "Do you like your job? What is the hardest part?", "a": "Yes, I like my job very much. The hardest part is when someone is seriously injured. It can be stressful, but training helps me stay calm."}, {"q": "What is your best friend's name? Where does she live?", "a": "My best friend's name is Michaela. She lives in Brno, quite near me. We have been friends since secondary school, so about fifteen years."}, {"q": "How does your best friend usually spend her weekends?", "a": "At the weekend Michaela likes to go hiking or cycling. She is very sporty. She also visits her family in a village near Brno on Sundays."}, {"q": "Does your best friend have a car? What kind?", "a": "Yes, Michaela has a car. It is a red Škoda Fabia. It is about three years old. She uses it to go to work and for trips at weekends."}, {"q": "What kind of books or magazines do you read?", "a": "I read medical magazines and also novels in my free time. I like books about real people and true stories. I also sometimes read cooking magazines."}, {"q": "What is your favourite room in the house? Why?", "a": "My favourite room is the kitchen because I love cooking. It is a large, bright room with a big window. I spend a lot of time there at weekends."}, {"q": "Do you prefer coffee or tea? How many cups a day?", "a": "I prefer tea. I drink about three or four cups a day. I like herbal teas, especially mint and chamomile. I only drink coffee when I am very tired."}, {"q": "Where is a good place to go on holiday in the Czech Republic?", "a": "I recommend the Šumava national park. It is beautiful in every season. There are forests, lakes, and cycling paths. It is peaceful and not too crowded."}]}, {"id": 21, "speaker": "Warrant Officer Karel Novák, Strakonice Base", "questions": [{"q": "How do you spell your surname?", "a": "My surname is Novák. I spell it N-O-V-Á-K. It is one of the most common surnames in the Czech Republic, like Smith in English."}, {"q": "What is your home city or town famous for?", "a": "My town Strakonice is famous for its bagpipes. There is an international bagpipe festival there every two years. It is very unusual and interesting."}, {"q": "How often do you do sport?", "a": "I do sport about four times a week. I run on Mondays and Wednesdays, go to the gym on Thursdays, and play football with friends on Saturdays."}, {"q": "What is your commander's rank?", "a": "My commander's rank is major. His name is Major Horáček. He has been our unit commander for about three years. He is very experienced."}, {"q": "How often does your commander organise exercises?", "a": "We have exercises about once a month. Sometimes more in summer. We also do regular training at the base every week. It keeps us ready."}, {"q": "What do your colleagues think about your commander?", "a": "Most of my colleagues respect Major Horáček. He is firm but fair. He takes care of the soldiers and he is always honest with us."}, {"q": "Is there a lot of traffic near your base?", "a": "Yes, there is some traffic near the base in the mornings and late afternoons. There is a main road nearby. But it is not as bad as in a big city."}, {"q": "What is special about Christmas in your family?", "a": "At Christmas we always have fried carp and potato salad on the evening of the 24th. The children open presents after dinner. We go to midnight mass."}, {"q": "Do you like going to restaurants? What kind?", "a": "Yes, I enjoy going to restaurants. I prefer traditional Czech restaurants with good food and reasonable prices. I go to a restaurant about twice a month."}, {"q": "What do you take with you on a military exercise?", "a": "On a military exercise I take my uniform, sleeping bag, personal equipment, water, and rations. I also take a first aid kit and my communication equipment."}]}, {"id": 22, "speaker": "Sergeant Alena Procházková, Žatec Base", "questions": [{"q": "What is the name of the base where you work?", "a": "I work at the base in Žatec. It is in the Ústí nad Labem region in the north-west of Bohemia. It is a medium-sized garrison."}, {"q": "How many bedrooms does your home have?", "a": "My home has two bedrooms. One is for my husband and me, and the other one is for my daughter. We also have a living room and a small study."}, {"q": "What do you usually do on a rainy day?", "a": "On a rainy day I usually stay at home, cook something nice, and watch a film or read a book. Sometimes I go to the gym instead of running outside."}, {"q": "Do you have a brother or sister? What does he or she do in free time?", "a": "Yes, I have an older brother. In his free time he likes to play tennis and go to the cinema. He also builds model aeroplanes as a hobby."}, {"q": "Is your brother married? Does he have children?", "a": "Yes, my brother is married. He and his wife have one son who is eight years old. They live in Chomutov, not far from Žatec."}, {"q": "How many hours a week do you work?", "a": "I work about forty hours a week. Sometimes more when we have exercises or special duties. But normally the working week is Monday to Friday."}, {"q": "Do you like summer or winter more? Why?", "a": "I prefer summer because I love being outside. I like warm weather, cycling, and swimming. Winter is too dark and cold for me."}, {"q": "How do you get to the nearest big city from where you live?", "a": "The nearest big city is Ústí nad Labem. I get there by car. It takes about thirty minutes on the motorway. Sometimes I take the train."}, {"q": "What is a good present for a soldier?", "a": "I think a good present for a soldier is something practical, like a good quality torch, a multi-tool, or a warm fleece jacket. Personal items are also nice."}, {"q": "What sport facilities do you have at your base?", "a": "At our base we have a gym, a running track, a football pitch, and a volleyball court. We can use them after duty hours. I use the gym regularly."}]}, {"id": 23, "speaker": "Corporal David Horák, Přerov Base", "questions": [{"q": "What is your date of birth?", "a": "I was born on the fourteenth of March nineteen ninety-seven. So I am twenty-eight years old. I was born in Přerov, where I still live today."}, {"q": "How many people do you have in your immediate family?", "a": "In my immediate family there are four of us. My wife, our two children, and me. We live together in a flat in Přerov."}, {"q": "What is your son's or daughter's favourite subject at school?", "a": "My son's favourite subject is PE, of course. He also likes maths. He is quite good at numbers. He doesn't like writing essays very much."}, {"q": "What does your son or daughter want to do in the future?", "a": "My son says he wants to be a soldier like me or maybe a pilot. He loves aeroplanes. But he is only ten so his ideas might change."}, {"q": "Do you have a mobile phone? What do you use it for?", "a": "Yes, I have a smartphone. I mainly use it for calls and messages. I also use it for navigation, weather, and sometimes reading the news."}, {"q": "Is English useful in everyday life in the Czech Republic?", "a": "Yes, English is very useful in the Czech Republic. You need it for tourism, online shopping, and many jobs. Young people use it a lot too."}, {"q": "How often does your family eat together?", "a": "We eat dinner together almost every day. Lunch is more difficult because of work and school. But dinner is our family time and I think it is important."}, {"q": "What sport is the most popular in the Czech Republic?", "a": "The most popular sports in the Czech Republic are ice hockey and football. Ice hockey is like a national passion. Everyone watches the world championships."}, {"q": "What do you usually have for dinner?", "a": "For dinner I usually have something light, like soup with bread, or a salad with chicken. I try not to eat a big meal in the evening."}, {"q": "What is the address of your military base?", "a": "The address of my base is Velká Dlážka in Přerov. I prefer not to give the exact address, but it is in the southern part of the city."}]}, {"id": 24, "speaker": "Staff Sergeant Monika Krejčí, Tábor Base", "questions": [{"q": "How do you usually spend your evenings after work?", "a": "After work I usually cook dinner, spend time with my daughter, and help her with homework. Then I watch a bit of TV or read before going to bed."}, {"q": "What is your base like? Describe it.", "a": "My base is quite large. There are office buildings, a parade ground, a gym, a mess hall, and a garage for military vehicles. It is well maintained."}, {"q": "What is your best friend's job? Does she like it?", "a": "My best friend Klára is a primary school teacher. She likes it very much. She says the children give her energy. She has been teaching for eight years."}, {"q": "What does your best friend think about your life in the army?", "a": "Klára thinks my job is interesting but also difficult. She respects what soldiers do. She says she could never do it but she is proud of me."}, {"q": "What do you and your best friend talk about?", "a": "We talk about everything, our families, work, and plans. We also talk about films and books. We have coffee together every Friday and never run out of topics."}, {"q": "Is there a market in your town? Do you shop there?", "a": "Yes, there is a market in Tábor on Saturday mornings. I sometimes go there to buy fresh vegetables and fruit. The local honey is very good too."}, {"q": "What season is it now? What is the weather like?", "a": "It is autumn now. The weather is cool and sometimes rainy. The leaves on the trees are beautiful orange and red colours. I actually like autumn."}, {"q": "What is your morning routine before you go to work?", "a": "In the morning I get up at five forty-five, have a quick shower, eat breakfast, and prepare my daughter's lunch box. I leave the house at six thirty."}, {"q": "What kind of clothes do you wear at the weekend?", "a": "At the weekend I wear casual clothes, usually jeans and a jumper or a hoodie. I like to be comfortable. I only wear smart clothes for special occasions."}, {"q": "Do you have central heating at home?", "a": "Yes, we have central heating in our flat. It is very comfortable in winter. The heating is included in our rent, which is convenient."}]}, {"id": 25, "speaker": "Captain Petr Černý, Prague Garrison", "questions": [{"q": "What is your full name and rank?", "a": "My full name is Petr Černý and my rank is captain. I have been a captain for four years. I work at the garrison in Prague."}, {"q": "What does your partner do? Where does she work?", "a": "My partner is a lawyer. She works at a law firm in Prague city centre. She is very busy but she loves her work."}, {"q": "Does your wife like her job? Why?", "a": "Yes, she loves her job. She likes solving complex problems and helping people. She says every case is different and that keeps it interesting."}, {"q": "Does your wife speak any foreign languages?", "a": "Yes, she speaks excellent English and also some French. She studied law in English and she uses both languages at work with international clients."}, {"q": "What do you do to improve your English?", "a": "I try to improve my English by watching films and series in English. I also read English news online and practise with colleagues before exercises."}, {"q": "Describe the street where you live.", "a": "The street where I live is quiet and tree-lined. There are family houses and a few blocks of flats. There is a small park at the end of the street."}, {"q": "What is the most important meal of the day for you?", "a": "The most important meal for me is breakfast. I need energy for a long working day. I always have a proper breakfast with eggs, bread, and coffee."}, {"q": "Do you have a first aid kit at home?", "a": "Yes, of course. I have a well-stocked first aid kit at home. As a soldier I think it is essential. I also have one in my car."}, {"q": "What are your children interested in? What are their hobbies?", "a": "My son is interested in computers and gaming. My daughter loves horse riding and drawing. They are very different but they get on well together."}, {"q": "What would be your perfect day off?", "a": "My perfect day off would start with a long run, then a big breakfast with the family. In the afternoon I would go hiking with my wife and end with a barbecue at home."}]}];
 
-// ── INIT ──
 const params = new URLSearchParams(window.location.search);
 const setId = parseInt(params.get('set')) || 1;
 const setData = SETS.find(s => s.id === setId);
 
 if (!setData) {
-  document.getElementById('questions-list').innerHTML = '<p style="color:var(--red);padding:1rem">Set not found.</p>';
+  document.getElementById('questions-list').innerHTML = '<p style="color:#8b2020;padding:1rem">Set not found.</p>';
 } else {
-  // Header
-  document.title = `Set ${String(setId).padStart(2,'0')} – STANAG Level 1 Interview`;
+  document.title = 'Set ' + String(setId).padStart(2,'0') + ' – STANAG Level 1';
   document.getElementById('set-title').textContent = 'Set ' + String(setId).padStart(2,'0');
   const img = document.getElementById('header-img');
-  const placeholder = document.getElementById('header-placeholder');
-  img.src = `../interview/photos/picture_set${setId}.jpg`;
-  img.alt = `Set ${setId}`;
-  img.onerror = () => { img.style.display='none'; placeholder.style.display='flex'; placeholder.textContent = setId; };
+  const ph = document.getElementById('header-placeholder');
+  img.src = '../interview/photos/picture_set' + setId + '.jpg';
+  img.onerror = function(){ img.style.display='none'; ph.style.display='flex'; ph.textContent=setId; };
 
-  // Progress
-  function getProgress() {
-    try { return JSON.parse(localStorage.getItem('stanag1_set'+setId)) || {}; } catch { return {}; }
+  function getProgress(){ try{ return JSON.parse(localStorage.getItem('stanag1_set'+setId))||{}; }catch{ return {}; } }
+  function saveProgress(p){ localStorage.setItem('stanag1_set'+setId, JSON.stringify(p)); }
+  function countDone(){ return Object.values(getProgress()).filter(Boolean).length; }
+  function updateBar(){
+    var d=countDone(), pct=Math.round(d/10*100);
+    document.getElementById('prog-fill').style.width=pct+'%';
+    document.getElementById('prog-count').textContent=d+'/10';
   }
-  function saveProgress(p) { localStorage.setItem('stanag1_set'+setId, JSON.stringify(p)); }
-  function countDone() { return Object.values(getProgress()).filter(Boolean).length; }
-  function updateProgressBar() {
-    const done = countDone();
-    const pct = Math.round(done/10*100);
-    document.getElementById('spb-fill').style.width = pct+'%';
-    document.getElementById('spb-count').textContent = done+'/10';
-  }
-
-  document.getElementById('spb-reset').addEventListener('click', () => {
-    if (!confirm('Reset progress for this set?')) return;
+  document.getElementById('prog-reset').addEventListener('click', function(){
+    if(!confirm('Reset progress for this set?')) return;
     localStorage.removeItem('stanag1_set'+setId);
-    // uncheck all
-    document.querySelectorAll('.self-check input').forEach(cb => cb.checked = false);
-    updateProgressBar();
+    document.querySelectorAll('.q-footer input').forEach(function(cb){ cb.checked=false; });
+    document.querySelectorAll('.q-num').forEach(function(n){ n.classList.remove('done'); });
+    updateBar();
   });
 
-  // Audio
-  let currentAudio = null, currentBtn = null;
-  function playIcon(){return`<svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><polygon points="0,0 10,6 0,12"/></svg>`;}
-  function stopIcon(){return`<svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><rect x="0" y="0" width="4" height="12"/><rect x="6" y="0" width="4" height="12"/></svg>`;}
+  var currentAudio=null, currentListenBtn=null;
+  function playIcon(){ return '<svg width="11" height="13" viewBox="0 0 10 12" fill="currentColor"><polygon points="0,0 10,6 0,12"/></svg>'; }
+  function stopIcon(){ return '<svg width="11" height="11" viewBox="0 0 12 12" fill="currentColor"><rect x="0" y="0" width="4" height="12"/><rect x="8" y="0" width="4" height="12"/></svg>'; }
 
-  function playQuestion(qIdx, btn) {
-    const path = `../interview/audio/Set${setId}/S${setId}Q${qIdx+1}.mp3`;
-    if (currentAudio) {
-      currentAudio.pause(); currentAudio = null;
-      if (currentBtn) { currentBtn.innerHTML = playIcon(); currentBtn.classList.remove('playing'); }
+  function playQ(qIdx, btn){
+    if(currentAudio){
+      currentAudio.pause(); currentAudio=null;
+      if(currentListenBtn){ currentListenBtn.innerHTML=playIcon()+' Listen to the question'; currentListenBtn.classList.remove('playing'); }
     }
-    const audio = new Audio(path);
-    currentAudio = audio; currentBtn = btn;
-    btn.innerHTML = stopIcon(); btn.classList.add('playing');
-    audio.addEventListener('ended', () => { btn.innerHTML=playIcon(); btn.classList.remove('playing'); currentAudio=null; currentBtn=null; });
-    audio.addEventListener('error', () => { btn.innerHTML=playIcon(); btn.classList.remove('playing'); btn.title='Audio not yet available'; currentAudio=null; currentBtn=null; });
+    var path='../interview/audio/Set'+setId+'/S'+setId+'Q'+(qIdx+1)+'.mp3';
+    var audio=new Audio(path);
+    currentAudio=audio; currentListenBtn=btn;
+    btn.innerHTML=stopIcon()+' Stop';
+    btn.classList.add('playing');
+    audio.addEventListener('ended', function(){
+      btn.innerHTML=playIcon()+' Listen to the question';
+      btn.classList.remove('playing');
+      currentAudio=null; currentListenBtn=null;
+    });
+    audio.addEventListener('error', function(){
+      btn.innerHTML=playIcon()+' Listen to the question';
+      btn.classList.remove('playing');
+      btn.title='Audio not yet available';
+      currentAudio=null; currentListenBtn=null;
+    });
     audio.play();
   }
 
-  // Build questions
-  const list = document.getElementById('questions-list');
-  const progress = getProgress();
+  var list=document.getElementById('questions-list');
+  var progress=getProgress();
 
-  setData.questions.forEach((item, i) => {
-    const card = document.createElement('div');
-    card.className = 'question-card';
+  setData.questions.forEach(function(item, i){
+    var checked=!!progress[i];
+    var cbId='cb_'+setId+'_'+i;
+    var card=document.createElement('div');
+    card.className='q-card';
+    card.innerHTML=
+      '<div class="q-header">'+
+        '<div class="q-num'+(checked?' done':'')+'" id="qnum_'+i+'">'+(i+1)+'</div>'+
+        '<span class="q-question-text" id="qtext_'+i+'">'+item.q+'</span>'+
+        '<span class="q-placeholder" id="qhint_'+i+'">Click &#8220;Show question&#8221; to read it</span>'+
+      '</div>'+
+      '<div class="q-actions">'+
+        '<button class="btn btn-listen" id="qplay_'+i+'">'+playIcon()+' Listen to the question</button>'+
+        '<button class="btn btn-show" id="qshow_'+i+'">&#128065; Show question</button>'+
+      '</div>'+
+      '<div class="q-write">'+
+        '<div class="section-label">Your answer &mdash; speak or write</div>'+
+        '<textarea class="write-area" placeholder="Type your answer here if you want to practise in writing…"></textarea>'+
+      '</div>'+
+      '<div class="q-example">'+
+        '<button class="btn-example" id="qex_'+i+'">&#9660; Show example answer</button>'+
+        '<div class="example-box" id="exbox_'+i+'">'+
+          '<div class="example-speaker">'+setData.speaker+'</div>'+
+          '<div class="example-text">'+item.a+'</div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="q-footer">'+
+        '<input type="checkbox" id="'+cbId+'"'+(checked?' checked':'')+'>'+
+        '<label for="'+cbId+'">I can answer this question</label>'+
+      '</div>';
 
-    const checked = !!progress[i];
-    const cbId = `cb_${setId}_${i}`;
+    var listenBtn=card.querySelector('#qplay_'+i);
+    listenBtn.addEventListener('click', function(){ playQ(i, listenBtn); });
 
-    card.innerHTML = `
-      <div class="q-row">
-        <button class="q-num-btn" title="Reveal question" aria-expanded="false">${i+1}</button>
-        <span class="q-hint">Click number to reveal question</span>
-        <span class="q-text">${item.q}</span>
-        <button class="q-play-btn" title="Play audio">${playIcon()}</button>
-        <button class="q-toggle" title="Show model answer" aria-expanded="false">▼</button>
-      </div>
-      <div class="answer-panel">
-        <p>${item.a}</p>
-      </div>
-      <div class="self-check">
-        <input type="checkbox" id="${cbId}" ${checked?'checked':''}>
-        <label for="${cbId}">I can answer this question</label>
-      </div>
-    `;
-
-    // Number button: reveal/hide question text
-    const numBtn = card.querySelector('.q-num-btn');
-    const qText = card.querySelector('.q-text');
-    const hint = card.querySelector('.q-hint');
-    numBtn.addEventListener('click', () => {
-      const revealed = qText.classList.toggle('visible');
-      hint.classList.toggle('hidden', revealed);
-      numBtn.classList.toggle('revealed', revealed);
-      numBtn.setAttribute('aria-expanded', revealed);
-      if (!revealed) {
-        // hide answer too
-        const panel = card.querySelector('.answer-panel');
-        if (panel.classList.contains('open')) {
-          panel.classList.remove('open');
-          card.querySelector('.q-toggle').textContent = '▼';
-        }
-      }
+    var showBtn=card.querySelector('#qshow_'+i);
+    var qText=card.querySelector('#qtext_'+i);
+    var qHint=card.querySelector('#qhint_'+i);
+    showBtn.addEventListener('click', function(){
+      var rev=qText.classList.toggle('visible');
+      qHint.classList.toggle('hidden', rev);
+      showBtn.classList.toggle('revealed', rev);
+      showBtn.innerHTML=rev ? '&#128065; Hide question' : '&#128065; Show question';
     });
 
-    // Play button
-    const playBtn = card.querySelector('.q-play-btn');
-    playBtn.addEventListener('click', () => playQuestion(i, playBtn));
-
-    // Answer toggle
-    const toggle = card.querySelector('.q-toggle');
-    const panel = card.querySelector('.answer-panel');
-    toggle.addEventListener('click', () => {
-      const open = panel.classList.toggle('open');
-      toggle.textContent = open ? '▲' : '▼';
-      toggle.setAttribute('aria-expanded', open);
+    var exBtn=card.querySelector('#qex_'+i);
+    var exBox=card.querySelector('#exbox_'+i);
+    exBtn.addEventListener('click', function(){
+      var open=exBox.classList.toggle('open');
+      exBtn.classList.toggle('open', open);
+      exBtn.innerHTML=open ? '&#9650; Hide example answer' : '&#9660; Show example answer';
     });
 
-    // Checkbox
-    const cb = card.querySelector('input[type="checkbox"]');
-    cb.addEventListener('change', () => {
-      const p = getProgress();
-      p[i] = cb.checked;
-      saveProgress(p);
-      updateProgressBar();
+    var cb=card.querySelector('#'+cbId);
+    var numEl=card.querySelector('#qnum_'+i);
+    cb.addEventListener('change', function(){
+      var p=getProgress(); p[i]=cb.checked; saveProgress(p);
+      numEl.classList.toggle('done', cb.checked);
+      updateBar();
     });
 
     list.appendChild(card);
   });
 
-  updateProgressBar();
+  updateBar();
 }
 </script>
 </body>
