@@ -53,7 +53,7 @@
   .q-header{display:flex;align-items:flex-start;gap:12px;padding:14px 16px 13px;border-bottom:1px solid #e0d8cc;}
   .q-num{width:30px;height:30px;border-radius:50%;background:var(--olive);color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
   .q-num.done{background:var(--olive-lt);}
-  .q-question-text{font-size:1rem;color:var(--text);line-height:1.5;font-weight:500;display:none;flex:1;}
+  .q-question-text{font-size:1.15rem;color:var(--text);line-height:1.45;font-weight:700;display:none;flex:1;}
   .q-question-text.visible{display:block;}
   .q-placeholder{font-size:0.9rem;color:#888070;font-style:italic;flex:1;padding-top:3px;}
   .q-placeholder.hidden{display:none;}
@@ -219,7 +219,7 @@ if (!setData) {
       '<div class="q-example">'+
         '<button class="btn-example" id="qex_'+i+'">&#9660; Show example answer</button>'+
         '<div class="example-box" id="exbox_'+i+'">'+
-          '<div class="example-speaker">'+setData.speaker+'</div>'+
+          ''  +
           '<div class="example-text">'+item.a+'</div>'+
         '</div>'+
       '</div>'+
